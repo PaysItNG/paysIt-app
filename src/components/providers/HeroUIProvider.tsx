@@ -10,7 +10,7 @@ type HeroProp = {
 
 const HeroProvider = ({children}: HeroProp) => {
   return (
-   <HeroUIProvider>
+   <HeroUIProvider aria-label='hero_ui_provider'>
     {children}
    </HeroUIProvider>
   )
