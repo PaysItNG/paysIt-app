@@ -3,7 +3,7 @@
 import { CiBank } from "react-icons/ci";
 import { MdOutlineSubscriptions } from "react-icons/md";
 import { IoFlashOutline } from "react-icons/io5";
-import { Badge, Button, Card } from "@heroui/react";
+import { Button, Card } from "@heroui/react";
 import { BsArrowRight } from "react-icons/bs";
 
 const FeaturesView = () => {
@@ -12,23 +12,23 @@ const FeaturesView = () => {
         icon: <CiBank className="w-8 h-8" />,
         title: 'Banking assistant service',
         description:
-          'Centralized employee database with smart automation for HR processes',
-        color: 'text-blue-600',
-        colorbg: 'bg-blue-100/50',
+          'Virtual assistant for seamless account management, transactions, and financial support.',
+        color: 'text-[#ec8631]',
+        colorbg: 'bg-[#ec8631]/10',
       },
       {
         icon: <MdOutlineSubscriptions className="w-8 h-8" />,
         title: 'Subcription management',
-        description: 'Advanced time tracking with geofencing and mobile clock-in',
+        description: 'A centralized platform to track, manage, and optimize all your subscriptions in one place.',
         color: 'text-green-600',
         colorbg: 'bg-green-100/50',
       },
       {
         icon: <IoFlashOutline className="w-8 h-8" />,
         title: 'Fast payment processing',
-        description: 'Automated payroll with tax compliance and direct deposits',
-        color: 'text-purple-600',
-        colorbg: 'bg-purple-100/50',
+        description: 'A secure and efficient system for instant transactions and seamless fund transfers.',
+        color: 'text-[#db560c]',
+        colorbg: 'bg-[#db560c]/10',
       },
     ];
   
@@ -52,10 +52,9 @@ const FeaturesView = () => {
                   >
                     {feature.icon}
                   </div>
-                  <div className='flex flex-col gap-10 my-5 '>
+                  <div className='flex flex-col gap-2 my-5'>
                     <h3 className="text-xl font-semibold">{feature.title}</h3>
                     <p className="text-gray-600 text-lg">{feature.description}</p>
-  
                   </div>
                   <Button variant="ghost" className="group-hover:translate-x-2 transition-transform duration-300 mt-auto rounded-3xl p-6 max-w-max">
                     Learn more <BsArrowRight className="ml-2 w-4 h-4" />
