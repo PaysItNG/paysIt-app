@@ -8,9 +8,15 @@ import { notifier } from "@/lib/utils/notifier";
 import { useLoginUser } from "@/api/auth/login";
 import { AxiosError } from "axios";
 import Input from "@/components/shared/ui/Input";
+import { useRouter } from "next/router";
+// import useAuthUser from "@/hooks/useAuthUser";
 
 const Login = () => {
+  const router = useRouter();
+
   const { mutateAsync: loginUser, isPending: isLoginLoading } = useLoginUser();
+
+  // const { setAuthUser } = useAuthUser();
 
   const {
     register,
@@ -34,9 +40,9 @@ const Login = () => {
       const res = await loginUser(payload);
       if (res.status === 200) {
         console.log(res.data);
-
+        // setAuthUser(res?.data?.data);
         notifier({ message: "Login successfully", type: "success" });
-        // router.push("/dashboard");
+        router.push("/dashboard");
       } else {
         notifier({ message: res.data.message, type: "error" });
       }

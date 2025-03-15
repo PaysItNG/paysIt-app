@@ -8,9 +8,12 @@ import { notifier } from "@/lib/utils/notifier";
 import { useLoginUser } from "@/api/auth/login";
 import { AxiosError } from "axios";
 import Input from "@/components/shared/ui/Input";
+// import useAuthUser from "@/hooks/useAuthUser";
 
 const Signup = () => {
   const [pswVisible, setPswVisible] = useState(false);
+
+  // const { setAuthUser } = useAuthUser();
 
   const { mutateAsync: loginUser, isPending: isSignupLoading } = useLoginUser();
 
