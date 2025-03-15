@@ -1,86 +1,164 @@
 "use client";
-
-import Input from "@/components/shared/ui/Input";
 import { Button, Checkbox } from "@heroui/react";
-import Image from "next/image";
+import { Controller, FieldValues, useForm } from "react-hook-form";
+import Link from "next/link";
+import { useState } from "react";
+import { IoEye, IoEyeOff } from "react-icons/io5";
+import { notifier } from "@/lib/utils/notifier";
+import { useLoginUser } from "@/api/auth/login";
+import { AxiosError } from "axios";
+import Input from "@/components/shared/ui/Input";
 
-const LoginPage = () => {
+const Login = () => {
+  const { mutateAsync: loginUser, isPending: isLoginLoading } = useLoginUser();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    control,
+  } = useForm({
+    defaultValues: {
+      remember: false,
+      email: "",
+      password: "",
+    },
+  });
+
+  const onSubmit = async (values: FieldValues) => {
+    try {
+      const payload = {
+        email: values?.email,
+        password: values?.password,
+      };
+      const res = await loginUser(payload);
+      if (res.status === 200) {
+        console.log(res.data);
+
+        notifier({ message: "Login successfully", type: "success" });
+        // router.push("/dashboard");
+      } else {
+        notifier({ message: res.data.message, type: "error" });
+      }
+    } catch (err: unknown) {
+      const error = err as AxiosError<{ message: string }>;
+      notifier({
+        message:
+          error?.response?.data?.message ??
+          error?.message ??
+          "Something went wrong, please try again",
+        type: "error",
+      });
+    }
+  };
+
+  const [pswVisible, setPswVisible] = useState(false);
+
   return (
-    <>
-      <main className="min-h-screen flex items-center justify-center">
-        <div className="">
-          {/* I want to have a background gradiant animated on the login page */}
-        </div>
-        <div className=" bg-white rounded-lg shadow border w-[30rem]">
-          <form className="mt-5 space-y-4 px-12 pt-5 pb-10">
-            <div className="flex justify-center">
-              <Image
-                src={
-                  "https://www.paysit.net/static/media/paysit.7d63ac152631fed8fe7d.png"
+    <div className="container my-auto">
+      <div className="container py-20">
+        <div className="w-full max-w-md mx-auto rounded-xl">
+          <div className="mb-10">
+            <h1 className="text-4xl font-semibold">Login</h1>
+            <p className="mt-3 text-xl">
+              Enter your credentials below to sign in to your account
+            </p>
+          </div>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div className="space-y-4">
+              <Input
+                label="Email"
+                variant="bordered"
+                autoComplete="true"
+                {...register("email", {
+                  required: "email address is required",
+                  pattern: {
+                    value: /^[a-zA-Z0-9._+-]+@[a-zA-Z0-9-]+\.[a-zA-Z]{2,}$/,
+                    message: "email address is invalid",
+                  },
+                })}
+                errorMessage={errors?.email?.message}
+                isInvalid={!!errors?.email?.message}
+                classNames={{
+                  inputWrapper: "px-4",
+                }}
+                isDisabled={isLoginLoading}
+              />
+              <Input
+                type={pswVisible ? "text" : "password"}
+                className="w-full"
+                variant="bordered"
+                label="Password"
+                errorMessage={errors?.password?.message}
+                isInvalid={!!errors?.password?.message}
+                classNames={{
+                  inputWrapper: "px-4",
+                }}
+                endContent={
+                  <Button
+                    isIconOnly
+                    onPress={() => setPswVisible(!pswVisible)}
+                    size="sm"
+                    className="bg-white"
+                    disableRipple={true}
+                  >
+                    {pswVisible ? (
+                      <IoEye size={20} className="text-default-400" />
+                    ) : (
+                      <IoEyeOff size={20} className="text-default-400" />
+                    )}
+                  </Button>
                 }
-                alt="paysit logo"
-                width={50}
-                height={50}
+                {...register("password", {
+                  required: "Password is required",
+                })}
+                isDisabled={isLoginLoading}
               />
             </div>
-            <h2 className="font-semibold text-2xl text-gray-800">
-              Sign in to your account
-            </h2>
-            <div>
-              <label htmlFor="" className="font-medium text-sm mb-2">
-                Email
-              </label>
-              <Input
-                type="text"
-                className="w-full"
-                variant="bordered"
-                radius="sm"
-                size="lg"
-              />
+            <div className="flex items-center justify-between mt-6">
+              <Controller
+                name="remember"
+                control={control}
+                disabled={isLoginLoading}
+                render={({ field }) => (
+                  <Checkbox
+                    isDisabled={field.disabled}
+                    checked={field.value}
+                    onChange={field.onChange}
+                    className="text-[0.95rem]"
+                  >
+                    Remember me
+                  </Checkbox>
+                )}
+              ></Controller>
+              <Link href="" className="opacity-80 text-[0.95rem]">
+                Forgot password?
+              </Link>
             </div>
-            <div>
-              <div className="flex justify-between mb-2">
-                <label htmlFor="" className="font-medium text-sm">
-                  Password
-                </label>
-                <label
-                  htmlFor=""
-                  className="text-green-700 text-sm font-medium cursor-pointer"
-                >
-                  Forgot your Password?
-                </label>
-              </div>
-              <Input
-                type="password"
-                className="w-full"
-                variant="bordered"
-                radius="sm"
-                size="lg"
-              />
-            </div>
-            <div>
-              <Checkbox>Remember me on this device</Checkbox>
-            </div>
-            <div>
-              <Button
-                className="w-full bg-green-700 font-medium text-white"
-                size="lg"
-                radius="sm"
+
+            <Button
+              type="submit"
+              radius="sm"
+              size="lg"
+              className="mt-5 text-base bg-green-800 text-white w-full"
+              isLoading={isLoginLoading}
+            >
+              Login
+            </Button>
+            <div className="text-default-500 text-base mt-5">
+              New to PaysIt?{" "}
+              <Link
+                href={"/auth/signup"}
+                className="text-green-700 font-medium cursor-pointer"
               >
-                Sign in
-              </Button>
+                Create account
+              </Link>
             </div>
           </form>
-          <div className="bg-default-100 text-center text-default-500 p-4">
-            New to PaysIt?{" "}
-            <span className="text-green-700 font-medium cursor-pointer">
-              Create account
-            </span>
-          </div>
         </div>
-      </main>
-    </>
+      </div>
+    </div>
   );
 };
 
-export default LoginPage;
+export default Login;
