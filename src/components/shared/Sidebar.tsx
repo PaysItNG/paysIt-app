@@ -1,0 +1,61 @@
+"use client";
+import clsx from "clsx";
+import React from "react";
+import MenuLink from "../core/sidebar/MenuLink";
+import SidebarSwitch from "../core/sidebar/SidebarSwitch";
+import { bottomMenus, topMenus } from "@/lib/utils/sidebarMenus";
+import LogoNameHeader from "../core/sidebar/LogoNameHeader";
+import useManageSidebar from "@/hooks/useManageSidebar";
+import { AnimatePresence, motion } from "framer-motion";
+
+const Sidebar = () => {
+  const { data } = useManageSidebar();
+  const { sideBarOpen } = data;
+  return (
+    <>
+      <AnimatePresence mode="wait">
+        <motion.main
+          key="sidebar"
+          initial={{ opacity: 0, x: -50 }} // Start off-screen
+          animate={{ opacity: 1, x: 0 }} // Animate to visible
+          exit={{ opacity: 0, x: -50 }} // Exit animation
+          transition={{ duration: 0.3 }}
+          //   transition={{
+          //     type: "spring", // Use spring animation
+          //     stiffness: 200, // Bounciness
+          //     damping: 15, // Controls how much it settles
+          //     duration: 0.5, // Animation duration
+          //   }}
+          className={clsx(
+            "bg-[#fafafa] h-screen rounded-r-2xl relative transition-all",
+            sideBarOpen ? "w-64" : "w-16"
+          )}
+        >
+          <SidebarSwitch />
+
+          <div className="pt-8 pb-5 flex flex-col justify-between h-full">
+            <div className="space-y-10">
+              <LogoNameHeader sideBarOpen={sideBarOpen} />
+              <div>
+                <div
+                  className={clsx("space-y-5", sideBarOpen ? "md:mx-4" : "")}
+                >
+                  {topMenus.map((menu, index) => (
+                    <MenuLink key={index + "____top_menu"} menu={menu} />
+                  ))}
+                </div>
+              </div>
+            </div>
+            <div className={clsx("space-y-5", sideBarOpen ? "md:mx-4" : "")}>
+              {bottomMenus.map((menu, index) => (
+                <MenuLink key={index + "____bottom_menu"} menu={menu} />
+              ))}
+            </div>
+          </div>
+        </motion.main>
+      </AnimatePresence>
+    </>
+  );
+};
+
+export default Sidebar;

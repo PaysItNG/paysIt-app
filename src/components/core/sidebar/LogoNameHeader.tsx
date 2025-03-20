@@ -1,0 +1,60 @@
+import Image from "next/image";
+import paysIt_logo from "@/assets/images/paysIt_logo.jpeg";
+import Link from "next/link";
+import React from "react";
+import clsx from "clsx";
+import { AnimatePresence, motion } from "framer-motion";
+
+type PropType = {
+  sideBarOpen: boolean;
+};
+
+const LogoNameHeader: React.FC<PropType> = ({ sideBarOpen }) => {
+  return (
+    <div className={clsx("flex gap-x-2 items-center justify-center")}>
+      {/* Logo Image */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{
+          duration: 0.5,
+          ease: "easeOut",
+        }}
+        className="w-10 h-10 rounded-full border-2 border-green-800"
+      >
+        <Image
+          src={paysIt_logo}
+          alt="paysit logo"
+          width={50}
+          height={50}
+          className="rounded-full"
+        />
+      </motion.div>
+
+      {/* Animated Text */}
+      <AnimatePresence mode="wait">
+        {sideBarOpen && (
+          <motion.div
+            key="logo_name"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{
+              duration: 0.4,
+              ease: "easeOut",
+            }}
+          >
+            <Link
+              href={""}
+              className="font-extrabold font-sans text-green-800 text-3xl"
+            >
+              PAYSIT
+            </Link>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+};
+
+export default LogoNameHeader;
