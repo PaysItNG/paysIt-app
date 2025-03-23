@@ -1,9 +1,13 @@
 import React from "react";
+import OverviewSection from "@/components/core/dashboard/OverviewSection";
 
 const Dashboard = () => {
   return (
     <>
-      <h1>DASHBOARD</h1>
+      <main className="grid grid-cols-2">
+        <OverviewSection />
+        <div></div>
+      </main>
     </>
   );
 };

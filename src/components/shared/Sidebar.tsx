@@ -20,14 +20,8 @@ const Sidebar = () => {
           animate={{ opacity: 1, x: 0 }} // Animate to visible
           exit={{ opacity: 0, x: -50 }} // Exit animation
           transition={{ duration: 0.3 }}
-          //   transition={{
-          //     type: "spring", // Use spring animation
-          //     stiffness: 200, // Bounciness
-          //     damping: 15, // Controls how much it settles
-          //     duration: 0.5, // Animation duration
-          //   }}
           className={clsx(
-            "bg-[#fafafa] h-screen rounded-r-2xl relative transition-all",
+            "bg-[#f1f1f1] min-h-screen rounded-r-2xl relative transition-all",
             sideBarOpen ? "w-64" : "w-16"
           )}
         >

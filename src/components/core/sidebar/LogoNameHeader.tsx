@@ -11,7 +11,12 @@ type PropType = {
 
 const LogoNameHeader: React.FC<PropType> = ({ sideBarOpen }) => {
   return (
-    <div className={clsx("flex gap-x-2 items-center justify-center")}>
+    <div
+      className={clsx(
+        "flex gap-x-2 items-center px-3",
+        !sideBarOpen && "justify-center"
+      )}
+    >
       {/* Logo Image */}
       <motion.div
         initial={{ opacity: 0, scale: 0.8 }}
