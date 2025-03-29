@@ -1,7 +1,7 @@
 "use client";
 
 import { InputOtp } from "@heroui/react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import React from "react";
 import { Controller, useForm } from "react-hook-form";
 import logo from "@/assets/images/paysIt_logo.jpeg";
@@ -9,7 +9,7 @@ import Image from "next/image";
 import { useActivateAccount } from "@/api/auth/verification";
 import { notifier } from "@/lib/utils/notifier";
 import { AxiosError } from "axios";
-import { APP_ROUTES } from "@/lib/routes";
+// import { APP_ROUTES } from "@/lib/routes";
 import Button from "@/components/shared/ui/Button";
 
 type FormData = {
@@ -19,7 +19,7 @@ type FormData = {
 const EmailVerification = () => {
   const searchParams = useSearchParams();
 
-  const router = useRouter();
+  // const router = useRouter();
 
   const emailToVerify = searchParams.get("vl");
 
@@ -50,7 +50,7 @@ const EmailVerification = () => {
 
       console.log(res);
 
-      const resData = res?.data;
+      // const resData = res?.data;
 
       notifier({ message: res?.message || "", type: "success" });
       // router.push(APP_ROUTES.LOGIN); //redirect to login to login again
