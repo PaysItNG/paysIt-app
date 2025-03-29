@@ -1,25 +1,32 @@
 "use client";
-import { Button } from "@heroui/react";
 import { FieldValues, useForm } from "react-hook-form";
 import Link from "next/link";
 import { useState } from "react";
 import { IoEye, IoEyeOff } from "react-icons/io5";
 import { notifier } from "@/lib/utils/notifier";
-import { useLoginUser } from "@/api/auth/login";
 import { AxiosError } from "axios";
 import Input from "@/components/shared/ui/Input";
+import { useSignupUser } from "@/api/auth/signup";
+import { useRouter } from "next/navigation";
+import { APP_ROUTES } from "@/lib/routes";
+import Button from "@/components/shared/ui/Button";
 // import useAuthUser from "@/hooks/useAuthUser";
 
 const Signup = () => {
   const [pswVisible, setPswVisible] = useState(false);
+  const [confirmPswVisible, setConfirmPswVisible] = useState(false);
 
   // const { setAuthUser } = useAuthUser();
 
-  const { mutateAsync: loginUser, isPending: isSignupLoading } = useLoginUser();
+  const router = useRouter();
+
+  const { mutateAsync: signupUser, isPending: isSignupLoading } =
+    useSignupUser();
 
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -28,25 +35,24 @@ const Signup = () => {
       last_name: "",
       email: "",
       password: "",
+      confirm_password: "",
     },
   });
 
   const onSubmit = async (values: FieldValues) => {
-    console.log(values);
     try {
       const payload = {
+        first_name: values?.first_name,
+        last_name: values?.last_name,
         email: values?.email,
         password: values?.password,
       };
-      const res = await loginUser(payload);
-      if (res.status === 200) {
-        console.log(res.data);
+      const res = await signupUser(payload);
 
-        notifier({ message: "Account created successfully", type: "success" });
-        // router.push("/dashboard");
-      } else {
-        notifier({ message: res.data.message, type: "error" });
-      }
+      const resData = res?.data;
+
+      notifier({ message: res?.message, type: "success" });
+      router.push(`${APP_ROUTES.EMAIL_VERIFICATION}?vl=${resData?.email}`);
     } catch (err: unknown) {
       const error = err as AxiosError<{ message: string }>;
       notifier({
@@ -132,7 +138,7 @@ const Signup = () => {
                     isIconOnly
                     onPress={() => setPswVisible(!pswVisible)}
                     size="sm"
-                    className="bg-white"
+                    className="bg-transparent"
                     disableRipple={true}
                   >
                     {pswVisible ? (
@@ -144,6 +150,42 @@ const Signup = () => {
                 }
                 {...register("password", {
                   required: "Password is required",
+                })}
+                isDisabled={isSignupLoading}
+              />
+              <Input
+                type={confirmPswVisible ? "text" : "password"}
+                className="w-full"
+                variant="bordered"
+                label="Confirm Password"
+                errorMessage={errors?.confirm_password?.message}
+                isInvalid={!!errors?.confirm_password?.message}
+                classNames={{
+                  inputWrapper: "px-4 shadow-none border-1",
+                }}
+                endContent={
+                  <Button
+                    isIconOnly
+                    onPress={() => setConfirmPswVisible(!confirmPswVisible)}
+                    size="sm"
+                    className="bg-transparent"
+                    disableRipple={true}
+                  >
+                    {confirmPswVisible ? (
+                      <IoEye size={20} className="text-default-400" />
+                    ) : (
+                      <IoEyeOff size={20} className="text-default-400" />
+                    )}
+                  </Button>
+                }
+                {...register("confirm_password", {
+                  required: "Confirm Password is required",
+                  validate: (value) => {
+                    return (
+                      value === watch("password") ||
+                      "Confirm password do not match with password"
+                    );
+                  },
                 })}
                 isDisabled={isSignupLoading}
               />

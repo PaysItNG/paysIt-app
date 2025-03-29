@@ -1,7 +1,6 @@
 "use client";
 
 import { APP_ROUTES } from "@/lib/routes";
-import { Button } from "@heroui/react";
 import Link from "next/link";
 import { useState } from "react";
 import { BiMenu } from "react-icons/bi";
@@ -15,19 +14,9 @@ const Navbar = () => {
       <div className=" sm:max-w-[95vw]  mx-auto px-6 py-6 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <div className="w-8 h-8 bg-gradient-to-r from-btnColor to-cyan-500 rounded-lg"></div>
-          <span className="font-bold text-xl">PaysIt</span>
+          <span className="font-bold text-xl dark:text-black">PaysIt</span>
         </div>
-        <nav className="hidden lg:flex gap-x-10">
-          {/* {navLinks.map((link) => (
-              <a
-                key={link}
-                href="#"
-                className="text-gray-600 hover:text-gray-900 text-sm font-medium"
-              >
-                {link}
-              </a>
-            ))} */}
-        </nav>
+        <nav className="hidden lg:flex gap-x-10"></nav>
         <div className="flex items-center gap-4">
           <Link
             href={APP_ROUTES.LOGIN}
@@ -35,9 +24,12 @@ const Navbar = () => {
           >
             <span className="font-medium">Sign In</span>
           </Link>
-          <Button className="bg-gradient-to-r from-green-500 to-cyan-500 hover:from-btnColor hover:to-cyan-600 flex">
-            Request Demo <BsArrowRight className="ml-2 w-4 h-4" />
-          </Button>
+          <Link
+            href={APP_ROUTES.SIGNUP}
+            className="py-2 px-5 rounded-lg bg-gradient-to-r from-green-500 to-cyan-500 hover:from-btnColor hover:to-cyan-600 flex"
+          >
+            Signup <BsArrowRight className="ml-2 w-4 h-4" />
+          </Link>
           <button className="lg:hidden" onClick={() => setMenuOpen(!menuOpen)}>
             <BiMenu className="w-6 h-6" />
           </button>

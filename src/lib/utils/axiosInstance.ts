@@ -1,14 +1,21 @@
 import axios from "axios";
 
 
-export const http = axios.create({baseURL: "http://127.0.0.1:8000"})
+const baseURL = process.env.NEXT_PUBLIC_PAYSIT_SERVER_BASE_URL
+
+
+// export const http = axios.create({baseURL: "https://p4clf7zf-8000.uks1.devtunnels.ms/"})
+export const http = axios.create({baseURL})
 
 http.interceptors.request.use((req) => {
     // Get the token dynamically on each request
     const session = localStorage.getItem('paysit-auth-session');
     const token = session ? JSON.parse(session)?.state?.userData?.token : null;
-  
-    req.headers['token'] = token || '';
+
+
+    if (token) {
+      req.headers["token"] = token || "";
+    }
     req.headers['Content-type'] = 'application/json';
     req.headers['Accept'] = 'application/json';
     return req;

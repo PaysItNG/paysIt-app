@@ -2,8 +2,9 @@
 
 export const API_ROUTE = {
     //authentication routes
-    signup: "/auth/register",
-    login: "/auth/login"
+    signup: "/auth/register/",
+    login: "/auth/login/",
+    activate_account: "/auth/activate/account/"
 
     
 }

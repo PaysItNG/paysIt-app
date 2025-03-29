@@ -1,5 +1,5 @@
 "use client";
-import { Button, Checkbox } from "@heroui/react";
+import { Checkbox } from "@heroui/react";
 import { Controller, FieldValues, useForm } from "react-hook-form";
 import Link from "next/link";
 import { useState } from "react";
@@ -9,12 +9,16 @@ import { useLoginUser } from "@/api/auth/login";
 import { AxiosError } from "axios";
 import Input from "@/components/shared/ui/Input";
 import { useRouter } from "next/navigation";
+import { APP_ROUTES } from "@/lib/routes";
+import Button from "@/components/shared/ui/Button";
 // import useAuthUser from "@/hooks/useAuthUser";
 
 const Login = () => {
   const router = useRouter();
 
   const { mutateAsync: loginUser, isPending: isLoginLoading } = useLoginUser();
+
+  const [pswVisible, setPswVisible] = useState(false);
 
   // const { setAuthUser } = useAuthUser();
 
@@ -38,14 +42,24 @@ const Login = () => {
         password: values?.password,
       };
       const res = await loginUser(payload);
-      if (res.status === 200) {
-        console.log(res.data);
+      console.log(res);
+
+      const resData = res?.data;
+
+      if (res?.logged_in) {
+        console.log(resData);
         // setAuthUser(res?.data?.data);
-        notifier({ message: "Login successfully", type: "success" });
-        router.push("/dashboard");
-      } else {
-        notifier({ message: res.data.message, type: "error" });
+        router.push(APP_ROUTES.DASHBOARD);
+      } else if (
+        res?.message === "This Account is not Activated, Check your mail"
+      ) {
+        router.push(`${APP_ROUTES.EMAIL_VERIFICATION}?vl=${payload?.email}`);
       }
+
+      notifier({
+        message: res?.message || "",
+        type: res?.logged_in ? "success" : "error",
+      });
     } catch (err: unknown) {
       const error = err as AxiosError<{ message: string }>;
       notifier({
@@ -57,8 +71,6 @@ const Login = () => {
       });
     }
   };
-
-  const [pswVisible, setPswVisible] = useState(false);
 
   return (
     <div className="container my-auto">
@@ -105,7 +117,7 @@ const Login = () => {
                     isIconOnly
                     onPress={() => setPswVisible(!pswVisible)}
                     size="sm"
-                    className="bg-white"
+                    className="bg-transparent"
                     disableRipple={true}
                   >
                     {pswVisible ? (
