@@ -6,7 +6,7 @@ import { HiMiniDocumentCheck } from "react-icons/hi2";
 const Layout = ({ children }: { children: ReactNode }) => {
   return (
     <>
-      <div className="flex flex-col w-full min-h-screen md:grid md:h-screen md:min-h-0 md:grid-cols-12 md:overflow-hidden gap-6">
+      <div className="flex flex-col w-full min-h-screen md:grid md:h-screen md:min-h-0 md:grid-cols-12 md:overflow-hidden gap-6 pattern-2">
         <div className="md:col-span-7 order-2 md:order-1">
           <div className="pattern-4 flex h-full flex-col gap-7 justify-between overflow-hidden rounded-r-md md:rounded-r-2xl bg-green-900 px-8 py-12 text-white md:px-16 md:py-20">
             <div className="space-y-7">

@@ -68,10 +68,10 @@ const EmailVerification = () => {
 
   return (
     <>
-      <main className="h-screen flex items-center justify-center flex-1 bg-green-100">
+      <main className="h-screen flex items-center justify-center flex-1 bg-green-100 pattern-4">
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="bg-white rounded-2xl p-8 flex items-center justify-center flex-col gap-y-3 m-4 w-full max-w-lg"
+          className="bg-white rounded-2xl p-8 flex items-center justify-center flex-col gap-y-3 m-4 w-full max-w-lg shadow"
         >
           <div>
             <Image src={logo} alt="logo" height={70} width={70} />
@@ -101,6 +101,7 @@ const EmailVerification = () => {
                     segmentWrapper: "gap-x-2 flex justify-center",
                     segment:
                       "border-1.5 shadow-none h-[3rem w-[3rem border-zinc-300 outline-none shadow-none transition",
+                    helperWrapper: "text-center",
                   }}
                 />
               )}
