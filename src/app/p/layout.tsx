@@ -1,6 +1,7 @@
 import Sidebar from "@/components/shared/Sidebar";
 import clsx from "clsx";
 import React from "react";
+import KycDrawer from "@/components/core/kyc/KycDrawer";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -11,6 +12,8 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
           {children}
         </section>
       </main>
+
+      <KycDrawer />
     </>
   );
 };

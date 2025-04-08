@@ -1,0 +1,67 @@
+"use client";
+import Drawer from "@/components/shared/ui/Drawer";
+import React, { createElement } from "react";
+import { ConfigProvider, Steps } from "antd";
+import Title from "@/components/shared/ui/Title";
+import TakeSelfie from "./TakeSelfie";
+import UploadSelfie from "./UploadSelfie";
+import { usekYCStore } from "@/store/kyc";
+
+const KycDrawer = () => {
+  // const isMobile = useMediaQuery({ maxWidth: 640 });
+
+  const currentStep = usekYCStore((state) => state.data.currentStep);
+  const onNext = usekYCStore((state) => state.onNext);
+  const onPrev = usekYCStore((state) => state.onPrev);
+
+  const stepsComponent = [
+    {
+      key: "selfie",
+      element: TakeSelfie,
+    },
+    {
+      key: "upload_picture",
+      element: UploadSelfie,
+    },
+  ];
+
+  return (
+    <>
+      <Drawer isOpen={true} onClose={() => {}} size="3xl">
+        <div className="space-y-6">
+          <ConfigProvider
+            theme={{
+              token: {
+                colorPrimary: "#166534",
+              },
+            }}
+          >
+            <Steps
+              current={currentStep}
+              items={[
+                {
+                  title: "",
+                  description: "",
+                },
+                {
+                  title: "",
+                  description: "",
+                },
+              ]}
+            />
+          </ConfigProvider>
+          <div>
+            <div className="mt-6">
+              {createElement(stepsComponent?.[currentStep].element, {
+                onNext: onNext,
+                onPrev: onPrev,
+              })}
+            </div>
+          </div>
+        </div>
+      </Drawer>
+    </>
+  );
+};
+
+export default KycDrawer;
