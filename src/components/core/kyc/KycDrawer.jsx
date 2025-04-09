@@ -6,6 +6,7 @@ import Title from "@/components/shared/ui/Title";
 import TakeSelfie from "./TakeSelfie";
 import UploadSelfie from "./UploadSelfie";
 import { usekYCStore } from "@/store/kyc";
+import LivenessCheckPage from "./LivenessCheckPage";
 
 const KycDrawer = () => {
   // const isMobile = useMediaQuery({ maxWidth: 640 });
@@ -17,7 +18,7 @@ const KycDrawer = () => {
   const stepsComponent = [
     {
       key: "selfie",
-      element: TakeSelfie,
+      element: LivenessCheckPage, //TakeSelfie,
     },
     {
       key: "upload_picture",

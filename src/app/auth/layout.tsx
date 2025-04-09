@@ -14,7 +14,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
                 href={"/"}
                 className="font-extrabold text-white text-xl md:text-[2.7rem]"
               >
-                PAYSIT
+                PaysIt
               </Link>
               <p className="text-xl !leading-[1.2] md:text-[2.7rem] font-extrabold">
                 Seamless Subscriptions and Faster Payments

@@ -11,8 +11,6 @@ http.interceptors.request.use((req) => {
     // Get the token dynamically on each request
     const session = localStorage.getItem('paysit-auth-session');
     const token = session ? JSON.parse(session)?.state?.userData?.token : null;
-
-
     if (token) {
       req.headers["token"] = token || "";
     }
