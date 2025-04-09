@@ -2,7 +2,7 @@
 import { useState, useRef, useEffect } from "react";
 import * as faceapi from "face-api.js";
 
-export default function ClientSideLivenessDetector({ onComplete }) {
+const ClientSideLivenessDetector = ({ onComplete }) => {
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
   const [isStarted, setIsStarted] = useState(false);
@@ -499,7 +499,10 @@ export default function ClientSideLivenessDetector({ onComplete }) {
         )}
       </div>
 
-      <div className="controls" style={{ marginTop: "20px" }}>
+      <div
+        className="controls flex justify-center"
+        style={{ marginTop: "20px" }}
+      >
         {!isStarted ? (
           <button
             onClick={startDetection}
@@ -533,4 +536,6 @@ export default function ClientSideLivenessDetector({ onComplete }) {
       </div>
     </div>
   );
-}
+};
+
+export default ClientSideLivenessDetector;

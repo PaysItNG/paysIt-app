@@ -40,26 +40,26 @@ export default function LivenessCheckPage() {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-8 flex flex-col justify-center items-center">
       <h1 className="text-2xl font-bold mb-6">
-        Client-Side Liveness Verification
+        Start Liveness Face Verification
       </h1>
 
       {!verificationComplete ? (
         <div className="bg-white p-6 rounded-lg shadow-md">
           <p className="mb-4">
             This verification ensures you are a real person present at your
-            device. All processing happens directly in your browser for privacy.
+            device.
           </p>
 
           <ClientSideLivenessDetector onComplete={handleVerificationComplete} />
 
-          <div className="mt-4 text-sm text-gray-600">
+          {/* <div className="mt-4 text-sm text-gray-600">
             <p>
               Privacy notice: All face processing is done entirely on your
               device. No images are sent to any server.
             </p>
-          </div>
+          </div> */}
         </div>
       ) : (
         <div className="bg-white p-6 rounded-lg shadow-md">
@@ -82,7 +82,7 @@ export default function LivenessCheckPage() {
           ) : (
             <div className="text-center text-red-600">
               <h2 className="text-xl font-bold mb-3">Verification Failed</h2>
-              <p>We couldn't verify your liveness. Please try again.</p>
+              <p>We couldn&apos;t verify your liveness. Please try again.</p>
               <button
                 onClick={resetVerification}
                 className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
