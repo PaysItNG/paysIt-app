@@ -11,6 +11,7 @@ import Input from "@/components/shared/ui/Input";
 import { useRouter } from "next/navigation";
 import { APP_ROUTES } from "@/lib/routes";
 import Button from "@/components/shared/ui/Button";
+import useAuthUser from "@/hooks/useAuthUser";
 // import useAuthUser from "@/hooks/useAuthUser";
 
 const Login = () => {
@@ -20,7 +21,7 @@ const Login = () => {
 
   const [pswVisible, setPswVisible] = useState(false);
 
-  // const { setAuthUser } = useAuthUser();
+  const { setAuthUser } = useAuthUser();
 
   const {
     register,
@@ -42,13 +43,17 @@ const Login = () => {
         password: values?.password,
       };
       const res = await loginUser(payload);
-      console.log(res);
 
       const resData = res?.data;
+      const tokens = res?.token as
+        | { access: string | null; refresh: string | null }
+        | undefined;
 
       if (res?.logged_in) {
-        console.log(resData);
-        // setAuthUser(res?.data?.data);
+        setAuthUser({
+          data: resData,
+          token: tokens,
+        });
         router.push(APP_ROUTES.DASHBOARD);
       } else if (
         res?.message === "This Account is not Activated, Check your mail"

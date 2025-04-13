@@ -11,9 +11,12 @@ import LivenessCheckPage from "./LivenessCheckPage";
 const KycDrawer = () => {
   // const isMobile = useMediaQuery({ maxWidth: 640 });
 
+  const kycStoreData = usekYCStore((state) => state.data);
+
   const currentStep = usekYCStore((state) => state.data.currentStep);
   const onNext = usekYCStore((state) => state.onNext);
   const onPrev = usekYCStore((state) => state.onPrev);
+  const onCloseDrawer = usekYCStore((state) => state.onCloseDrawer);
 
   const stepsComponent = [
     {
@@ -28,7 +31,7 @@ const KycDrawer = () => {
 
   return (
     <>
-      <Drawer isOpen={true} onClose={() => {}} size="3xl">
+      <Drawer isOpen={kycStoreData.isOpen} onClose={onCloseDrawer} size="3xl">
         <div className="space-y-6">
           <ConfigProvider
             theme={{
@@ -56,6 +59,8 @@ const KycDrawer = () => {
               {createElement(stepsComponent?.[currentStep].element, {
                 onNext: onNext,
                 onPrev: onPrev,
+                kycStoreData: kycStoreData,
+                onCloseDrawer,
               })}
             </div>
           </div>

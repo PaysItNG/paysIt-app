@@ -4,7 +4,7 @@ import OverviewSection from "@/components/core/dashboard/OverviewSection";
 const Dashboard = () => {
   return (
     <>
-      <main className="grid grid-cols-2">
+      <main className="grid lg:grid-cols-2">
         <OverviewSection />
         <div></div>
       </main>

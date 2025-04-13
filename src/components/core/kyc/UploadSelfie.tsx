@@ -1,11 +1,14 @@
+import { useSubmitKyc } from "@/api/kyc";
+import Button from "@/components/shared/ui/Button";
 import Title from "@/components/shared/ui/Title";
 import UploadImage from "@/components/shared/ui/UploadImage";
-import { Button } from "@heroui/react";
+import { notifier } from "@/lib/utils/notifier";
+import { AxiosError } from "axios";
 import React from "react";
-import { UseFormSetValue, UseFormGetValues, useForm } from "react-hook-form";
-import { TbChevronLeft, TbChevronRight } from "react-icons/tb";
+import { useForm } from "react-hook-form";
+import { TbChevronLeft } from "react-icons/tb";
 
-interface ValueType {
+interface SelfieFormData {
   file: File | null; // Add the 'file' property
   image: string; // Add the 'image' property
   selfie: string | null;
@@ -14,10 +17,53 @@ interface ValueType {
 type PropType = {
   onNext: () => void;
   onPrev: () => void;
+  onCloseDrawer: () => void;
+  kycStoreData: {
+    [key: string]: unknown;
+  };
 };
 
-const UploadSelfie: React.FC<PropType> = ({ onPrev, onNext }) => {
-  const { getValues, setValue } = useForm<FormData>({});
+const UploadSelfie: React.FC<PropType> = ({
+  onPrev,
+  kycStoreData,
+  onCloseDrawer,
+}) => {
+  const { getValues, setValue } = useForm<SelfieFormData>({
+    defaultValues: {
+      file: null,
+      image: "",
+      selfie: null,
+    },
+  });
+
+  const { mutateAsync: mutateSubmitKyc, isPending: isSubmittingKyc } =
+    useSubmitKyc();
+
+  const onSubmit = async () => {
+    const selfieFile = getValues().file;
+    const id_documentFile = kycStoreData?.livenessImageFile;
+
+    if (!selfieFile || !id_documentFile) {
+      notifier({
+        type: "error",
+        message: "Both selfie and ID document are required.",
+      });
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("id_document", id_documentFile as Blob);
+    formData.append("selfie", selfieFile as Blob);
+    try {
+      const res = await mutateSubmitKyc(formData);
+      notifier({ type: "success", message: res?.message as string });
+      onCloseDrawer();
+    } catch (err: unknown) {
+      const error = err as AxiosError<{ message: string }>;
+      const errMsg = error?.response?.data?.message || error?.message;
+      notifier({ type: "error", message: errMsg });
+    }
+  };
 
   return (
     <>
@@ -49,10 +95,11 @@ const UploadSelfie: React.FC<PropType> = ({ onPrev, onNext }) => {
               radius="full"
               size="lg"
               className="mt-5 text-base bg-primary text-white"
-              endContent={<TbChevronRight size="20" />}
-              onPress={onNext}
+              // endContent={<TbChevronRight size="20" />}
+              onPress={onSubmit}
+              isLoading={isSubmittingKyc}
             >
-              Continue
+              Submit
             </Button>
           </div>
         </div>

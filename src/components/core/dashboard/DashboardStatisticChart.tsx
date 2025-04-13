@@ -46,7 +46,7 @@ const DashboardStatisticChart = () => {
           fontSize: 14,
         },
         padding: 10,
-        formatter: function (params) {
+        formatter: function (params: { value: number }[]) {
           return `
             <div style="display: flex; align-items: center; gap: 8px; padding: 5px;">
             <div style="padding: 4px; border-radius: 50%; background: #f0fdf4;">

@@ -1,10 +1,11 @@
 "use client";
 import { Button, cn } from "@heroui/react";
+import { ReactNode } from "react";
 import { HiChevronLeft } from "react-icons/hi";
 
 type TitleProps = {
   title?: string;
-  sub?: string;
+  sub?: string | ReactNode;
   className?: string;
   classNames?: {
     base?: string;

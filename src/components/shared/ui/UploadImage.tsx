@@ -5,15 +5,15 @@ import { BsTrash } from "react-icons/bs";
 import { IoMdCheckmark, IoMdCloudUpload } from "react-icons/io";
 import { RiImageAddLine } from "react-icons/ri";
 import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
-import { useUploadImage } from "@/api/upload";
 import NextImage from "next/image";
 import { Image } from "@heroui/react";
 
 const { Dragger } = Upload;
 
 interface FormData {
-  file: File | null;
-  image: string;
+  file: File | null; // Add the 'file' property
+  image: string; // Add the 'image' property
+  selfie: string | null;
 }
 
 interface PropType {
@@ -26,8 +26,10 @@ const UploadImage: React.FC<PropType> = ({ setValue, getValues, label }) => {
   const [filePreviewUrl, setFilePreviewUrl] = useState<string | null>(null);
   const [uploadStatus, setUploadStatus] = useState("idle");
 
-  const { mutateAsync: mutateUploadImage, isLoading: isUploading } =
-    useUploadImage();
+  // const { mutateAsync: mutateUploadImage, isLoading: isUploading } =
+  //   useUploadImage();
+
+  const isUploading = false;
 
   const beforeUpload = (file: File) => {
     const isImage = file.type.startsWith("image/");

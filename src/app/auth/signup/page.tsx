@@ -134,19 +134,16 @@ const Signup = () => {
                   inputWrapper: "px-4 shadow-none border-1",
                 }}
                 endContent={
-                  <Button
-                    isIconOnly
-                    onPress={() => setPswVisible(!pswVisible)}
-                    size="sm"
-                    className="bg-transparent"
-                    disableRipple={true}
+                  <span
+                    onClick={() => setPswVisible(!pswVisible)}
+                    className="cursor-pointer"
                   >
                     {pswVisible ? (
                       <IoEye size={20} className="text-default-400" />
                     ) : (
                       <IoEyeOff size={20} className="text-default-400" />
                     )}
-                  </Button>
+                  </span>
                 }
                 {...register("password", {
                   required: "Password is required",
@@ -164,19 +161,16 @@ const Signup = () => {
                   inputWrapper: "px-4 shadow-none border-1",
                 }}
                 endContent={
-                  <Button
-                    isIconOnly
-                    onPress={() => setConfirmPswVisible(!confirmPswVisible)}
-                    size="sm"
-                    className="bg-transparent"
-                    disableRipple={true}
+                  <span
+                    onClick={() => setConfirmPswVisible(!confirmPswVisible)}
+                    className="cursor-pointer"
                   >
                     {confirmPswVisible ? (
                       <IoEye size={20} className="text-default-400" />
                     ) : (
                       <IoEyeOff size={20} className="text-default-400" />
                     )}
-                  </Button>
+                  </span>
                 }
                 {...register("confirm_password", {
                   required: "Confirm Password is required",

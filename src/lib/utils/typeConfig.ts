@@ -1,7 +1,7 @@
 export type ApiResponseType = {
-    status: number;
-    message: string;
-    data: {
+    status?: number;
+    message?: string;
+    data?: {
         message?: string,
         [key: string]: unknown
     }
