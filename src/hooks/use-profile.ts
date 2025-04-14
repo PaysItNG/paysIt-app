@@ -21,13 +21,21 @@ export const useProfile=()=>{
     useEffect(()=>{
         if (getProfileData && getProfileData.data) {
             const { data } = getProfileData;
-            authenticate(data);
+            const transformedData: UserProfile = {
+                user: {
+                  first_name: data.first_name as string,
+                  last_name: data.last_name as string,
+                  ...data, // Include other fields if needed
+                },
+              };
+        
+              authenticate(transformedData);
           }
     }, [getProfileData])
 
 
 
-    const authenticate=(data: {[key: string]:unknown})=>{
+    const authenticate=(data: UserProfile)=>{
         setprofileData(data);
         // setAuthenticated(true)
     }

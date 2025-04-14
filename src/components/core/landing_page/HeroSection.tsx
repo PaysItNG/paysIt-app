@@ -32,7 +32,7 @@ const HeroNotification = ({
 );
 
 const HeroSection = () => (
-  <section className="pt-32 pb-20 px-4 overflow-hidden relative bg-white pattern-4">
+  <section className="pt-32 pb-20 px-4 overflow-hidden relative bg-white pattern-2">
     <div className="absolute inset-0 top-72 bg-gradient-to-b from-blue-50 to-red-500 -z-10"></div>
 
     {/* Floating Notifications */}

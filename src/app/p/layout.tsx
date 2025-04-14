@@ -1,6 +1,7 @@
 import Sidebar from "@/components/shared/Sidebar";
 import clsx from "clsx";
 import AuthProvider from "@/components/providers/AuthProvider";
+import ChildrenSection from "@/components/shared/ChildrenSection";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -8,9 +9,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       <AuthProvider>
         <main className={clsx("flex w-screen max-w-full")}>
           <Sidebar />
-          <section className={"w-full px-10 py-3 overflow-y-auto"}>
-            {children}
-          </section>
+          <ChildrenSection>{children}</ChildrenSection>
         </main>
       </AuthProvider>
     </>

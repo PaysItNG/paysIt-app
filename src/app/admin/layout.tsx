@@ -1,0 +1,18 @@
+import AdminProvider from "@/components/providers/AdminProvider";
+import ChildrenSection from "@/components/shared/ChildrenSection";
+import Sidebar from "@/components/shared/Sidebar";
+import clsx from "clsx";
+import React from "react";
+
+const Layout = ({ children }: { children: React.ReactNode }) => {
+  return (
+    <AdminProvider>
+      <main className={clsx("flex w-screen max-w-full")}>
+        <Sidebar role={"admin"} />
+        <ChildrenSection>{children}</ChildrenSection>
+      </main>
+    </AdminProvider>
+  );
+};
+
+export default Layout;

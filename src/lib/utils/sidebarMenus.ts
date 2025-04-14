@@ -12,15 +12,21 @@ import { AiOutlineLogout } from "react-icons/ai";
 
 import { IconType } from "react-icons";
 
-type MenuType = {
+export type MenuType = {
   path: string;
   name: string;
   defaultIcon: IconType;
   activeIcon: IconType;
   active?: boolean;
-}[];
+  menuItem?: {
+    path: string;
+    name: string;
+    defaultIcon: IconType;
+    activeIcon: IconType;
+  }[];
+};
 
-export const topMenus: MenuType = [
+export const topMenus: MenuType[] = [
   {
     path: "",
     name: "Dashboard",
@@ -37,7 +43,7 @@ export const topMenus: MenuType = [
   },
 ];
 
-export const bottomMenus: MenuType = [
+export const bottomMenus: MenuType[] = [
   {
     path: "",
     name: "Setting",
@@ -45,6 +51,39 @@ export const bottomMenus: MenuType = [
     activeIcon: IoSettings,
     active: false,
   },
+  {
+    path: "",
+    name: "Logout",
+    defaultIcon: AiOutlineLogout,
+    activeIcon: AiOutlineLogout,
+  },
+];
+export const adminTopMenus: MenuType[] = [
+  {
+    path: "",
+    name: "Dashboard",
+    defaultIcon: LuLayoutDashboard,
+    activeIcon: TbLayoutDashboardFilled,
+    active: true,
+  },
+  {
+    path: "",
+    name: "Account Approval",
+    defaultIcon: IoWalletOutline,
+    activeIcon: IoWallet,
+    active: false,
+    menuItem: [
+        {
+          path: "",
+          name: "KYC Approval",
+          defaultIcon: LuLayoutDashboard,
+          activeIcon: TbLayoutDashboardFilled,
+        }
+    ]
+  },
+];
+
+export const adminBottomMenus: MenuType[] = [
   {
     path: "",
     name: "Logout",

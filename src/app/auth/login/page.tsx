@@ -12,7 +12,6 @@ import { useRouter } from "next/navigation";
 import { APP_ROUTES } from "@/lib/routes";
 import Button from "@/components/shared/ui/Button";
 import useAuthUser from "@/hooks/useAuthUser";
-// import useAuthUser from "@/hooks/useAuthUser";
 
 const Login = () => {
   const router = useRouter();
@@ -54,7 +53,11 @@ const Login = () => {
           data: resData,
           token: tokens,
         });
-        router.push(APP_ROUTES.DASHBOARD);
+        if (resData?.role === "user") {
+          router.push(APP_ROUTES.DASHBOARD);
+        } else {
+          router.push(APP_ROUTES.ADMIN_DASHBOARD);
+        }
       } else if (
         res?.message === "This Account is not Activated, Check your mail"
       ) {

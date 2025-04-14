@@ -8,10 +8,17 @@ import { TbNetworkOff } from "react-icons/tb";
 import KycDrawer from "../core/kyc/KycDrawer";
 import { usekYCStore } from "@/store/kyc";
 import { useEffect, useMemo } from "react";
+import useAuthUser from "@/hooks/useAuthUser";
+import { APP_ROUTES } from "@/lib/routes";
+import { useRouter } from "next/navigation";
 
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const { isPending: isLoadingProfile, isError: errorGettingProfile } =
     useUserProfile();
+
+  const router = useRouter();
+
+  const { token } = useAuthUser();
 
   const {
     data: kycStatus,
@@ -25,6 +32,13 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const kycDetail = useMemo(() => {
     return kycStatus?.kyc as KycStatus | undefined;
   }, [kycStatus]);
+
+  useEffect(() => {
+    if (!token?.access) {
+      router.push(APP_ROUTES.DASHBOARD);
+    }
+  }, [router, token?.access]);
+
   useEffect(() => {
     if (!kycDetail?.submitted) {
       onOpenKycDrawer();
@@ -32,8 +46,6 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       onCloseKycDrawer();
     }
   }, [kycDetail?.submitted, onOpenKycDrawer, onCloseKycDrawer]);
-
-  console.log(isLoadingProfile);
 
   return (
     <>

@@ -53,7 +53,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
             </div>
           </div>
         </div>
-        <div className="flex flex-col flex-1 overflow-y-auto text-xl md:col-span-5 order-1 md:order-2">
+        <div className="flex flex-col flex-1 overflow-y-auto text-xl md:col-span-5 order-1 md:order-2 px-3">
           {children}
         </div>
       </div>

@@ -34,7 +34,10 @@ const useAuthUser = create<AuthType>()(
           data: {},
         }
       ) => set({ userData: authData.data, token: authData.token }),
-      removeAuthUser: () => set({ userData: null }),
+      removeAuthUser: () => {
+        localStorage.removeItem("paysit-auth-session");
+        set({ userData: null, token: {} });
+      },
     }),
     {
       name: "paysit-auth-session",

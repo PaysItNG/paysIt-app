@@ -12,7 +12,7 @@ export const useUserProfile=()=>{
                 data: res?.data?.data,
             };
         },
-    //     enabled: false,
-    // retry: false,
+        // enabled: false,
+    retry: false,
     })
 }
