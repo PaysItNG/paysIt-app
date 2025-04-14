@@ -34,18 +34,18 @@ const FeaturesView = () => {
   ];
 
   return (
-    <section className="pb-20 pt-14 bg-[#f1f1f1]">
-      <div className="container mx-auto max-w-7xl px-4">
+    <section className="pb-20 pt-14 bg-[#f1f1f1] pattern-6">
+      <div className="mx-auto max-w-screen-xl space-y-8 px-4 py-16 sm:px-6 lg:space-y-16 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold mb-4">
             PaysIt Features, Simplified
           </h2>
           <p className="text-lg text-gray-600">
-            Everything you need to manage your workforce effectively
+            Everything you need to manage your finances effectively
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 w-[90%] mx-auto gap-16 min-h-[400px] place-items-center">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 mx-auto gap-16 min-h-[400px] place-items-center">
           {features.map((feature, index) => (
             <Card
               key={index}
