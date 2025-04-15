@@ -37,13 +37,13 @@ const Sidebar: React.FC<PropType> = ({ role }) => {
           exit={{ opacity: 0, x: -50 }} // Exit animation
           transition={{ duration: 0.3 }}
           className={clsx(
-            "bg-[#f1f1f1] min-h-screen rounded-r-2xl fixed md:relative transition-all z-20",
+            "bg-[#f1f1f1] min-h-screen rounded-r-2xl fixed md:relativ transition-all z-20",
             sideBarOpen ? "w-64" : "w-16"
           )}
         >
           <SidebarSwitch />
 
-          <div className="pt-8 pb-5 flex flex-col justify-between h-full">
+          <div className="pt-8 pb-5 flex flex-col justify-between h-screen">
             <div className="space-y-10">
               <LogoNameHeader sideBarOpen={sideBarOpen} />
               <div>

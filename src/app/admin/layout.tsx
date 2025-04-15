@@ -1,3 +1,4 @@
+import AdminHeader from "@/components/core/admin/AdminHeader";
 import AdminProvider from "@/components/providers/AdminProvider";
 import ChildrenSection from "@/components/shared/ChildrenSection";
 import Sidebar from "@/components/shared/Sidebar";
@@ -9,7 +10,8 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
     <AdminProvider>
       <main className={clsx("flex w-screen max-w-full")}>
         <Sidebar role={"admin"} />
-        <ChildrenSection>{children}</ChildrenSection>
+
+        <ChildrenSection header={<AdminHeader />}>{children}</ChildrenSection>
       </main>
     </AdminProvider>
   );
