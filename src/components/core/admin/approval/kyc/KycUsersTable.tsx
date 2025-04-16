@@ -33,7 +33,11 @@ const colors = [
 const KycUsersTable = () => {
   const [selectedKeys, setSelectedKeys] = useState<Set<string>>(new Set([]));
 
-  const { isPending: isLoading } = useGetUserKyc();
+  const { data, isPending: isLoading } = useGetUserKyc({
+    d: 30,
+  });
+
+  console.log(data);
 
   const topContent = (
     <div className="flex justify-between gap-3">
