@@ -17,11 +17,7 @@ const GeneralProtectedProvider = ({
   const { removeAuthUser } = useAuthUser();
 
   useEffect(() => {
-    if (
-      error &&
-      (error as AxiosError<{ code?: string }>)?.response?.data?.code ===
-        "token_not_valid"
-    ) {
+    if (error && (error as AxiosError)?.status === 401) {
       const relogin = window.confirm(
         "Your Login session has expired, please re-login"
       );

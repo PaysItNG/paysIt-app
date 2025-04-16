@@ -54,14 +54,14 @@ const Title = ({
           {title}
         </h2>
         {!!sub && (
-          <p
+          <div
             className={cn(
               "opacity-75 leading-none mt-1.5",
               classNames.sub || ""
             )}
           >
             {sub}
-          </p>
+          </div>
         )}
       </div>
     </div>

@@ -1,0 +1,1 @@
+export const filePrefix = "https://res.cloudinary.com/ded3ejyc1/"

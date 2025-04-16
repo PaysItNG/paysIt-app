@@ -7,6 +7,8 @@ type SidebarState = {
 type SidebarStore = {
   data: SidebarState;
   switchSidebar: () => void;
+  openSidebar: () => void;
+  closeSidebar: () => void;
 };
 
 const defaultState = {
@@ -19,6 +21,14 @@ const useManageSidebar = create<SidebarStore>((set) => ({
   switchSidebar: () =>
     set((state) => ({
       data: { ...state.data, sideBarOpen: !state.data.sideBarOpen },
+    })),
+  openSidebar: () =>
+    set((state) => ({
+      data: { ...state.data, sideBarOpen: true },
+    })),
+  closeSidebar: () =>
+    set((state) => ({
+      data: { ...state.data, sideBarOpen: false },
     })),
 }));
 

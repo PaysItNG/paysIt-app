@@ -33,11 +33,11 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     return kycStatus?.kyc as KycStatus | undefined;
   }, [kycStatus]);
 
-  useEffect(() => {
-    if (!token?.access) {
-      router.push(APP_ROUTES.DASHBOARD);
-    }
-  }, [router, token?.access]);
+  // useEffect(() => {
+  //   if (!token?.access) {
+  //     router.push(APP_ROUTES.DASHBOARD);
+  //   }
+  // }, [router, token?.access]);
 
   useEffect(() => {
     if (!kycDetail?.submitted) {

@@ -60,7 +60,7 @@ export const bottomMenus: MenuType[] = [
 ];
 export const adminTopMenus: MenuType[] = [
   {
-    path: "",
+    path: "/admin",
     name: "Dashboard",
     defaultIcon: LuLayoutDashboard,
     activeIcon: TbLayoutDashboardFilled,
@@ -74,7 +74,7 @@ export const adminTopMenus: MenuType[] = [
     active: false,
     menuItem: [
         {
-          path: "",
+          path: "/admin/approval/kyc",
           name: "KYC Approval",
           defaultIcon: LuLayoutDashboard,
           activeIcon: TbLayoutDashboardFilled,

@@ -8,9 +8,10 @@ export const API_ROUTE = {
 
     //profile apis
     profile: "/profile/",
+    admin_update_profile: "/profile/",
 
     //kyc apis
     kyc_verification: "/auth/kyc/apply/",
-
+    admin_get_kyc: "/auth/kyc/status"
     
 }

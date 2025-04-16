@@ -37,3 +37,15 @@ export const useSubmitKyc=()=>{
         }
     })
 }
+
+
+
+export const useGetUserKyc=()=>{
+    return useQuery<ApiResponseType>({
+        queryKey: ["admin_get_kyc"],
+        queryFn: async()=>{
+            const res = await http.get(API_ROUTE.admin_get_kyc);
+            return res?.data?.data || []
+        }
+    })
+}

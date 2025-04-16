@@ -1,5 +1,5 @@
 "use client";
-import { Button, message, Upload } from "antd";
+import { Button, ConfigProvider, message, Upload } from "antd";
 import React, { useState } from "react";
 import { BsTrash } from "react-icons/bs";
 import { IoMdCheckmark, IoMdCloudUpload } from "react-icons/io";
@@ -7,22 +7,33 @@ import { RiImageAddLine } from "react-icons/ri";
 import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
 import NextImage from "next/image";
 import { Image } from "@heroui/react";
+import clsx from "clsx";
 
 const { Dragger } = Upload;
 
 interface FormData {
   file: File | null; // Add the 'file' property
   image: string; // Add the 'image' property
-  selfie: string | null;
+  selfie?: string | null;
+  [key: string]: unknown;
 }
 
 interface PropType {
   setValue: UseFormSetValue<FormData>; // Correctly type setValue
   getValues: UseFormGetValues<FormData>;
   label?: string;
+  classNames: {
+    base?: string | string[];
+  };
+  isProfile?: boolean;
 }
 
-const UploadImage: React.FC<PropType> = ({ setValue, getValues, label }) => {
+const UploadImage: React.FC<PropType> = ({
+  setValue,
+  getValues,
+  label,
+  isProfile,
+}) => {
   const [filePreviewUrl, setFilePreviewUrl] = useState<string | null>(null);
   const [uploadStatus, setUploadStatus] = useState("idle");
 
@@ -92,8 +103,13 @@ const UploadImage: React.FC<PropType> = ({ setValue, getValues, label }) => {
       <label className="block text-sm font-medium text-gray-700">{label}</label>
 
       {filePreviewUrl ?? getValues("image") ? (
-        <div className="relative group">
-          <div className="border border-gray-200 rounded-lg overflow-hidden h-64 w-full bg-gray-50 flex items-center justify-center">
+        <div className={clsx("relative group")}>
+          <div
+            className={clsx(
+              "border border-gray-200 overflow-hidden bg-gray-50 flex items-center justify-center",
+              isProfile ? "rounded-full h-44 w-44" : "rounded-lg h-64 w-full"
+            )}
+          >
             <Image
               src={filePreviewUrl ?? getValues("image")}
               alt="Preview"
@@ -103,7 +119,12 @@ const UploadImage: React.FC<PropType> = ({ setValue, getValues, label }) => {
               height={200}
             />
           </div>
-          <div className="absolute top-2 right-2 flex gap-2">
+          <div
+            className={clsx(
+              "absolute flex gap-2 z-10",
+              isProfile ? "top-1/2 left-1/4" : "top-2 right-2"
+            )}
+          >
             <Button
               type="primary"
               danger
@@ -113,23 +134,31 @@ const UploadImage: React.FC<PropType> = ({ setValue, getValues, label }) => {
               className="opacity-0 group-hover:opacity-100 transition-opacity"
             />
             {uploadStatus !== "done" && (
-              <Button
-                type="primary"
-                size="small"
-                icon={<IoMdCloudUpload />}
-                loading={isUploading}
-                onClick={handleUploadFile}
-                className="opacity-0 group-hover:opacity-100 transition-opacity bg-[#033f4b]"
+              <ConfigProvider
+                theme={{
+                  token: {
+                    colorPrimary: "#166534",
+                  },
+                }}
               >
-                {isUploading ? "Uploading" : "Upload"}
-              </Button>
+                <Button
+                  type="primary"
+                  size="small"
+                  icon={<IoMdCloudUpload />}
+                  loading={isUploading}
+                  onClick={handleUploadFile}
+                  className="opacity-0 group-hover:opacity-100 transition-opacity bg-primary"
+                >
+                  {isUploading ? "Uploading" : "Upload"}
+                </Button>
+              </ConfigProvider>
             )}
             {uploadStatus === "done" && (
               <Button
                 type="default"
                 size="small"
-                icon={<IoMdCheckmark className="text-green-500" />}
-                className="opacity-100 disabled:bg-[#033f4b] disabled:text-white"
+                icon={<IoMdCheckmark className="text-primary" />}
+                className="opacity-100 disabled:bg-primary disabled:text-white"
                 disabled
               >
                 Uploaded
@@ -144,15 +173,24 @@ const UploadImage: React.FC<PropType> = ({ setValue, getValues, label }) => {
           accept="image/*"
           beforeUpload={handleChooseFile}
           showUploadList={false}
-          className="border-2 border-dashed border-gray-300 hover:border-blue-400 rounded-lg bg-gray-50 h-64 flex flex-col items-center justify-center transition-colors"
+          className={clsx(
+            "border-2 border-dashed border-gray-300 hover:border-blue-400 bg-gray-50 flex flex-col items-center justify-center transition-colors",
+            isProfile ? "rounded-full h-44 w-44" : "rounded-lg h-64 w-full"
+          )}
         >
           <div className="text-center p-4">
             <RiImageAddLine className="text-4xl text-gray-400 mx-auto mb-3" />
-            <p className="text-gray-500 mb-1">
-              <span className="text-blue-500 font-medium">Click to upload</span>{" "}
-              or drag and drop
-            </p>
-            <p className="text-xs text-gray-400">PNG, JPG up to 5MB</p>
+            {!isProfile && (
+              <>
+                <p className="text-gray-500 mb-1">
+                  <span className="text-blue-500 font-medium">
+                    Click to upload
+                  </span>{" "}
+                  or drag and drop
+                </p>
+                <p className="text-xs text-gray-400">PNG, JPG up to 5MB</p>
+              </>
+            )}
           </div>
         </Dragger>
       )}

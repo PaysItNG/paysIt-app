@@ -1,9 +1,10 @@
 import { Button as HeroButton } from "@heroui/react";
+import clsx from "clsx";
 import type { ComponentProps } from "react";
 
 type HeroButtonProps = ComponentProps<typeof HeroButton>;
 
-const Button = ({ className, ...rest }: HeroButtonProps) => {
+const Button = ({ className, variant, ...rest }: HeroButtonProps) => {
   return (
     <HeroButton
       spinner={
@@ -28,8 +29,12 @@ const Button = ({ className, ...rest }: HeroButtonProps) => {
           />
         </svg>
       }
+      variant={variant}
       {...rest}
-      className={className} // Use className instead of classNames
+      className={clsx(
+        className,
+        variant === "bordered" && "border-[1.6px] border-zinc-300"
+      )} // Use className instead of classNames
     />
   );
 };

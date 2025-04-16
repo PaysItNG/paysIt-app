@@ -17,7 +17,7 @@ const ChildrenSection = ({
       <div className="w-full">{header}</div>
       <section
         className={clsx(
-          "w-full px-10 py-3 overflow-y-auto overflow-x-hidden min-h-screen",
+          "w-full px-10 py-3 pt-8 overflow-y-auto overflow-x-hidden min-h-screen",
           !sideBarOpen && "pl-24 md:pl-10"
         )}
       >

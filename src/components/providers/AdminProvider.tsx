@@ -16,11 +16,11 @@ const AdminProvider = ({ children }: { children: React.ReactNode }) => {
 
   const { token } = useAuthUser();
 
-  useEffect(() => {
-    if (!token?.access) {
-      router.push(APP_ROUTES.ADMIN_DASHBOARD);
-    }
-  }, [router, token?.access]);
+  // useEffect(() => {
+  //   if (!token?.access) {
+  //     router.push(APP_ROUTES.ADMIN_DASHBOARD);
+  //   }
+  // }, [router, token?.access]);
 
   return (
     <>
