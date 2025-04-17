@@ -7,7 +7,7 @@ type ColorType = {
   bColor: string;
 };
 
-type StatusColorType = {
+export type StatusColorType = {
   success: ColorType;
   pending: ColorType;
   error: ColorType;

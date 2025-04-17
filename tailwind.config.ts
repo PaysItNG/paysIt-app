@@ -1,6 +1,6 @@
 import type { Config } from "tailwindcss";
-import {heroui} from "@heroui/react"
-import tailwindAnimate from 'tailwindcss-animate';
+import { heroui } from "@heroui/react";
+import tailwindAnimate from "tailwindcss-animate";
 
 export default {
   content: [
@@ -24,11 +24,15 @@ export default {
       themes: {
         light: {
           colors: {
-            primary: {
-              DEFAULT: '#166534',
-              foreground: '#fff',
+            danger: {
+              DEFAULT: "#ef4444",
+              foreground: "#fff",
             },
-            focus: '#166534',
+            primary: {
+              DEFAULT: "#166534",
+              foreground: "#fff",
+            },
+            focus: "#166534",
           },
         },
         // dark: {

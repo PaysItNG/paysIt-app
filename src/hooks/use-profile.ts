@@ -1,10 +1,10 @@
 "use client";
 import { useUserProfile } from "@/api/profile";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
 import { useMount } from "react-use";
 
 interface UserProfile {
-  first_name?: string | null;
+  first_name?: string;
   last_name?: string | null;
   email?: string | null;
   phone?: string | null;

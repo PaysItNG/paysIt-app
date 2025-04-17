@@ -6,6 +6,7 @@ import ChipStatus from "@/components/shared/ui/ChipStatus";
 import { useProfile } from "@/hooks/use-profile";
 import { RankIcon } from "@/lib/design/svgIcons";
 import { filePrefix } from "@/lib/utils/filePrefix";
+import { formatInitial } from "@/lib/utils/formatInitial";
 import { useEditProfile } from "@/store/editProfile";
 import { Avatar, Badge } from "@heroui/react";
 import React from "react";
@@ -20,9 +21,10 @@ const ProfileHeaderInfoView = () => {
     openDrawer("PERSONAL_INFO");
   };
 
-  const nameInitials = `${profileData?.user?.first_name?.trim()[0] || ""}${
-    profileData?.user?.last_name?.trim()[0] || ""
-  }`;
+  const nameInitials = formatInitial(
+    profileData?.user?.first_name || "",
+    profileData?.user?.last_name || ""
+  );
 
   return (
     <Card className="p-6 flex justify-between items-center gap-4 !shadow-sm">
@@ -58,16 +60,6 @@ const ProfileHeaderInfoView = () => {
           </h3>
           <div className="space-x-2">
             {/* Team Manager | Arizona, United States. */}
-
-            {/* <ChipStatus
-              className="capitalize"
-              label={
-                <div className="flex">
-                  <RankIcon color="orange" /> {profileData?.tier || ""}
-                </div>
-              }
-              size="sm"
-            /> */}
             <ChipStatus
               status={profileData?.user?.is_active ? "success" : "pending"}
               label={

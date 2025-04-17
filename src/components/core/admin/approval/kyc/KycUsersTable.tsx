@@ -1,9 +1,10 @@
 "use client";
 import { useGetUserKyc } from "@/api/kyc";
 import Button from "@/components/shared/ui/Button";
-import ChipStatus from "@/components/shared/ui/ChipStatus";
+import ChipStatus, { StatusColorType } from "@/components/shared/ui/ChipStatus";
 import Input from "@/components/shared/ui/Input";
 import Title from "@/components/shared/ui/Title";
+import { formatInitial } from "@/lib/utils/formatInitial";
 import {
   Avatar,
   Spinner,
@@ -19,6 +20,9 @@ import dayjs from "dayjs";
 import React, { useState } from "react";
 import { AiFillEye } from "react-icons/ai";
 import { CiSearch } from "react-icons/ci";
+import ViewKycDetail from "./ViewKycDetailDrawer";
+import { useViewKycDetailStore } from "@/store/viewKycDetail";
+import { UserKycType } from "@/lib/utils/typeConfig";
 
 const colors = [
   { tColor: "text-red-500", bColor: "bg-red-100" },
@@ -30,14 +34,22 @@ const colors = [
   { tColor: "text-indigo-500", bColor: "bg-indigo-100" },
 ];
 
+const kycStatus: Record<"pending" | "approved" | "rejected", string> = {
+  pending: "pending",
+  approved: "success",
+  rejected: "error",
+};
+
 const KycUsersTable = () => {
   const [selectedKeys, setSelectedKeys] = useState<Set<string>>(new Set([]));
+
+  const { openDrawer } = useViewKycDetailStore();
 
   const { data, isPending: isLoading } = useGetUserKyc({
     d: 30,
   });
 
-  console.log(data);
+  const usersKyc = data?.[0] as UserKycType[] | undefined;
 
   const topContent = (
     <div className="flex justify-between gap-3">
@@ -122,10 +134,10 @@ const KycUsersTable = () => {
         </TableHeader>
         <TableBody
           isLoading={isLoading}
-          loadingContent={<Spinner label="Loading Statement..." />}
+          loadingContent={<Spinner label="Loading KYC..." />}
           emptyContent={"No statement found"}
         >
-          {[1, 2, 3, 4].map((data, index) => {
+          {usersKyc?.map((userData, index) => {
             const randomIndex = Math.floor(Math.random() * colors.length);
             return (
               <TableRow
@@ -138,7 +150,10 @@ const KycUsersTable = () => {
                       <Avatar
                         size="md"
                         // src={`https://i.pravatar.cc/150?im${index + 8}`}
-                        name={"JG"}
+                        name={formatInitial(
+                          userData?.user?.first_name,
+                          userData?.user?.last_name
+                        )}
                         classNames={{
                           base: [colors?.[randomIndex].bColor],
                           name: ["font-bold", colors?.[randomIndex].tColor],
@@ -148,24 +163,25 @@ const KycUsersTable = () => {
                     <div>
                       <p>{"John Fixit"}</p>
                       <p className="text-gray-400 font-medium">
-                        jfixcoding@gmail
+                        {userData?.user?.email}
                       </p>
                     </div>
                   </div>
                 </TableCell>
                 <TableCell className=" text-[.82rem] font-medium text-black/80">
-                  User
+                  {userData?.user?.role}
                 </TableCell>
 
                 <TableCell className=" text-[.82rem] font-medium text-black/80">
-                  {dayjs().format("D MMMM, YYYY")}
+                  {dayjs(userData?.submitted_at).format("D MMMM, YYYY")}
                 </TableCell>
                 <TableCell className=" text-[.82rem] font-medium text-black/80">
-                  {index % 3 ? (
-                    <ChipStatus status="success" label="Success" />
-                  ) : (
-                    <ChipStatus status="pending" label="Pending" />
-                  )}
+                  <ChipStatus
+                    status={
+                      kycStatus?.[userData.status] as keyof StatusColorType
+                    }
+                    label={kycStatus?.[userData.status]}
+                  />
                 </TableCell>
                 <TableCell className="">
                   <div className="flex gap-x-2">
@@ -173,7 +189,7 @@ const KycUsersTable = () => {
                       isIconOnly
                       size="sm"
                       variant="light"
-                      onPress={() => {}}
+                      onPress={() => openDrawer({ userData })}
                     >
                       <AiFillEye size={18} className="text-gray-500" />
                     </Button>
@@ -181,9 +197,11 @@ const KycUsersTable = () => {
                 </TableCell>
               </TableRow>
             );
-          })}
+          }) || <></>}
         </TableBody>
       </Table>
+
+      <ViewKycDetail />
     </>
   );
 };

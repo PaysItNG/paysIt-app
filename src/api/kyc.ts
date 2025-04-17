@@ -12,6 +12,10 @@ export type KycStatus = {
 
 type SubmitKycType = FormData;
 
+type ApproveOrRejectKycType = {
+  status: string;
+};
+
 export const useGetKycStatus = () => {
   return useQuery<ApiResponseType>({
     queryKey: ["get_kyc_status"],
@@ -49,6 +53,34 @@ export const useGetUserKyc = (payload: {
     queryFn: async () => {
       const res = await http.post(API_ROUTE.admin_get_kyc, payload);
       return res?.data?.data || [];
+    },
+  });
+};
+
+export const useGetKycDetail = (kycID: number | string) => {
+  return useQuery<ApiResponseType>({
+    queryKey: [`get_kyc_detail_${kycID}`, kycID],
+    queryFn: async () => {
+      const res = await http.get(API_ROUTE.admin_get_kyc_detail + kycID + "/");
+      return res?.data?.data;
+    },
+  });
+};
+
+export const useApproveOrRejectKyc = (kycID: string | number) => {
+  const queryClient = useQueryClient();
+  return useMutation<ApiResponseType, AxiosError, ApproveOrRejectKycType>({
+    mutationFn: async (payload) => {
+      const res = await http.put(
+        API_ROUTE.admin_approve_reject_kyc + kycID + "/",
+        payload
+      );
+      return res?.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["get_kyc_status"],
+      });
     },
   });
 };
