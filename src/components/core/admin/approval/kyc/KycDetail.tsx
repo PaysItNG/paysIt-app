@@ -41,21 +41,24 @@ const KycActionButtons = ({ data }: { data: UserKycType }) => {
     useApproveOrRejectKyc(data?.id);
   const handleRejectKyc = () => {
     setAction("REJECT");
-    executeAction("rejected");
+    executeAction("rejected", "rejected");
   };
   const handleApproveKyc = () => {
     setAction("APPROVE");
-    executeAction("approved");
+    executeAction("approved", "approved");
   };
 
-  const executeAction = async (status: string) => {
+  const executeAction = async (status: string, action: string) => {
     const payload = {
       status,
     };
-    console.log(payload);
     try {
       const res = await mutateAction(payload);
-      notifier({ type: "success", message: res?.message || "" });
+      const resMsg = res?.message || `KYC ${action} successfully`;
+      notifier({
+        type: "success",
+        message: resMsg,
+      });
     } catch (err) {
       const errMsg =
         (err as AxiosError<{ message: string }>)?.response?.data?.message ||

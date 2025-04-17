@@ -12,7 +12,7 @@ export const API_ROUTE = {
 
   //kyc apis
   kyc_verification: "/auth/kyc/apply/",
-  admin_get_kyc: "/auth/kyc/status",
-  admin_get_kyc_detail: "/padmin/kyc/approve/",
-  admin_approve_reject_kyc: "/padmin/kyc/approve/",
+  admin_get_kyc: "/auth/kyc/status/",
+  admin_get_kyc_detail: "/auth/kyc/approve/",
+  admin_approve_reject_kyc: "/auth/kyc/approve/",
 };

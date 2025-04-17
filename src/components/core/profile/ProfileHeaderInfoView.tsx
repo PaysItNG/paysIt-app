@@ -59,12 +59,11 @@ const ProfileHeaderInfoView = () => {
             {profileData?.user?.first_name} {profileData?.user?.last_name}
           </h3>
           <div className="space-x-2">
-            {/* Team Manager | Arizona, United States. */}
             <ChipStatus
               status={profileData?.user?.is_active ? "success" : "pending"}
               label={
                 profileData?.user?.is_active
-                  ? "Account Active"
+                  ? "Account activated"
                   : "Account not activated"
               }
               size="md"

@@ -79,7 +79,7 @@ export const useApproveOrRejectKyc = (kycID: string | number) => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ["get_kyc_status"],
+        queryKey: ["admin_get_kyc"],
       });
     },
   });
