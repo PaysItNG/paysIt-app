@@ -1,5 +1,5 @@
 "use client";
-import { ReactNode, useEffect } from "react";
+import { ComponentProps, ReactNode, useEffect } from "react";
 import {
   DrawerBody,
   DrawerContent,
@@ -7,31 +7,12 @@ import {
   Drawer as HeroUiDrawer,
 } from "@heroui/react";
 
-interface DrawerTypes {
-  isOpen: boolean;
-  title?: string;
+type HeroDrawerProps = ComponentProps<typeof HeroUiDrawer> & {
   header?: ReactNode;
-  padding?: boolean;
-  round?: boolean;
-  onClose: () => void;
-  children?: ReactNode;
-  size?:
-    | "lg"
-    | "xs"
-    | "sm"
-    | "md"
-    | "xl"
-    | "2xl"
-    | "3xl"
-    | "4xl"
-    | "5xl"
-    | "full";
-  [key: string]: unknown;
-}
+};
 
-const Drawer: React.FC<DrawerTypes> = ({
+const Drawer: React.FC<HeroDrawerProps> = ({
   isOpen,
-  //   title,
   header,
   onClose,
   children,

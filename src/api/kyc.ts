@@ -58,11 +58,11 @@ export const useGetUserKyc = (payload: {
 };
 
 export const useGetKycDetail = (kycID: number | string) => {
-  return useQuery<ApiResponseType>({
+  return useQuery<ApiResponseType, AxiosError>({
     queryKey: [`get_kyc_detail_${kycID}`, kycID],
     queryFn: async () => {
       const res = await http.get(API_ROUTE.admin_get_kyc_detail + kycID + "/");
-      return res?.data?.data;
+      return res?.data;
     },
   });
 };

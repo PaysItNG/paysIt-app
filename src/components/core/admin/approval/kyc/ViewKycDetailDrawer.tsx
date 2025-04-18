@@ -10,7 +10,12 @@ const ViewKycDetailDrawer = () => {
   } = useViewKycDetailStore();
   return (
     <>
-      <Drawer size="2xl" isOpen={isOpen} onClose={closeDrawer}>
+      <Drawer
+        size="2xl"
+        isOpen={isOpen}
+        onClose={closeDrawer}
+        isDismissable={false}
+      >
         <KycDetail />
       </Drawer>
     </>

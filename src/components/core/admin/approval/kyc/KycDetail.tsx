@@ -1,12 +1,12 @@
 import { useApproveOrRejectKyc, useGetKycDetail } from "@/api/kyc";
-import ProfileHeaderInfoView from "@/components/core/profile/ProfileHeaderInfoView";
-import ProfilePersonalInfoView from "@/components/core/profile/ProfilePersonalInfoView";
 import Button from "@/components/shared/ui/Button";
 import { notifier } from "@/lib/utils/notifier";
 import { UserKycType } from "@/lib/utils/typeConfig";
 import { useViewKycDetailStore } from "@/store/viewKycDetail";
 import { AxiosError } from "axios";
 import React, { useState } from "react";
+import KycDetailHeader from "./KycDetailHeader";
+import KycIdentification from "./KycIdentification";
 
 const KycDetail = () => {
   const { data } = useViewKycDetailStore();
@@ -14,16 +14,26 @@ const KycDetail = () => {
   const userData = data?.userData as UserKycType;
 
   //================get the kyc detail================
-  const { data: kycData } = useGetKycDetail(userData?.id);
-  console.log(kycData);
+  const { data: getKycData, isPending: isLoading } = useGetKycDetail(
+    userData?.id
+  );
+
+  const kycData = getKycData?.data as UserKycType;
+
   //============
 
   return (
     <>
       <main className="space-y-4">
         <section className="space-y-4 min-h-[35rem]">
-          <ProfileHeaderInfoView />
-          <ProfilePersonalInfoView />
+          <KycDetailHeader
+            user={userData.user}
+            isLoading={isLoading}
+            submitted_at={kycData?.submitted_at}
+            submitted={kycData?.submitted as boolean}
+            status={kycData?.status}
+          />
+          <KycIdentification kycData={kycData} isLoading={isLoading} />
         </section>
 
         {<KycActionButtons data={userData} />}
