@@ -7,6 +7,7 @@ import { AxiosError } from "axios";
 import React, { useState } from "react";
 import KycDetailHeader from "./KycDetailHeader";
 import KycIdentification from "./KycIdentification";
+import Title from "@/components/shared/ui/Title";
 
 const KycDetail = () => {
   const { data } = useViewKycDetailStore();
@@ -24,7 +25,13 @@ const KycDetail = () => {
 
   return (
     <>
-      <main className="space-y-4">
+      <main className="space-y-2">
+        <Title
+          title="KYC Detail"
+          classNames={{
+            title: "text-lg",
+          }}
+        />
         <section className="space-y-4 min-h-[35rem]">
           <KycDetailHeader
             user={userData.user}
@@ -36,7 +43,7 @@ const KycDetail = () => {
           <KycIdentification kycData={kycData} isLoading={isLoading} />
         </section>
 
-        {<KycActionButtons data={userData} />}
+        {!isLoading && <KycActionButtons data={userData} />}
       </main>
     </>
   );
@@ -78,22 +85,22 @@ const KycActionButtons = ({ data }: { data: UserKycType }) => {
   };
 
   return (
-    <div className="flex justify-between">
+    <div className="flex justify-between mt-2">
       <Button
         color="danger"
         onPress={handleRejectKyc}
         isLoading={action === "REJECT" && isLoading}
-        isDisabled={isLoading}
+        isDisabled={isLoading || data.status === "rejected"}
       >
-        Reject
+        {data?.status === "rejected" ? "Rejected" : "Reject"}
       </Button>
       <Button
         color="primary"
         onPress={handleApproveKyc}
         isLoading={action === "APPROVE" && isLoading}
-        isDisabled={isLoading}
+        isDisabled={isLoading || data.status === "approved"}
       >
-        Approve
+        {data?.status === "approved" ? "Approved" : "Approve"}
       </Button>
     </div>
   );
