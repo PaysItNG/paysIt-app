@@ -7,6 +7,11 @@ import Title from "@/components/shared/ui/Title";
 import { formatInitial } from "@/lib/utils/formatInitial";
 import {
   Avatar,
+  ButtonGroup,
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownTrigger,
   Spinner,
   Table,
   TableBody,
@@ -22,7 +27,12 @@ import { AiFillEye } from "react-icons/ai";
 import { CiSearch } from "react-icons/ci";
 import ViewKycDetail from "./ViewKycDetailDrawer";
 import { useViewKycDetailStore } from "@/store/viewKycDetail";
-import { UserKycType } from "@/lib/utils/typeConfig";
+import {
+  KycStatusType,
+  KycStatusValue,
+  UserKycType,
+} from "@/lib/utils/typeConfig";
+import { ChevronDownIcon } from "@/lib/design/svgIcons";
 
 const colors = [
   { tColor: "text-red-500", bColor: "bg-red-100" },
@@ -43,10 +53,17 @@ const kycStatus: Record<"pending" | "approved" | "rejected", string> = {
 const KycUsersTable = () => {
   const [selectedKeys, setSelectedKeys] = useState<Set<string>>(new Set([]));
 
+  const [selectedOption, setSelectedOption] = React.useState<
+    "pending" | "approved" | "rejected"
+  >("approved");
+
   const { openDrawer } = useViewKycDetailStore();
+
+  console.log(selectedOption);
 
   const { data, isPending: isLoading } = useGetUserKyc({
     d: 30,
+    kyc_status: selectedOption,
   });
 
   const usersKyc = data?.[0] as UserKycType[] | undefined;
@@ -73,6 +90,10 @@ const KycUsersTable = () => {
           }}
         />
       </div>
+      <SelectFilterOption
+        setSelectedOption={setSelectedOption}
+        selectedOption={selectedOption as keyof KycStatusType}
+      />
     </div>
   );
 
@@ -82,7 +103,7 @@ const KycUsersTable = () => {
         aria-label="Financial Transactions"
         className="min-w-full text-gray-500 text-[.85rem] font-semibold"
         selectedKeys={selectedKeys}
-        selectionMode="multiple"
+        // selectionMode="multiple"
         onRowAction={() => {}}
         isStriped={true}
         topContent={topContent}
@@ -207,3 +228,59 @@ const KycUsersTable = () => {
 };
 
 export default KycUsersTable;
+
+type SelectFilterOptionType = {
+  setSelectedOption: (val: KycStatusValue) => void;
+  selectedOption: keyof KycStatusType;
+};
+
+const SelectFilterOption = ({
+  setSelectedOption,
+  selectedOption,
+}: SelectFilterOptionType) => {
+  const labelsMap: Record<
+    "pending" | "approved" | "rejected",
+    keyof KycStatusType
+  > = {
+    pending: "pending",
+    approved: "approved",
+    rejected: "rejected",
+  };
+
+  // Convert the Set to an Array and get the first value.
+  // const selectedOptionValue = Array.from(selectedOption as )[0];
+
+  return (
+    <ButtonGroup variant="flat">
+      <Button className="capitalize">{labelsMap[selectedOption]}</Button>
+      <Dropdown placement="bottom-end">
+        <DropdownTrigger>
+          <Button isIconOnly>
+            <ChevronDownIcon />
+          </Button>
+        </DropdownTrigger>
+        <DropdownMenu
+          disallowEmptySelection
+          aria-label="Merge options"
+          className="max-w-[300px]"
+          selectedKeys={selectedOption as KycStatusValue}
+          selectionMode="single"
+          onSelectionChange={(keys) => {
+            const selectedKey = Array.from(keys)[0] as string; // Extract the selected key
+            setSelectedOption(selectedKey as KycStatusValue); // Pass the key to the state setter
+          }}
+        >
+          <DropdownItem key="pending" className="capitalize">
+            {labelsMap["pending"]}
+          </DropdownItem>
+          <DropdownItem key="approved" className="capitalize">
+            {labelsMap["approved"]}
+          </DropdownItem>
+          <DropdownItem key="rejected" className="capitalize">
+            {labelsMap["rejected"]}
+          </DropdownItem>
+        </DropdownMenu>
+      </Dropdown>
+    </ButtonGroup>
+  );
+};

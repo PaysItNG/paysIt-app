@@ -1,3 +1,5 @@
+import { KycStatus } from "@/api/kyc";
+
 export type ApiResponseType = {
   status?: number;
   message?: string;
@@ -31,4 +33,12 @@ export type UserKycType = {
   submitted_at?: string;
   user: UserType;
   [key: string]: unknown;
+};
+
+export type KycStatusValue = KycStatus["status"];
+
+export type KycStatusType = {
+  pending: string;
+  approved: string;
+  rejected: string;
 };

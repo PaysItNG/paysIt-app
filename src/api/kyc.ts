@@ -49,7 +49,7 @@ export const useGetUserKyc = (payload: {
   hr?: string | number;
 }) => {
   return useQuery<ApiResponseType>({
-    queryKey: ["admin_get_kyc"],
+    queryKey: ["admin_get_kyc", payload],
     queryFn: async () => {
       const res = await http.post(API_ROUTE.admin_get_kyc, payload);
       return res?.data?.data || [];
