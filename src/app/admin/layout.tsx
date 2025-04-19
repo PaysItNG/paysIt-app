@@ -1,4 +1,3 @@
-import AdminHeader from "@/components/core/admin/AdminHeader";
 import SidebarHeader from "@/components/core/sidebar/SidebarHeader";
 import AdminProvider from "@/components/providers/AdminProvider";
 import ChildrenSection from "@/components/shared/ChildrenSection";

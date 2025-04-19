@@ -2,6 +2,9 @@
 import { useUserProfile } from "@/api/profile";
 import { useMemo } from "react";
 import { useMount } from "react-use";
+import useAuthUser from "./useAuthUser";
+import { useRouter } from "next/navigation";
+import { APP_ROUTES } from "@/lib/routes";
 
 interface UserProfile {
   first_name?: string;
@@ -25,6 +28,8 @@ interface UserProfile {
 export const useProfile = () => {
   // const [profileData, setprofileData] = useState<UserProfile | null>(null);
   const { data: getProfileData, error, refetch } = useUserProfile();
+  const { removeAuthUser } = useAuthUser();
+  const router = useRouter();
 
   const profileData: UserProfile | null = useMemo(() => {
     if (!getProfileData?.data) return null;
@@ -48,9 +53,15 @@ export const useProfile = () => {
     }
   });
 
+  const logoutUser = () => {
+    removeAuthUser();
+    router.push(APP_ROUTES.LOGIN);
+  };
+
   return {
     profileData,
     error,
     reloadUser,
+    logoutUser,
   };
 };

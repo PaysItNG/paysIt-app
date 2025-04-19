@@ -31,11 +31,16 @@ const ChildrenSection = ({
   };
 
   return (
-    <main className={clsx("w-full", sideBarOpen ? "lg:ml-64" : "lg:ml-16")}>
-      <div className="w-full">{header}</div>
+    <div
+      className={clsx(
+        "w-full flex-1 relative",
+        sideBarOpen ? "lg:ml-64" : "lg:ml-16"
+      )}
+    >
+      <div className="w-full sticky top-0 z-40">{header}</div>
       <section
         className={clsx(
-          "w-full px-10 py-3 pt-8 overflow-y-auto overflow-x-hidden min-h-screen",
+          "w-full px-10 py-3 pt-8 min-h-screen",
           !sideBarOpen && "pl-6 lg:pl-10"
         )}
       >
@@ -56,7 +61,7 @@ const ChildrenSection = ({
 
         {children}
       </section>
-    </main>
+    </div>
   );
 };
 

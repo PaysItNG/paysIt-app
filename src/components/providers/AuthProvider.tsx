@@ -8,17 +8,16 @@ import { TbNetworkOff } from "react-icons/tb";
 import KycDrawer from "../core/kyc/KycDrawer";
 import { usekYCStore } from "@/store/kyc";
 import { useEffect, useMemo } from "react";
-import useAuthUser from "@/hooks/useAuthUser";
-import { APP_ROUTES } from "@/lib/routes";
-import { useRouter } from "next/navigation";
+// import useAuthUser from "@/hooks/useAuthUser";
+// import { useRouter } from "next/navigation";
 
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const { isPending: isLoadingProfile, isError: errorGettingProfile } =
     useUserProfile();
 
-  const router = useRouter();
+  // const router = useRouter();
 
-  const { token } = useAuthUser();
+  // const { token } = useAuthUser();
 
   const {
     data: kycStatus,

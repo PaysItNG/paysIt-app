@@ -11,14 +11,15 @@ const OverviewSection = () => {
   return (
     <>
       <main className="min-h-screen w-full">
-        <div className="py-8">
+        <div className="">
           <Title
             title={"Overview"}
             sub={
               <span>
                 Good morning{" "}
-                <span className="capitalize">
-                  {profileData?.user?.first_name} {profileData?.user?.last_name}
+                <span className="capitalize font-medium">
+                  {profileData?.user?.first_name}
+                  {/* {profileData?.user?.last_name} */}
                 </span>
               </span>
             }
