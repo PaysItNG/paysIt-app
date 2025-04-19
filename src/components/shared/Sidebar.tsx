@@ -1,6 +1,6 @@
 "use client";
 import clsx from "clsx";
-import React from "react";
+import React, { useEffect } from "react";
 import MenuLink from "../core/sidebar/MenuLink";
 import SidebarSwitch from "../core/sidebar/SidebarSwitch";
 import {
@@ -14,6 +14,7 @@ import LogoNameHeader from "../core/sidebar/LogoNameHeader";
 import useManageSidebar from "@/hooks/useManageSidebar";
 import { AnimatePresence, motion } from "framer-motion";
 import { usePathname } from "next/navigation";
+import useScreenSize from "@/hooks/use-screen-size";
 
 type PropType = {
   topMenus?: MenuType[];
@@ -32,11 +33,29 @@ const Sidebar: React.FC<PropType> = ({ role }) => {
 
   const routeActive = (path: string): boolean => pathname === path;
 
-  const handleMouseEnter = () => {
-    if (!sideBarOpen) {
-      console.log("Hovered");
-      openSidebar();
+  const { isMediumScreen, isSmallScreen, isLargeScreen } = useScreenSize();
+
+  // Prevent body scrolling when sidebar is open on mobile
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      if ((isSmallScreen || isMediumScreen) && sideBarOpen) {
+        document.body.style.overflow = "hidden";
+      } else {
+        document.body.style.overflow = "auto";
+      }
     }
+
+    // Cleanup function
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [isMediumScreen, isSmallScreen, sideBarOpen]);
+
+  const handleMouseEnter = () => {
+    // if (!sideBarOpen) {
+    //   console.log("Hovered");
+    //   openSidebar();
+    // }
   };
 
   return (
@@ -49,20 +68,19 @@ const Sidebar: React.FC<PropType> = ({ role }) => {
           exit={{ opacity: 0, x: -50 }} // Exit animation
           transition={{ duration: 0.3 }}
           className={clsx(
-            "bg-[#f1f1f1] min-h-screen rounded-r-2xl fixed md:relativ transition-all z-20",
-            sideBarOpen ? "w-64" : "w-16"
+            "bg-[#f1f1f1] min-h-screen lg:rounded-r-2xl fixed top-[3.6rem] lg:top-0 transition-all z-40",
+            !sideBarOpen && "hidden lg:block",
+            sideBarOpen ? "lg:w-64 w-72" : "lg:w-16"
           )}
           onMouseEnter={handleMouseEnter}
         >
-          <SidebarSwitch />
+          {/* <SidebarSwitch /> */}
 
           <div className="pt-8 pb-5 flex flex-col justify-between h-screen">
             <div className="space-y-10">
-              <LogoNameHeader sideBarOpen={sideBarOpen} />
+              {isLargeScreen && <LogoNameHeader sideBarOpen={sideBarOpen} />}
               <div>
-                <div
-                  className={clsx("space-y-5", sideBarOpen ? "md:mx-4" : "")}
-                >
+                <div className={clsx("space-y-5", sideBarOpen ? "mx-3" : "")}>
                   {topMenuItems.map((menu, index) =>
                     menu?.menuItem?.length ? (
                       <details
@@ -135,7 +153,7 @@ const Sidebar: React.FC<PropType> = ({ role }) => {
                 </div>
               </div>
             </div>
-            <div className={clsx("space-y-5", sideBarOpen ? "md:mx-4" : "")}>
+            <div className={clsx("space-y-5", sideBarOpen ? "mx-4" : "")}>
               {bottomMenuItems.map((menu, index) => (
                 <MenuLink key={index + "____bottom_menu"} menu={menu} />
               ))}

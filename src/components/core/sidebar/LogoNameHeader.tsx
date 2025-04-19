@@ -4,12 +4,15 @@ import Link from "next/link";
 import React from "react";
 import clsx from "clsx";
 import { AnimatePresence, motion } from "framer-motion";
+import useScreenSize from "@/hooks/use-screen-size";
 
 type PropType = {
   sideBarOpen: boolean;
 };
 
 const LogoNameHeader: React.FC<PropType> = ({ sideBarOpen }) => {
+  //large screen size
+  const { isLargeScreen } = useScreenSize();
   return (
     <div
       className={clsx(
@@ -38,7 +41,7 @@ const LogoNameHeader: React.FC<PropType> = ({ sideBarOpen }) => {
 
       {/* Animated Text */}
       <AnimatePresence mode="wait">
-        {sideBarOpen && (
+        {(!isLargeScreen || sideBarOpen) && (
           <motion.div
             key="logo_name"
             initial={{ opacity: 0, y: -20 }}
@@ -48,6 +51,7 @@ const LogoNameHeader: React.FC<PropType> = ({ sideBarOpen }) => {
               duration: 0.4,
               ease: "easeOut",
             }}
+            className=""
           >
             <Link
               href={""}

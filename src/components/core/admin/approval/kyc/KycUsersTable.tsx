@@ -101,9 +101,10 @@ const KycUsersTable = () => {
     <>
       <Table
         aria-label="Financial Transactions"
-        className="min-w-full text-gray-500 text-[.85rem] font-semibold"
+        className="w-full text-gray-500 text-[.85rem] font-semibold"
         selectedKeys={selectedKeys}
         // selectionMode="multiple"
+        fullWidth
         onRowAction={() => {}}
         isStriped={true}
         topContent={topContent}
@@ -161,10 +162,7 @@ const KycUsersTable = () => {
           {usersKyc?.map((userData, index) => {
             const randomIndex = Math.floor(Math.random() * colors.length);
             return (
-              <TableRow
-                key={index}
-                className={clsx("hover:bg-gray-50", index !== 3 && "border-b")}
-              >
+              <TableRow key={index}>
                 <TableCell className="whitespace-nowrap text-[.82rem] font-medium text-black/80">
                   <div className="flex items-center gap-2">
                     <div>

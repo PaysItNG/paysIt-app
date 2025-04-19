@@ -8,9 +8,19 @@ import { formatInitial } from "@/lib/utils/formatInitial";
 import { Avatar } from "@heroui/react";
 import { useRouter } from "next/navigation";
 import { IoIosNotifications } from "react-icons/io";
+import useManageSidebar from "@/hooks/useManageSidebar";
+import clsx from "clsx";
+import { RiMenu2Fill } from "react-icons/ri";
+import { RiMenu3Fill } from "react-icons/ri";
+import LogoNameHeader from "./LogoNameHeader";
+import { IoMdClose } from "react-icons/io";
+import { useMediaQuery } from "react-responsive";
 
 const SidebarHeader = ({ role }: { role: string }) => {
   const router = useRouter();
+
+  const { data, switchSidebar } = useManageSidebar();
+  const { sideBarOpen } = data;
 
   const { profileData } = useProfile();
   const nameInitials = formatInitial(
@@ -26,9 +36,27 @@ const SidebarHeader = ({ role }: { role: string }) => {
     }
   };
 
+  const isMobile = useMediaQuery({ maxWidth: 1024 });
+
+  const BarIcon = sideBarOpen
+    ? isMobile
+      ? IoMdClose
+      : RiMenu3Fill
+    : RiMenu2Fill;
+
   return (
     <>
-      <main className="w-full bg-white shadow flex justify-end z-20 px-8 py-2">
+      <main
+        className={clsx(
+          "w-full bg-white shadow flex justify-between items-center z-20 px-5 py-2 border border-red-500"
+        )}
+      >
+        <div className="cursor-pointer" onClick={switchSidebar}>
+          <BarIcon size={25} className="transition-all text-gray-500" />
+        </div>
+        <div className="lg:hidden">
+          <LogoNameHeader sideBarOpen={sideBarOpen} />
+        </div>
         <div className="flex gap-5">
           <div>
             <Button isIconOnly className="bg-transparent">
