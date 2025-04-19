@@ -48,7 +48,7 @@ const SidebarHeader = ({ role }: { role: string }) => {
     <>
       <main
         className={clsx(
-          "w-full bg-white shadow flex justify-between items-center z-20 px-5 py-2 border border-red-500"
+          "w-full bg-white shadow flex justify-between items-center z-20 px-5 py-2"
         )}
       >
         <div className="cursor-pointer" onClick={switchSidebar}>

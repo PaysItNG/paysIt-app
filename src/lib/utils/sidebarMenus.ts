@@ -1,4 +1,3 @@
-
 import { LuLayoutDashboard } from "react-icons/lu";
 import { TbLayoutDashboardFilled } from "react-icons/tb";
 
@@ -11,6 +10,8 @@ import { IoWalletOutline } from "react-icons/io5";
 import { AiOutlineLogout } from "react-icons/ai";
 
 import { IconType } from "react-icons";
+import { MdApproval } from "react-icons/md";
+import { MdOutlineApproval } from "react-icons/md";
 
 export type MenuType = {
   path: string;
@@ -73,13 +74,13 @@ export const adminTopMenus: MenuType[] = [
     activeIcon: IoWallet,
     active: false,
     menuItem: [
-        {
-          path: "/admin/approval/kyc",
-          name: "KYC Approval",
-          defaultIcon: LuLayoutDashboard,
-          activeIcon: TbLayoutDashboardFilled,
-        }
-    ]
+      {
+        path: "/admin/approval/kyc",
+        name: "KYC Approval",
+        defaultIcon: MdOutlineApproval,
+        activeIcon: MdApproval,
+      },
+    ],
   },
 ];
 
