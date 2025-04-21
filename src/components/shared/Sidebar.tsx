@@ -262,8 +262,6 @@ const Sidebar: React.FC<PropType> = ({ role }) => {
 
   const isMobile = isSmallScreen || isMediumScreen;
 
-  console.log(isMobile);
-
   return (
     <>
       <AnimatePresence mode="wait">
@@ -284,7 +282,7 @@ const Sidebar: React.FC<PropType> = ({ role }) => {
           exit={isMobile ? "closed" : "desktopClosed"}
           variants={sidebarVariants}
           className={clsx(
-            "bg-[#f1f1f1] min-h-screen fixed top-[3.6rem] lg:top-0 z-40",
+            "bg-[#f1f1f1] h-screen fixed top-[3.6rem] lg:top-0 z-40 overflow-y-scroll",
             sideBarOpen ? "lg:w-64 w-72" : "lg:w-16 hidden lg:block"
           )}
         >

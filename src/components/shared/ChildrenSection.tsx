@@ -40,7 +40,7 @@ const ChildrenSection = ({
       <div className="w-full sticky top-0 z-40">{header}</div>
       <section
         className={clsx(
-          "w-full px-10 py-3 pt-8 min-h-screen",
+          "w-full px-6 py-3 pt-8 min-h-screen",
           !sideBarOpen && "pl-6 lg:pl-10"
         )}
       >

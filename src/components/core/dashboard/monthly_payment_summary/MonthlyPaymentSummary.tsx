@@ -11,7 +11,7 @@ const MonthlyPaymentSummary = () => {
           <Title
             title="Monthly Payment"
             classNames={{
-              title: "text-base font-semibold",
+              title: "text-base font-medium",
             }}
           />
           <AddNewPayment />

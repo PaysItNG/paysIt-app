@@ -27,7 +27,7 @@ const OverviewSection = () => {
               sub: "text-sm",
             }}
           />
-          <div className="mt-10 space-y-5">
+          <div className="mt-5 space-y-5">
             <DashboardFinanceSummary />
             <DashboardStatisticChart />
             <MonthlyPaymentSummary />

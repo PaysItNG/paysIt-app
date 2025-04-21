@@ -3,7 +3,7 @@ import { Button } from "@heroui/react";
 import React from "react";
 import { IoMdAdd } from "react-icons/io";
 
-const AddNewPayment = () => {
+const AddCardButton = () => {
   return (
     <>
       <Button
@@ -18,4 +18,4 @@ const AddNewPayment = () => {
   );
 };
 
-export default AddNewPayment;
+export default AddCardButton;
