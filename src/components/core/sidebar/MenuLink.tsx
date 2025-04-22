@@ -1,4 +1,6 @@
+import { useProfile } from "@/hooks/use-profile";
 import useManageSidebar from "@/hooks/useManageSidebar";
+import { Modal } from "antd";
 import clsx from "clsx";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
@@ -22,13 +24,38 @@ const MenuLink: React.FC<MenuType> = ({ menu, isSubmenu }) => {
     data: { sideBarOpen },
   } = useManageSidebar();
 
+  const { logoutUser } = useProfile();
+
+  const [modal, contextHolder] = Modal.useModal();
+
   const pathname = usePathname();
 
   const routeActive = pathname === menu.path;
 
+  const handleClickEvent = () => {
+    if (menu?.name === "Logout") {
+      const instance = modal.confirm({
+        title: "Logout!!",
+        content: <p>Are you sure you want to logout of this account?</p>,
+        okText: "Yes",
+        cancelText: "Cancel",
+        okButtonProps: {
+          className: "bg-primary",
+        },
+        onOk: () => {
+          logoutUser();
+        },
+        onCancel: () => {
+          instance.destroy(); // optional, but usually handled automatically
+        },
+      });
+    }
+  };
+
   return (
     <Link
       href={menu.path}
+      onClick={handleClickEvent}
       className={clsx(
         "relative flex items-center gap-x-2 px-3 py-2 transition-all",
         routeActive &&
@@ -67,6 +94,8 @@ const MenuLink: React.FC<MenuType> = ({ menu, isSubmenu }) => {
           </motion.h3>
         )}
       </AnimatePresence>
+
+      {contextHolder}
     </Link>
   );
 };
