@@ -10,7 +10,7 @@ const CardDetail = () => {
     <div className="space-y-3">
       <div className="flex justify-between">
         <Title
-          title="Monthly Payment"
+          title="Card Information"
           classNames={{
             title: "text-base font-medium",
           }}
@@ -35,11 +35,13 @@ const CardDetail = () => {
           <div className="space-y-3">
             <div>
               <p className="text-gray-500 text-xs">Card Name</p>
-              <h4 className="font-medium text-sm">John Fixit</h4>
+              <h4 className="font-medium text-sm">
+                {visible ? "John Fixit" : "**** ****"}
+              </h4>
             </div>
             <div>
               <p className="text-gray-500 text-xs">CVV</p>
-              <h4 className="font-medium text-sm">039</h4>
+              <h4 className="font-medium text-sm">{visible ? "039" : "***"}</h4>
             </div>
           </div>
           <div className="space-y-3">
@@ -49,7 +51,9 @@ const CardDetail = () => {
             </div>
             <div>
               <p className="text-gray-500 text-xs">Valid Until</p>
-              <h4 className="font-medium text-sm">05/27</h4>
+              <h4 className="font-medium text-sm">
+                {visible ? "05/27" : "****"}
+              </h4>
             </div>
           </div>
         </div>

@@ -45,13 +45,13 @@ export const topMenus: MenuType[] = [
 ];
 
 export const bottomMenus: MenuType[] = [
-  {
-    path: "",
-    name: "Setting",
-    defaultIcon: IoSettingsOutline,
-    activeIcon: IoSettings,
-    active: false,
-  },
+  // {
+  //   path: "",
+  //   name: "Setting",
+  //   defaultIcon: IoSettingsOutline,
+  //   activeIcon: IoSettings,
+  //   active: false,
+  // },
   {
     path: "",
     name: "Logout",

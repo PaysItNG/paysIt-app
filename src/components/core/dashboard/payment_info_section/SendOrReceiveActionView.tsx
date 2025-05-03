@@ -11,7 +11,7 @@ const SendOrReceiveActionView = () => {
       <div>
         <Button
           variant="solid"
-          className="bg-black text-white"
+          className="bg-black text-white text-sm"
           radius="md"
           size="lg"
           fullWidth
@@ -23,7 +23,7 @@ const SendOrReceiveActionView = () => {
       <div>
         <Button
           variant="solid"
-          className="bg-black text-white"
+          className="bg-black text-white text-sm"
           radius="md"
           size="lg"
           fullWidth

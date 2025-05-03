@@ -8,9 +8,11 @@ const Dashboard = () => {
     <>
       <main className="grid lg:grid-cols-2 gap-4">
         <OverviewSection />
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-          <CardInfoSectionView />
-          <PaymentinfoSection />
+        <div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+            <CardInfoSectionView />
+            <PaymentinfoSection />
+          </div>
         </div>
       </main>
     </>

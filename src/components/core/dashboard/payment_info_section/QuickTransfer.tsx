@@ -4,7 +4,7 @@ import { Avatar } from "@heroui/react";
 import React, { useCallback } from "react";
 import { IoMdAdd } from "react-icons/io";
 
-const QuickTrasfer = () => {
+const QuickTransfer = () => {
   const avatarColor = useCallback((id: number) => {
     const colors = [
       "#166534",
@@ -66,4 +66,4 @@ const QuickTrasfer = () => {
   );
 };
 
-export default QuickTrasfer;
+export default QuickTransfer;

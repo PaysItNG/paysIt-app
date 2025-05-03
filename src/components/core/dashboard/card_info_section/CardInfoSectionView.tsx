@@ -2,6 +2,7 @@ import Title from "@/components/shared/ui/Title";
 import React from "react";
 import AddCardButton from "./add_new_card/AddCardButton";
 import CardDetail from "./CardDetail";
+import { MasterCard } from "@/lib/design/cards";
 
 const CardInfoSectionView = () => {
   return (
@@ -16,7 +17,9 @@ const CardInfoSectionView = () => {
         <AddCardButton />
       </div>
       <div className="mt-5 space-y-5">
-        <div>{/* card here */}</div>
+        <div>
+          <MasterCard balance={0} cardNo="123456789392" expiryDate={"09/26"} />
+        </div>
         <div>
           <CardDetail />
         </div>
