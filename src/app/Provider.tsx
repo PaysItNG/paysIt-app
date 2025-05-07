@@ -8,11 +8,9 @@ import GeneralProtectedProvider from "@/components/providers/GeneralProtectedPro
 export const Providers = ({ children }: { children: ReactNode }) => {
   return (
     <ReactQueryProvider>
-      {/* <AuthProvider> */}
       <HeroProvider>
         <GeneralProtectedProvider>{children}</GeneralProtectedProvider>
       </HeroProvider>
-      {/* </AuthProvider> */}
       <Toaster
         position="top-right"
         reverseOrder={false}

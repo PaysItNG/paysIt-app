@@ -21,14 +21,14 @@ const QuickTransfer = () => {
   }, []);
 
   return (
-    <div className="space-y-5">
+    <div className="space-y-5 lg:block flex flex-col items-center">
       <Title
         title="Quick transfer"
         classNames={{
           title: "text-base font-medium",
         }}
       />
-      <div className="flex gap-3">
+      <div className="flex gap-8 lg:gap-3 lg:px-0 px-5">
         {[1, 2, 3].map((it, index) => (
           <div key={index + "_____avatar"}>
             <Avatar

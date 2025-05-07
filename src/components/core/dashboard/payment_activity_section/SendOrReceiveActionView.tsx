@@ -7,7 +7,7 @@ import { TbArrowDownFromArc } from "react-icons/tb";
 
 const SendOrReceiveActionView = () => {
   return (
-    <div className="flex gap-4">
+    <div className="flex gap-4 justify-center">
       <div>
         <Button
           variant="solid"

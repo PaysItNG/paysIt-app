@@ -6,7 +6,7 @@ import { MasterCard } from "@/lib/design/cards";
 
 const CardInfoSectionView = () => {
   return (
-    <main>
+    <main className="order-2 lg:order-1">
       <div className="flex justify-between gap-2">
         <Title
           title="Your Card"
@@ -16,11 +16,11 @@ const CardInfoSectionView = () => {
         />
         <AddCardButton />
       </div>
-      <div className="mt-5 space-y-5">
-        <div>
+      <div className="mt-5 space-y-5 md:flex md:gap-5 md:space-y-0 lg:block flex-wrap w-full">
+        <div className="w-full">
           <MasterCard balance={0} cardNo="123456789392" expiryDate={"09/26"} />
         </div>
-        <div>
+        <div className="w-full">
           <CardDetail />
         </div>
       </div>
