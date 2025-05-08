@@ -7,7 +7,7 @@ import { IoEye, IoEyeOff } from "react-icons/io5";
 const CardDetail = () => {
   const [visible, setVisible] = useState(false);
   return (
-    <div className="space-y-3">
+    <div className="space-y-3 w-full">
       <div className="flex justify-between">
         <Title
           title="Card Information"

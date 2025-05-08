@@ -20,9 +20,7 @@ const CardInfoSectionView = () => {
         <div className="w-full">
           <MasterCard balance={0} cardNo="123456789392" expiryDate={"09/26"} />
         </div>
-        <div className="w-full">
-          <CardDetail />
-        </div>
+        <CardDetail />
       </div>
     </main>
   );
