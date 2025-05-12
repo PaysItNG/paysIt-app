@@ -7,11 +7,16 @@ import React, { createElement, ElementType } from "react";
 type PropType = {
   label: string;
   icon: ElementType;
-  value: string | number | null;
+  value: string | number;
   isCurrency?: boolean;
 };
 
-const HeaderCard: React.FC<PropType> = ({ label, icon, value, isCurrency }) => {
+const HeaderCard: React.FC<PropType> = ({
+  label,
+  icon,
+  value = "",
+  isCurrency,
+}) => {
   return (
     <Card className="p-5 rounded-xl shadow-none fle justify-between flex-wrap dark:bg-[#27272a] dark:border-[#27272a]">
       <div>

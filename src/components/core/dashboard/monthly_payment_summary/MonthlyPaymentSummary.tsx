@@ -2,6 +2,7 @@ import Title from "@/components/shared/ui/Title";
 import AddNewPayment from "./AddNewPayment";
 import { IoFlashOutline } from "react-icons/io5";
 import PayNowButton from "./PayNowButton";
+import { formatCurrency } from "@/lib/utils/formatCurrency";
 
 const MonthlyPaymentSummary = () => {
   return (
@@ -32,7 +33,9 @@ const MonthlyPaymentSummary = () => {
               </div>
             </div>
             <div className="flex gap-x-8 items-center">
-              <h4 className="font-medium text-base">$3000</h4>
+              <h4 className="font-medium text-base">
+                {formatCurrency(3000, "NGN")}
+              </h4>
               <PayNowButton />
             </div>
           </div>

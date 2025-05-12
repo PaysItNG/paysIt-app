@@ -20,7 +20,6 @@ import {
   TableHeader,
   TableRow,
 } from "@heroui/react";
-import clsx from "clsx";
 import dayjs from "dayjs";
 import React, { useState } from "react";
 import { AiFillEye } from "react-icons/ai";
@@ -58,8 +57,6 @@ const KycUsersTable = () => {
   >("approved");
 
   const { openDrawer } = useViewKycDetailStore();
-
-  console.log(selectedOption);
 
   const { data, isPending: isLoading } = useGetUserKyc({
     d: 30,

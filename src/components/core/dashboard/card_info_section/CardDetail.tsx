@@ -47,7 +47,9 @@ const CardDetail = () => {
           <div className="space-y-3">
             <div>
               <p className="text-gray-500 text-xs">Card No</p>
-              <h4 className="font-medium text-sm">******** 1902</h4>
+              <h4 className="font-medium text-sm">
+                {visible ? "10101019339292" : "******** 1902"}
+              </h4>
             </div>
             <div>
               <p className="text-gray-500 text-xs">Valid Until</p>

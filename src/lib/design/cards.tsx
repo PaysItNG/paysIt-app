@@ -1,10 +1,11 @@
 import { formatCurrency } from "../utils/formatCurrency";
+import { CurrencyType } from "../utils/typeConfig";
 
 type CardProps = {
   balance: number | string;
   cardNo: string;
   expiryDate: string | number;
-  currency?: string;
+  currency?: CurrencyType;
 };
 
 export const MasterCard = ({

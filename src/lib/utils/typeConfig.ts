@@ -52,3 +52,28 @@ export type NetworkType =
   | "";
 
 export type UtilityViews = "airtime" | "data" | "cable" | "electricity";
+
+export type CurrencyType =
+  | "NGN"
+  | "USD"
+  | "EUR"
+  | "GBP"
+  | "KES"
+  | "GHS"
+  | "XAF"
+  | "XOF"
+  | "JPY"
+  | "INR"
+  | "BRL"
+  | "AUD"
+  | "CAD"
+  | "CHF"
+  | "CNY"
+  | "SEK"
+  | "NZD"
+  | "SGD"
+  | "HKD"
+  | "NOK"
+  | "MXN"
+  | "ZAR"
+  | "";

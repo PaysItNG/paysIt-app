@@ -1,20 +1,15 @@
 "use client";
-import useAuthUser from "@/hooks/useAuthUser";
-import { APP_ROUTES } from "@/lib/routes";
+// import useAuthUser from "@/hooks/useAuthUser";
 import { Spinner } from "@heroui/react";
-import { useRouter } from "next/navigation";
-import React, { useEffect } from "react";
 import { TbNetworkOff } from "react-icons/tb";
 import Button from "../shared/ui/Button";
 import { useUserProfile } from "@/api/profile";
 
 const AdminProvider = ({ children }: { children: React.ReactNode }) => {
-  const router = useRouter();
-
   const { isPending: isLoadingProfile, isError: errorGettingProfile } =
     useUserProfile();
 
-  const { token } = useAuthUser();
+  // const { token } = useAuthUser();
 
   // useEffect(() => {
   //   if (!token?.access) {

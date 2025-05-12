@@ -1,9 +1,6 @@
 import { LuLayoutDashboard } from "react-icons/lu";
 import { TbLayoutDashboardFilled } from "react-icons/tb";
 
-import { IoSettings } from "react-icons/io5";
-import { IoSettingsOutline } from "react-icons/io5";
-
 import { IoWallet } from "react-icons/io5";
 import { IoWalletOutline } from "react-icons/io5";
 

@@ -2,8 +2,6 @@
 import Drawer from "@/components/shared/ui/Drawer";
 import React, { createElement } from "react";
 import { ConfigProvider, Steps } from "antd";
-import Title from "@/components/shared/ui/Title";
-import TakeSelfie from "./TakeSelfie";
 import UploadSelfie from "./UploadSelfie";
 import { usekYCStore } from "@/store/kyc";
 import LivenessCheckPage from "./LivenessCheckPage";

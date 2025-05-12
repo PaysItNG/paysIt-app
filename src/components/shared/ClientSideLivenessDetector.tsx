@@ -1,6 +1,7 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
-import * as faceapi from "face-api.js";
+// import * as faceapi from "face-api.js";
+import faceapi from "@/lib/utils/face-api";
 import clsx from "clsx";
 import { base64ToFile } from "@/lib/utils/convertBase64ToFile";
 

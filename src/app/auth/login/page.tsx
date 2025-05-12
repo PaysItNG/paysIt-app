@@ -12,6 +12,8 @@ import { useRouter } from "next/navigation";
 import { APP_ROUTES } from "@/lib/routes";
 import Button from "@/components/shared/ui/Button";
 import useAuthUser from "@/hooks/useAuthUser";
+import { useSingleEffect } from "react-haiku";
+import { useProfile } from "@/hooks/use-profile";
 
 const Login = () => {
   const router = useRouter();
@@ -21,6 +23,15 @@ const Login = () => {
   const [pswVisible, setPswVisible] = useState(false);
 
   const { setAuthUser } = useAuthUser();
+
+  const { logoutUser } = useProfile();
+
+  //=======remove user from local storage if gotten here and token is still in save
+  useSingleEffect(() => {
+    logoutUser();
+  });
+
+  //==================ends here===================
 
   const {
     register,

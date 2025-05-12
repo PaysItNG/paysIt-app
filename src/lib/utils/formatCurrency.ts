@@ -1,17 +1,21 @@
-export const formatCurrency = (value: unknown, currency: string = "ngn") => {
+import { CurrencyType } from "./typeConfig";
+
+export const formatCurrency = (
+  value: number | string,
+  currency: CurrencyType = "NGN"
+  // locale = "en-IN"
+) => {
   const amount = Number(value);
-  if (isNaN(amount)) return amount;
-  if (currency.toLowerCase() === "ngn") {
-    return new Intl.NumberFormat("en-NG", {
+  if (isNaN(amount)) return value;
+
+  const locale = "en-" + currency?.split("")[0] + currency?.split("")[1];
+
+  try {
+    return new Intl.NumberFormat(locale, {
       style: "currency",
-      currency: "NGN",
-    }).format(+amount);
+      currency: currency,
+    }).format(amount);
+  } catch {
+    return amount;
   }
-  if (currency.toLowerCase() === "usd") {
-    return new Intl.NumberFormat("en-US", {
-      style: "currency",
-      currency: "USD",
-    }).format(+amount);
-  }
-  return amount;
 };

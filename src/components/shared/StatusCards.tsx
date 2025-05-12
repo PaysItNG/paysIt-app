@@ -1,5 +1,3 @@
-import { IoDocumentOutline } from "react-icons/io5";
-import { FaStore } from "react-icons/fa";
 import { ElementType, FC } from "react";
 import StarLoader from "./ui/loaders/StarLoader";
 
@@ -30,23 +28,6 @@ const StatusCards: FC<PropType> = ({
   const handleSelect = (val: string) => {
     setSelectedTab(val);
   };
-
-  const memoData = [
-    {
-      name: "Total Goods Received",
-      key: "total",
-      icon: IoDocumentOutline,
-      bColor: "bg-amber-100",
-      t_color: "text-amber-600",
-    },
-    {
-      name: "Store Consumable Requisition",
-      key: "outstore",
-      icon: FaStore,
-      bColor: "bg-purple-100",
-      t_color: "text-purple-700",
-    },
-  ];
 
   return (
     <>

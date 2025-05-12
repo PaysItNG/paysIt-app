@@ -11,7 +11,7 @@ import clsx from "clsx";
 type PropTypes = {
   name: string;
   type: string;
-  amount: unknown;
+  amount: number | string;
 };
 
 const FinancialOverviewCard: React.FC<PropTypes> = ({ name, type, amount }) => {

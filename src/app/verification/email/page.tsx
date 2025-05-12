@@ -1,8 +1,8 @@
 "use client";
 
-import { InputOtp } from "@heroui/react";
+import { InputOtp, Spinner } from "@heroui/react";
 import { useRouter, useSearchParams } from "next/navigation";
-import React from "react";
+import React, { Suspense } from "react";
 import { Controller, useForm } from "react-hook-form";
 import logo from "@/assets/images/paysIt_logo.jpeg";
 import Image from "next/image";
@@ -16,7 +16,7 @@ type FormData = {
   otp: string;
 };
 
-const EmailVerification = () => {
+const EmailVerificationContent = () => {
   const searchParams = useSearchParams();
 
   const router = useRouter();
@@ -122,6 +122,21 @@ const EmailVerification = () => {
         </form>
       </main>
     </>
+  );
+};
+
+const EmailVerification = () => {
+  return (
+    <Suspense
+      fallback={
+        <div className="h-screen w-full flex flex-col justify-center items-center text-center">
+          <Spinner size="lg" />
+          <p className="mt-6">Just a moment..</p>
+        </div>
+      }
+    >
+      <EmailVerificationContent />
+    </Suspense>
   );
 };
 
