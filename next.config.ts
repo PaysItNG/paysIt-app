@@ -2,11 +2,11 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    domains: [
-      "static.vecteezy.com",
-      "www.paysit.net",
-      "img.freepik.com",
-      "res.cloudinary.com",
+    remotePatterns: [
+      { protocol: "https", hostname: "static.vecteezy.com" },
+      { protocol: "https", hostname: "www.paysit.net" },
+      { protocol: "https", hostname: "img.freepik.com" },
+      { protocol: "https", hostname: "res.cloudinary.com" },
     ],
   },
   typescript: {
@@ -14,6 +14,7 @@ const nextConfig: NextConfig = {
     // Disabling type checking might lead to production bugs
     ignoreBuildErrors: true,
   },
+  basePath: "",
   // For Next.js 13+, use transpilePackages instead of next-transpile-modules
   transpilePackages: [
     "tfjs-image-recognition-base",
