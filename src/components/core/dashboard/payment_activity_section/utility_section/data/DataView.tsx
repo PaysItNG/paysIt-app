@@ -8,6 +8,7 @@ import React, { useEffect, useMemo } from "react";
 import DataPlanCard from "./DataPlanCard";
 import { useDebounce } from "react-haiku";
 import { useGetDataPlans } from "@/api/vtu";
+import StarLoader from "@/components/shared/ui/loaders/StarLoader";
 
 const colors: Record<NetworkType, string> = {
   MTN: "text-yellow-500",
@@ -20,10 +21,13 @@ const colors: Record<NetworkType, string> = {
 
 const DataView = () => {
   const [network, setNetwork] = React.useState<NetworkType>("MTN");
-  const [amount, setAmount] = React.useState<number | string>(0);
   const [phoneNumber, setPhoneNumber] = React.useState<string>("");
 
-  const { mutateAsync: mutateGetDataPlans, data } = useGetDataPlans();
+  const {
+    mutateAsync: mutateGetDataPlans,
+    data,
+    isPending: isLoadingDataPlans,
+  } = useGetDataPlans();
 
   const debouncedPhoneNumber = useDebounce(phoneNumber, 1000);
 
@@ -100,20 +104,26 @@ const DataView = () => {
                 title: "text-lg font-medium",
               }}
             />
-            <Tabs size="md" color="primary" fullWidth variant="underlined">
+            {/* <Tabs size="md" color="primary" fullWidth variant="underlined">
               <Tab key={"daily"} title="Daily" />
               <Tab key={"weekly"} title="Weekly" />
               <Tab key={"monthly"} title="Monthly" />
-            </Tabs>
+            </Tabs> */}
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 gap-x-3 gap-y-4">
-            {provider2Plans?.map((plan: DataPlanType, index: number) => (
-              <DataPlanCard
-                key={index + "___data_plans"}
-                phoneNumber={phoneNumber}
-                plan={plan}
-              />
-            ))}
+            {isLoadingDataPlans ? (
+              <div className="h-52 flex justify-center items-center w-full col-span-3">
+                <StarLoader size={30} />
+              </div>
+            ) : (
+              provider2Plans?.map((plan: DataPlanType, index: number) => (
+                <DataPlanCard
+                  key={index + "___data_plans"}
+                  phoneNumber={phoneNumber}
+                  plan={plan}
+                />
+              ))
+            )}
           </div>
         </div>
       </div>

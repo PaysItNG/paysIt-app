@@ -11,6 +11,7 @@ type PropTypes = {
 const DataPlanCard: FC<PropTypes> = ({ phoneNumber, plan }) => {
   const handleTopup = () => {
     // Handle top-up logic here
+    console.log(phoneNumber);
     // console.log("Top-up initiated with", { network, amount, phoneNumber });
   };
 
@@ -29,7 +30,7 @@ const DataPlanCard: FC<PropTypes> = ({ phoneNumber, plan }) => {
             <h3 className="font-semibold text-base">
               {formatCurrency(plan?.price)}
             </h3>
-            <p className="text-gray-500 text-xs">{plan?.displayName}</p>
+            <p className="text-gray-500 text-[0.85rem]">{plan?.displayName}</p>
             {/* <div className="pt-2 pb-1">
               <span className="inline-block bg-gray-100 rounded-full px-2 py-1 text-xs text-gray-500 w-full">
                 Validity:{" "}
