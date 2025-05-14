@@ -5,16 +5,18 @@ import Link from "next/link";
 import { useState } from "react";
 import { BiMenu } from "react-icons/bi";
 import { BsArrowRight } from "react-icons/bs";
+import logo from "@/assets/images/paysIt_logo.jpeg";
+import Image from "next/image";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const navLinks = ["Product", "Solutions", "Resources", "Pricing"];
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-sm border-b">
-      <div className=" sm:max-w-[95vw]  mx-auto px-6 py-6 flex items-center justify-between">
+      <div className=" sm:max-w-[95vw]  mx-auto px-6 py-3 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 bg-gradient-to-r from-btnColor to-cyan-500 rounded-lg"></div>
-          <span className="font-bold text-xl dark:text-black">PaysIt</span>
+          {/* <div className="w-8 h-8 bg-gradient-to-r from-btnColor to-cyan-500 rounded-lg"></div> */}
+          <Image src={logo} alt="paysIt logo" width={40} height={40} />
         </div>
         <nav className="hidden lg:flex gap-x-10"></nav>
         <div className="flex items-center gap-4">

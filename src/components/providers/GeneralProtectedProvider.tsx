@@ -21,25 +21,25 @@ const GeneralProtectedProvider = ({
   // const { confirm } = Modal;
 
   useEffect(() => {
-    if (error && (error as AxiosError)?.status === 401) {
-      // confirm({
-      //   title: 'Your Login session has expired, please re-login',
-      //   icon: <IoWarningSharp />,
-      //   onOk() {
-      //     removeAuthUser();
-      //   router.push(APP_ROUTES.LOGIN);
-      //   },
-      //   onCancel() {
-      //   },
-      // });
-      const relogin = window.confirm(
-        "Your Login session has expired, please re-login"
-      );
-      if (relogin) {
-        removeAuthUser();
-        router.push(APP_ROUTES.LOGIN);
-      }
-    }
+    // if (error && (error as AxiosError)?.status === 401) {
+    //   // confirm({
+    //   //   title: 'Your Login session has expired, please re-login',
+    //   //   icon: <IoWarningSharp />,
+    //   //   onOk() {
+    //   //     removeAuthUser();
+    //   //   router.push(APP_ROUTES.LOGIN);
+    //   //   },
+    //   //   onCancel() {
+    //   //   },
+    //   // });
+    //   const relogin = window.confirm(
+    //     "Your Login session has expired, please re-login"
+    //   );
+    //   if (relogin) {
+    //     removeAuthUser();
+    //     router.push(APP_ROUTES.LOGIN);
+    //   }
+    // }
   }, [error, router, removeAuthUser]);
   return children;
 };

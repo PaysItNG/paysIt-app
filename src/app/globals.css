@@ -2,6 +2,9 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+/* @tailwind base;
+@tailwind components;
+@tailwind utilities; */
 
 :root {
   --background: #faf8f8;
@@ -25,31 +28,25 @@ body {
 
 /* Simplified pattern backgrounds to avoid encoding issues */
 .pattern-1 {
-  background-color: rgba(148, 130, 238, 0.05);
   background-image: url("data:image/svg+xml,%3Csvg width='100%' height='100%' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cpattern id='pattern1' patternUnits='userSpaceOnUse' width='65.5' height='55.2' patternTransform='scale(30) rotate(20)'%3E%3Crect x='0' y='0' width='100%' height='100%' fill='hsla(0, 0%, 100%, 0)'/%3E%3Cpath d='M0 21L32.7-4.9 65.5 21V.1L32.7-25.6 0 .1zm0 30.6l28-22-8.3-6.5L0 38.1zm45.8-28.5l-8.4 6.5 28.1 22V38.1zM0 76.3l32.7-26 32.8 26v-21L32.7 29.6 0 55.3z' stroke-width='1' stroke='none' fill='hsla(259, 59%, 59%, 0.03)'/%3E%3Cpath d='M26.4 3.9L13.2 14.3l19.5 15.3 19.5-15.3L39.1 3.9l-6.4 4.9z' stroke-width='1' stroke='none' fill='hsla(340, 82%, 52%, 0.08)'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='800%' height='800%' transform='translate(-343,-2.8)' fill='url(%23pattern1)'/%3E%3C/svg%3E");
 }
 
 .pattern-2 {
-  background-color: rgba(76, 81, 191, 0.05);
   background-image: url("data:image/svg+xml,%3Csvg width='100%' height='100%' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cpattern id='pattern2' width='75' height='75' patternUnits='userSpaceOnUse' patternTransform='scale(12) rotate(0)'%3E%3Crect x='0' y='0' width='100%' height='100%' fill='hsla(0,0%,100%,0)'/%3E%3Cpath d='M32.763-11.976c-1.05-.075-1.95.676-2.024 1.726L29.764.849c-.075 1.05.675 1.95 1.725 2.026 1.05.075 1.95-.675 2.025-1.725l.975-11.1c.075-1.05-.675-1.95-1.725-2.025z' stroke-width='1' stroke='none' fill='hsla(231, 48%, 48%, 0.03)'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='800%' height='800%' fill='url(%23pattern2)'/%3E%3C/svg%3E");
 }
 
 .pattern-3 {
-  background-color: rgba(255, 255, 255, 0.05);
   background-image: url("data:image/svg+xml,%3Csvg width='100%' height='100%' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cpattern id='pattern3' patternUnits='userSpaceOnUse' width='69.283' height='40' patternTransform='scale(16) rotate(70)'%3E%3Crect x='0' y='0' width='100%' height='100%' fill='hsla(0, 0%, 100%, 0)'/%3E%3Cpath d='M46.189-20L57.736 0M46.189 20l11.547 20m-46.189 0l11.547 20M11.547 0l11.547 20m40.415 30H40.415M28.868 30H5.774m23.094-40H5.774m57.735 20H40.415m0 20L28.868 50m11.547-60L28.868 10m46.188 0L63.509 30M5.774 10L-5.773 30m75.056 10H46.189L34.64 20 46.19 0h23.094C73.13 6.667 76.98 13.333 80.83 20z' stroke-width='0.5' stroke='hsla(259, 0%, 100%, 0.02)' fill='none'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='800%' height='800%' fill='url(%23pattern3)'/%3E%3C/svg%3E");
 }
 
 .pattern-4 {
-  background-color: rgba(128, 128, 128, 0.05);
   background-image: url("data:image/svg+xml,%3Csvg width='100%' height='100%' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cpattern id='pattern4' patternUnits='userSpaceOnUse' width='100' height='82' patternTransform='scale(11) rotate(0)'%3E%3Crect x='0' y='0' width='100%' height='100%' fill='hsla(0, 0%, 100%, 0)'/%3E%3Cpath d='M74.4-14.6l-24 41.1h48l-24-41.1zm0 82l-24 41.1h48l-24-41.1z' stroke-width='1' stroke='none' fill='hsla(259, 59%, 59%, 0.03)'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='800%' height='800%' fill='url(%23pattern4)'/%3E%3C/svg%3E");
 }
 
 .pattern-5 {
-  background-color: rgba(194, 97, 52, 0.05);
   background-image: url("data:image/svg+xml,%3Csvg width='100%' height='100%' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cpattern id='pattern5' patternUnits='userSpaceOnUse' width='150' height='150' patternTransform='scale(12) rotate(5)'%3E%3Crect x='0' y='0' width='100%' height='100%' fill='hsla(0, 0%, 100%, 0)'/%3E%3Cpath d='M12.5 62.5H37.5V75h-4.9v-7.6H17.42v15.2H32.6V75h4.9v12.49h-25Z' stroke-width='1' stroke='none' fill='hsla(15, 52%, 29%, 0.08)'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='800%' height='800%' fill='url(%23pattern5)'/%3E%3C/svg%3E");
 }
 
 .pattern-6 {
-  background-color: rgba(22, 101, 52, 0.05);
   background-image: url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M9 0h2v20H9V0zm25.134.84l1.732 1-10 17.32-1.732-1 10-17.32zm-20 20l1.732 1-10 17.32-1.732-1 10-17.32z' fill='%23166534' fill-opacity='0.02' fill-rule='evenodd'/%3E%3C/svg%3E");
 }

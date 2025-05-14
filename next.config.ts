@@ -24,11 +24,6 @@ const nextConfig: NextConfig = {
     "react-haiku",
   ],
   webpack: (config, { isServer }) => {
-    // Provide browser-compatible empty modules for Node.js specific imports
-    // config.module.rules.push({
-    //   test: /\.svg$/,
-    //   use: ["@svgr/webpack", "style-loader", "css-loader"],
-    // });
     if (!isServer) {
       config.resolve.fallback = {
         ...config.resolve.fallback,

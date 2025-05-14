@@ -13,10 +13,10 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "allowJs": true, // Allow importing .js files
-    "resolveJsonModule": true, // If you need to import JSON files
-    "esModuleInterop": true, // Enable compatibility with CommonJS modules
-    "moduleResolution": "node",
+    // "allowJs": true, // Allow importing .js files
+    // "resolveJsonModule": true, // If you need to import JSON files
+    // "esModuleInterop": true, // Enable compatibility with CommonJS modules
+    // "moduleResolution": "node",
     "plugins": [
       {
         "name": "next"

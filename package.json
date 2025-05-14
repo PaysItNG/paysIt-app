@@ -3,14 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev",
+    "dev:turbo": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
     "@heroui/react": "^2.7.2",
-    "@tailwindcss/postcss": "^4.1.6",
     "@tanstack/react-query": "^5.66.9",
     "antd": "^5.24.8",
     "axios": "^1.8.3",
