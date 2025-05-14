@@ -20,7 +20,11 @@ const UtilityDrawer = () => {
   };
   return (
     <>
-      <Drawer isOpen={isOpen} onClose={closeDrawer} header="Top-up Airtime">
+      <Drawer
+        isOpen={isOpen}
+        onClose={closeDrawer}
+        header={<span className="capitalize">Top-up {utility_type}</span>}
+      >
         {views[utility_type]}
       </Drawer>
     </>

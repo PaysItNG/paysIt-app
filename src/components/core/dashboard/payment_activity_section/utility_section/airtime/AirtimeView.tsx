@@ -1,8 +1,8 @@
 import Button from "@/components/shared/ui/Button";
 import Input from "@/components/shared/ui/Input";
+import NumberInput from "@/components/shared/ui/NumberInput";
 import { NetworkType } from "@/lib/utils/typeConfig";
 import { validatePhoneNumber } from "@/lib/utils/validatePhoneNumber";
-import { NumberInput } from "@heroui/react";
 import clsx from "clsx";
 import React from "react";
 

@@ -77,3 +77,18 @@ export type CurrencyType =
   | "MXN"
   | "ZAR"
   | "";
+
+export type DataPlanType = {
+  price: string | number;
+  provider_price?: string | number;
+  provider?: string;
+  plan_id?: string;
+  service_id?: string;
+  network?: string;
+  name: string;
+  duration?: string;
+  qty: string;
+  service?: string;
+  displayName?: string;
+  value?: string;
+};

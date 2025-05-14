@@ -5,7 +5,6 @@ import useAuthUser from "@/hooks/useAuthUser";
 // import { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-// import { IoWarningSharp } from "react-icons/io5";
 
 const GeneralProtectedProvider = ({
   children,
