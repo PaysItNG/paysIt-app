@@ -43,13 +43,7 @@ export type KycStatusType = {
   rejected: string;
 };
 
-export type NetworkType =
-  | "MTN"
-  | "AIRTEL"
-  | "GLO"
-  | "ETISALAT"
-  | "Unknown"
-  | "";
+export type NetworkType = "MTN" | "AIRTEL" | "GLO" | "ETISALAT" | "";
 
 export type UtilityViews = "airtime" | "data" | "cable" | "electricity";
 

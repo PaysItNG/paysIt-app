@@ -8,6 +8,7 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "www.paysit.net" },
       { protocol: "https", hostname: "img.freepik.com" },
       { protocol: "https", hostname: "res.cloudinary.com" },
+      { protocol: "https", hostname: "cdn.worldvectorlogo.com" },
     ],
   },
   typescript: {

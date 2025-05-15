@@ -2,7 +2,7 @@ import toast from "react-hot-toast";
 
 type NotifierTypes = {
   message?: string;
-  type: string;
+  type: "success" | "error";
 };
 export const notifier = ({ message = "", type }: NotifierTypes) => {
   const types = ["success", "error"];

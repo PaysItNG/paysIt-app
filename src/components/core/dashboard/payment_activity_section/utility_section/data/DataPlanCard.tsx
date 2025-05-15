@@ -1,18 +1,29 @@
 import Button from "@/components/shared/ui/Button";
 import { formatCurrency } from "@/lib/utils/formatCurrency";
-import { DataPlanType } from "@/lib/utils/typeConfig";
+import { notifier } from "@/lib/utils/notifier";
+import { DataPlanType, NetworkType } from "@/lib/utils/typeConfig";
+import { useUtilityStore } from "@/store/utilityStore";
 import React, { FC } from "react";
 
 type PropTypes = {
   phoneNumber: string | number | null;
   plan: DataPlanType;
+  network: NetworkType;
 };
 
-const DataPlanCard: FC<PropTypes> = ({ phoneNumber, plan }) => {
+const DataPlanCard: FC<PropTypes> = ({ phoneNumber, plan, network }) => {
+  const { updateData } = useUtilityStore();
   const handleTopup = () => {
-    // Handle top-up logic here
-    console.log(phoneNumber);
-    // console.log("Top-up initiated with", { network, amount, phoneNumber });
+    if (!phoneNumber) {
+      notifier({ message: "Please enter Recipient Number", type: "error" });
+      return;
+    }
+    updateData({
+      phoneNumber,
+      network,
+      plan,
+      currentView: "preview",
+    });
   };
 
   return (
