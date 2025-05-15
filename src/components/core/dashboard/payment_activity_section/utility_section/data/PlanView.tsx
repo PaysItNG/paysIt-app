@@ -3,7 +3,6 @@ import Title from "@/components/shared/ui/Title";
 import { DataPlanType, NetworkType } from "@/lib/utils/typeConfig";
 import { validatePhoneNumber } from "@/lib/utils/validatePhoneNumber";
 // import { Tab, Tabs } from "@heroui/react";
-import clsx from "clsx";
 import React, { useEffect, useMemo } from "react";
 import DataPlanCard from "./DataPlanCard";
 import { useDebounce } from "react-haiku";
@@ -20,14 +19,6 @@ import {
 import Button from "@/components/shared/ui/Button";
 import { HiOutlineChevronDown } from "react-icons/hi";
 
-const colors: Record<NetworkType, string> = {
-  MTN: "text-amber-500",
-  AIRTEL: "text-red-500",
-  GLO: "text-green-500",
-  ETISALAT: "text-blue-500",
-  "": "",
-};
-
 const PlanView = () => {
   const {
     data: { phoneNumber: storedPhone },
@@ -35,7 +26,7 @@ const PlanView = () => {
 
   const [network, setNetwork] = React.useState<NetworkType>("MTN");
   const [phoneNumber, setPhoneNumber] = React.useState<string>(
-    (storedPhone as string) || ""
+    storedPhone as string
   );
 
   const {
@@ -48,8 +39,8 @@ const PlanView = () => {
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
+    setPhoneNumber(value);
     if (value.length >= 4) {
-      setPhoneNumber(value);
       const validationResult = validatePhoneNumber(value);
       setNetwork(validationResult.network);
     }
@@ -159,13 +150,13 @@ const PlanView = () => {
             // labelPlacement="outside"
             type="number"
             variant="bordered"
-            placeholder="e.g 0910000000"
+            // placeholder="e.g 0910000000"
             size="lg"
             radius="sm"
             autoComplete="true"
             onChange={onChange}
             value={phoneNumber}
-            className="placeholder:text-gray-400 text-sm"
+            // className="placeholder:text-gray-400 text-sm"
             classNames={{
               inputWrapper: "px-4 shadow-none border-1 rounded-l-none",
             }}
