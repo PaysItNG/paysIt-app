@@ -1,7 +1,6 @@
 import { useProfile } from "@/hooks/use-profile";
 import useAuthUser from "@/hooks/useAuthUser";
 import { APP_ROUTES } from "@/lib/routes";
-// import { Modal } from "antd";
 import { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
@@ -19,22 +18,22 @@ const GeneralProtectedProvider = ({
 
   const { removeAuthUser } = useAuthUser();
 
-  const { openConfirm } = useConfirmModal();
-
-  // const { confirm } = Modal;
+  const { openConfirm, closeConfirm } = useConfirmModal();
 
   useEffect(() => {
     const executeLogout = () => {
       removeAuthUser();
       router.push(APP_ROUTES.LOGIN);
+      closeConfirm();
     };
     if (error && (error as AxiosError)?.status === 401) {
       openConfirm({
-        title: "Please confirm this operation",
-        onOk: () => executeLogout,
+        title: "Your login session has expired, please re-login",
+        okText: "Re-login",
+        onOk: () => executeLogout(),
       });
     }
-  }, [error, router, removeAuthUser, openConfirm]);
+  }, [error, router, removeAuthUser, openConfirm, closeConfirm]);
   return (
     <>
       <ConfirmModal />

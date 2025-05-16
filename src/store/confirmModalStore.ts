@@ -11,7 +11,7 @@ type DataType = {
   okButtonProps?: {
     [key: string]: unknown;
   };
-  onOk: () => void;
+  onOk?: () => void;
   onCancel?: () => void;
   [key: string]: unknown;
 };
@@ -27,9 +27,6 @@ export const useConfirmModal = create<ConfirmModalStoreType>((set) => ({
   isOpen: false,
   data: {
     title: "",
-    okText: "Confirm",
-    cancelText: "Cancel",
-    onOk: () => {},
   },
   openConfirm: (data) =>
     set((state) => ({ data: { ...state.data, ...data }, isOpen: true })),
