@@ -28,11 +28,11 @@ const LogoNameHeader: React.FC<PropType> = ({ sideBarOpen }) => {
           duration: 0.5,
           ease: "easeOut",
         }}
-        className="w-10 h-10 rounded-full border-2 border-green-800"
+        className="w-10 h-10"
       >
         <Image
           src={paysIt_logo}
-          alt="paysit logo"
+          alt="logo"
           width={50}
           height={50}
           className="rounded-full"
@@ -40,7 +40,7 @@ const LogoNameHeader: React.FC<PropType> = ({ sideBarOpen }) => {
       </motion.div>
 
       {/* Animated Text */}
-      <AnimatePresence mode="wait">
+      {/* <AnimatePresence mode="wait">
         {(!isLargeScreen || sideBarOpen) && (
           <motion.div
             key="logo_name"
@@ -61,7 +61,7 @@ const LogoNameHeader: React.FC<PropType> = ({ sideBarOpen }) => {
             </Link>
           </motion.div>
         )}
-      </AnimatePresence>
+      </AnimatePresence> */}
     </div>
   );
 };

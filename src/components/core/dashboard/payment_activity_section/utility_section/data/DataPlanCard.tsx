@@ -1,7 +1,11 @@
 import Button from "@/components/shared/ui/Button";
 import { formatCurrency } from "@/lib/utils/formatCurrency";
 import { notifier } from "@/lib/utils/notifier";
-import { DataPlanType, NetworkType } from "@/lib/utils/typeConfig";
+import {
+  DataPlanType,
+  NetworkType,
+  PreviewDataType,
+} from "@/lib/utils/typeConfig";
 import { useUtilityStore } from "@/store/utilityStore";
 import React, { FC } from "react";
 
@@ -9,20 +13,55 @@ type PropTypes = {
   phoneNumber: string | number | null;
   plan: DataPlanType;
   network: NetworkType;
+  product_img: string;
 };
 
-const DataPlanCard: FC<PropTypes> = ({ phoneNumber, plan, network }) => {
+const validity = {
+  daily: "1 Day",
+  weekly: "7 Days",
+  monthly: "30 Days",
+};
+
+const DataPlanCard: FC<PropTypes> = ({
+  phoneNumber,
+  plan,
+  network,
+  product_img,
+}) => {
   const { updateData } = useUtilityStore();
   const handleTopup = () => {
     if (!phoneNumber) {
       notifier({ message: "Please enter Recipient Number", type: "error" });
       return;
     }
+
+    //<<<<<<<<<<<<<<<<<<< PREVIEW DATA >>>>>>>>>>>>>>>>>>>>
+    const previewData: PreviewDataType[] = [
+      {
+        key: "product_name",
+        label: "Product Name",
+        value: "Mobile Data",
+        product_img,
+      },
+      { key: "recipient", label: "Recipient", value: phoneNumber },
+      {
+        key: "data_bundle",
+        label: "Data Bundle",
+        value: `${plan?.qty} - ${
+          validity[plan?.duration as keyof typeof validity]
+        }`,
+      },
+      { key: "amount", label: "Amount", value: formatCurrency(plan?.price) },
+    ];
+    //<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>
+
     updateData({
       phoneNumber,
       network,
       plan,
+      product_amount: plan?.price,
       currentView: "preview",
+      previewData,
     });
   };
 
@@ -42,14 +81,15 @@ const DataPlanCard: FC<PropTypes> = ({ phoneNumber, plan, network }) => {
               {formatCurrency(plan?.price)}
             </h3>
             <p className="text-gray-500 text-[0.85rem]">{plan?.displayName}</p>
-            {/* <div className="pt-2 pb-1">
+            <div className="pt-2 pb-1">
               <span className="inline-block bg-gray-100 rounded-full px-2 py-1 text-xs text-gray-500 w-full">
                 Validity:{" "}
                 <span className="font-medium text-black text-[0.75rem]">
-                  1 Day
+                  {validity[plan?.duration as keyof typeof validity] ||
+                    "Unknown"}
                 </span>
               </span>
-            </div> */}
+            </div>
           </div>
         </div>
         <Button

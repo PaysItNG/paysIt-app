@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import PreviewConfirmation from "./PreviewConfirmation";
 import PlanView from "./PlanView";
 import { useUtilityStore } from "@/store/utilityStore";
+import PreviewConfirmation from "../PreviewConfirmation";
 
 const DataView = () => {
   const {
@@ -55,7 +55,7 @@ const DataView = () => {
   };
 
   return (
-    <div className="relative overflow-hidden">
+    <div className="relative overflow-x-hidden">
       <AnimatePresence initial={false} mode="wait">
         {currentView === "initial" ? (
           <motion.div

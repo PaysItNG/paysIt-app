@@ -1,4 +1,4 @@
-import { NetworkType } from "@/components/core/dashboard/payment_activity_section/utility_section/airtime/AirtimeView";
+import { NetworkType } from "./typeConfig";
 
 type ValidationResult = {
   network: NetworkType;
@@ -10,7 +10,7 @@ export function validatePhoneNumber(phoneNumber: string): ValidationResult {
   const regex = /^234\d{10}$/; // Check if the number starts with '234' and is followed by 10 digits
 
   if (regex.test(numericPhoneNumber)) {
-    return { isValid: false, network: "Unknown" };
+    return { isValid: false, network: "" };
   }
 
   // Extract the first 4 digits of the numeric phone number
@@ -66,6 +66,6 @@ export function validatePhoneNumber(phoneNumber: string): ValidationResult {
     return { isValid: true, network: "ETISALAT" };
   } else {
     // Number does not match any known network
-    return { isValid: false, network: "Unknown" };
+    return { isValid: false, network: "" };
   }
 }

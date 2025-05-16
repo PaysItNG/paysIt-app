@@ -86,3 +86,10 @@ export type DataPlanType = {
   displayName?: string;
   value?: string;
 };
+
+export type PreviewDataType = {
+  key: string;
+  label: string;
+  value: string | number;
+  product_img?: string;
+};

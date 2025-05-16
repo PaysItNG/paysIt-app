@@ -60,7 +60,7 @@ const SidebarHeader = ({ role }: { role: string }) => {
         <div className="flex gap-5">
           <div>
             <Button isIconOnly className="bg-transparent">
-              <IoIosNotifications size={20} className="text-gray-400" />
+              <IoIosNotifications size={25} className="text-gray-400" />
             </Button>
           </div>
           <div

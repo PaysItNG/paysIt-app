@@ -19,7 +19,7 @@ export const useGetDataPlans = () => {
           service_type,
         },
       });
-      return res?.data?.data;
+      return res?.data;
     },
   });
 };

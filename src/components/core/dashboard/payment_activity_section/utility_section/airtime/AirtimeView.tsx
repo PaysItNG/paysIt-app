@@ -11,7 +11,6 @@ const colors: Record<NetworkType, string> = {
   AIRTEL: "text-red-500",
   GLO: "text-green-500",
   ETISALAT: "text-blue-500",
-  Unknown: "",
   "": "",
 };
 

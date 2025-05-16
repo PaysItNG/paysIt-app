@@ -23,6 +23,11 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   title: "PaysIt",
   description: "For Seamless Subscriptions and Faster Payments",
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
+    shortcut: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({
