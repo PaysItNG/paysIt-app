@@ -8,9 +8,12 @@ import logo from "@/assets/images/paysIt_logo.jpeg";
 import { useUtilityStore } from "@/store/utilityStore";
 import { DataPlanType, PreviewDataType } from "@/lib/utils/typeConfig";
 import { catchErrFunc } from "@/lib/utils/catchErrFunc";
+import { useConfirmModal } from "@/store/confirmModalStore";
 
 const PreviewConfirmation = () => {
   const { data: utilityStoreData, updateData } = useUtilityStore();
+
+  const { openConfirm } = useConfirmModal();
 
   const { previewData, product_amount, utility_type, plan, phoneNumber } =
     utilityStoreData;
@@ -36,12 +39,14 @@ const PreviewConfirmation = () => {
       service_type: utility_type,
     },
   };
-
   //<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>
 
   const handleConfirm = async () => {
     const payload = utilityPayload[utility_type as keyof typeof utilityPayload];
-    executeConfirmation(payload);
+    openConfirm({
+      title: "Please confirm this operation",
+      onOk: () => executeConfirmation(payload),
+    });
   };
 
   const executeConfirmation = async (payload: Record<string, unknown>) => {

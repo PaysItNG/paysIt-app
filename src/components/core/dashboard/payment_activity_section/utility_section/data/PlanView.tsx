@@ -100,7 +100,7 @@ const PlanView = () => {
                 }
                 name={network}
                 radius="full"
-                className="h-8 w-8"
+                className="h-7 w-7"
               />
             </div>
           </Button>
@@ -211,7 +211,7 @@ const PlanView = () => {
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 gap-x-3 gap-y-4 max-h-[30rem] overflow-y-scroll">
             {isLoadingDataPlans ? (
               <div className="h-52 flex justify-center items-center w-full col-span-3">
-                <StarLoader size={30} />
+                <StarLoader size={28} />
               </div>
             ) : currentTabPlans?.length > 0 ? (
               currentTabPlans?.map((plan: DataPlanType, index: number) => (

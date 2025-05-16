@@ -93,3 +93,11 @@ export type PreviewDataType = {
   value: string | number;
   product_img?: string;
 };
+
+export type HeroUiDefaultColor =
+  | "primary"
+  | "default"
+  | "secondary"
+  | "success"
+  | "warning"
+  | "danger";

@@ -5,6 +5,8 @@ import { APP_ROUTES } from "@/lib/routes";
 import { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import ConfirmModal from "../shared/ui/ConfirmModal";
+import { useConfirmModal } from "@/store/confirmModalStore";
 
 const GeneralProtectedProvider = ({
   children,
@@ -17,30 +19,28 @@ const GeneralProtectedProvider = ({
 
   const { removeAuthUser } = useAuthUser();
 
+  const { openConfirm } = useConfirmModal();
+
   // const { confirm } = Modal;
 
   useEffect(() => {
+    const executeLogout = () => {
+      removeAuthUser();
+      router.push(APP_ROUTES.LOGIN);
+    };
     if (error && (error as AxiosError)?.status === 401) {
-      // confirm({
-      //   title: 'Your Login session has expired, please re-login',
-      //   icon: <IoWarningSharp />,
-      //   onOk() {
-      //     removeAuthUser();
-      //   router.push(APP_ROUTES.LOGIN);
-      //   },
-      //   onCancel() {
-      //   },
-      // });
-      const relogin = window.confirm(
-        "Your Login session has expired, please re-login"
-      );
-      if (relogin) {
-        removeAuthUser();
-        router.push(APP_ROUTES.LOGIN);
-      }
+      openConfirm({
+        title: "Please confirm this operation",
+        onOk: () => executeLogout,
+      });
     }
-  }, [error, router, removeAuthUser]);
-  return children;
+  }, [error, router, removeAuthUser, openConfirm]);
+  return (
+    <>
+      <ConfirmModal />
+      {children}
+    </>
+  );
 };
 
 export default GeneralProtectedProvider;

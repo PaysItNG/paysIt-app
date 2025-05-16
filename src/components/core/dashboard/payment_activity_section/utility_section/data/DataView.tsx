@@ -1,87 +1,66 @@
-import { useState, useEffect } from "react";
+"use client";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import PlanView from "./PlanView";
-import { useUtilityStore } from "@/store/utilityStore";
 import PreviewConfirmation from "../PreviewConfirmation";
+import { useUtilityStore } from "@/store/utilityStore";
+
+const views = ["initial", "preview"]; // Define known views in order
 
 const DataView = () => {
   const {
     data: { currentView },
   } = useUtilityStore();
 
-  // Track the direction of animation
-  const [direction, setDirection] = useState(1); // 1 for forward, -1 for backward
+  const prevViewRef = useRef(currentView);
+  const [direction, setDirection] = useState(1); // 1 = forward, -1 = backward
 
-  // Set direction when view changes
   useEffect(() => {
-    // If going back to initial view, set direction to -1
-    if (currentView === "initial") {
-      setDirection(-1);
-    } else {
-      // If going to confirmation view, set direction to 1
-      setDirection(1);
-    }
+    const prevIndex = views.indexOf(prevViewRef.current);
+    const currentIndex = views.indexOf(currentView);
+
+    if (currentIndex > prevIndex) setDirection(1);
+    else if (currentIndex < prevIndex) setDirection(-1);
+
+    prevViewRef.current = currentView;
   }, [currentView]);
 
-  // Animation variants
   const slideVariants = {
-    enterFromRight: {
-      x: 300,
+    enter: (dir: number) => ({
+      x: dir > 0 ? 300 : -300,
       opacity: 0,
-    },
-    enterFromLeft: {
-      x: -300,
-      opacity: 0,
-    },
+    }),
     center: {
       x: 0,
       opacity: 1,
     },
-    exitToLeft: {
-      x: -300,
+    exit: (dir: number) => ({
+      x: dir > 0 ? 300 : 300,
       opacity: 0,
-    },
-    exitToRight: {
-      x: 300,
-      opacity: 0,
-    },
+    }),
   };
 
-  // Transition configuration
   const transition = {
-    type: "spring",
-    stiffness: 300,
-    damping: 30,
+    type: "tween", // You can also try "spring"
+    ease: "easeInOut",
+    duration: 0.4,
   };
 
   return (
-    <div className="relative overflow-x-hidden">
-      <AnimatePresence initial={false} mode="wait">
-        {currentView === "initial" ? (
-          <motion.div
-            key="planView"
-            initial={direction === 1 ? "enterFromLeft" : "enterFromRight"}
-            animate="center"
-            exit={direction === 1 ? "exitToLeft" : "exitToRight"}
-            variants={slideVariants}
-            transition={transition}
-            className="w-full"
-          >
-            <PlanView />
-          </motion.div>
-        ) : (
-          <motion.div
-            key="previewConfirmation"
-            initial={direction === 1 ? "enterFromRight" : "enterFromLeft"}
-            animate="center"
-            exit={direction === 1 ? "exitToRight" : "exitToLeft"}
-            variants={slideVariants}
-            transition={transition}
-            className="w-full"
-          >
-            <PreviewConfirmation />
-          </motion.div>
-        )}
+    <div className="relative w-full h-full min-h-[300px] overflow-hidden">
+      <AnimatePresence initial={false} custom={direction} mode="wait">
+        <motion.div
+          key={currentView}
+          custom={direction}
+          variants={slideVariants}
+          initial="enter"
+          animate="center"
+          exit="exit"
+          transition={transition}
+          className="w-full"
+        >
+          {currentView === "initial" ? <PlanView /> : <PreviewConfirmation />}
+        </motion.div>
       </AnimatePresence>
     </div>
   );
