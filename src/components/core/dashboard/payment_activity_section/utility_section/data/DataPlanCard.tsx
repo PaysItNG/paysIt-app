@@ -62,6 +62,7 @@ const DataPlanCard: FC<PropTypes> = ({
       product_amount: plan?.price,
       currentView: "preview",
       previewData,
+      utility_type: "data",
     });
   };
 

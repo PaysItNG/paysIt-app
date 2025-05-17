@@ -3,8 +3,8 @@ import { create } from "zustand";
 type DataType = {
   title: string | React.ReactNode;
   description?: string | React.ReactNode;
-  cancelText?: string | React.ReactNode | Element;
-  okText?: string | React.ReactNode | Element;
+  cancelText?: string | React.ReactNode;
+  okText?: string | React.ReactNode;
   cancelButtonProps?: {
     [key: string]: unknown;
   };
@@ -30,6 +30,5 @@ export const useConfirmModal = create<ConfirmModalStoreType>((set) => ({
   },
   openConfirm: (data) =>
     set((state) => ({ data: { ...state.data, ...data }, isOpen: true })),
-  closeConfirm: () =>
-    set((state) => ({ data: { ...state.data }, isOpen: false })),
+  closeConfirm: () => set(() => ({ data: { title: "" }, isOpen: false })),
 }));

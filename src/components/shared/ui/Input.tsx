@@ -13,7 +13,7 @@ const Input = ({ classNames = {}, ...rest }: HeroInputProps) => {
           inputWrapper: `border border-zinc-300 outline-none shadow-none transition ${
             classNames?.inputWrapper || ""
           }`,
-          input: `placeholder:text-default-700/50 dark:placeholder:text-white/60 placeholder:text-[0.75rem]${
+          input: `placeholder:text-default-700/50 dark:placeholder:text-white/60 placeholder:text-[0.9rem]${
             classNames?.input || ""
           }`,
         }}

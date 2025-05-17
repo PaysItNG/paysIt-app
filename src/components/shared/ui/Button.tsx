@@ -33,7 +33,8 @@ const Button = ({ className, variant, ...rest }: HeroButtonProps) => {
       {...rest}
       className={clsx(
         className,
-        variant === "bordered" && "border-[1.6px] border-zinc-300"
+        variant === "bordered" &&
+          "border border-zinc-300 outline-none shadow-none"
       )} // Use className instead of classNames
     />
   );

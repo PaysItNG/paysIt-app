@@ -10,16 +10,9 @@ import { useGetDataPlans } from "@/api/vtu";
 import StarLoader from "@/components/shared/ui/loaders/StarLoader";
 import { useUtilityStore } from "@/store/utilityStore";
 import { MdOutlineHourglassEmpty } from "react-icons/md";
-import {
-  Avatar,
-  Divider,
-  Dropdown,
-  DropdownItem,
-  DropdownMenu,
-  DropdownTrigger,
-} from "@heroui/react";
-import Button from "@/components/shared/ui/Button";
-import { HiOutlineChevronDown } from "react-icons/hi";
+import { Divider } from "@heroui/react";
+import NetworkDropDown from "../NetworkProviderDropdown";
+import { serviceProvider } from "@/lib/utils/serviceProvider";
 
 const PlanView = () => {
   const {
@@ -72,105 +65,11 @@ const PlanView = () => {
     return filteredPlans;
   }, [allPlans, durationTab]);
 
-  const serviceProvider: Record<NetworkType, string> = {
-    MTN: "https://cdn.worldvectorlogo.com/logos/mtn-new-logo.svg",
-    AIRTEL:
-      "https://s3-ap-southeast-1.amazonaws.com/bsy/iportal/images/airtel-logo-white-text-vertical.jpg",
-    GLO: "https://static-00.iconduck.com/assets.00/globacom-limited-icon-2048x2048-uovm3iz4.png",
-    ETISALAT:
-      "https://logo-download.com/wp-content/data/images/png/Etisalat-logo.png",
-    "": "",
-  };
-  const NetworkDropDown = () => {
-    return (
-      <Dropdown>
-        <DropdownTrigger>
-          <Button
-            variant="bordered"
-            size="lg"
-            radius="sm"
-            className="rounded-r-none flex gap-1"
-            endContent={<HiOutlineChevronDown size={20} />}
-          >
-            <div>
-              <Avatar
-                src={
-                  serviceProvider[network] ||
-                  "https://images.unsplash.com/broken"
-                }
-                name={network}
-                radius="full"
-                className="h-7 w-7"
-              />
-            </div>
-          </Button>
-        </DropdownTrigger>
-        <DropdownMenu
-          aria-label="Dropdown menu with icons"
-          variant="faded"
-          disallowEmptySelection
-          selectionMode="single"
-          selectedKeys={new Set([network])}
-          onSelectionChange={(key) => setNetwork(key.anchorKey as NetworkType)}
-        >
-          <DropdownItem key="MTN" textValue="MTN">
-            <div className="flex gap-1">
-              <div>
-                <Avatar
-                  src={serviceProvider["MTN"]}
-                  radius="full"
-                  className="h-6 w-6"
-                />
-              </div>
-              MTN
-            </div>
-          </DropdownItem>
-          <DropdownItem key="AIRTEL" textValue="AIRTEL">
-            <div className="flex gap-1">
-              <div>
-                <Avatar
-                  src={serviceProvider["AIRTEL"]}
-                  radius="full"
-                  className="h-6 w-6"
-                />
-              </div>
-              AIRTEL
-            </div>
-          </DropdownItem>
-          <DropdownItem key="GLO" textValue="GLO">
-            <div className="flex gap-1">
-              <div>
-                <Avatar
-                  src={serviceProvider["GLO"]}
-                  radius="full"
-                  className="h-6 w-6"
-                />
-              </div>
-              GLO
-            </div>
-          </DropdownItem>
-          <DropdownItem key="ETISALAT" textValue="ETISALAT">
-            <div className="flex gap-1">
-              <div>
-                <Avatar
-                  src={serviceProvider["ETISALAT"]}
-                  radius="full"
-                  className="h-6 w-6"
-                />
-              </div>
-              ETISALAT
-            </div>
-          </DropdownItem>
-        </DropdownMenu>
-      </Dropdown>
-    );
-  };
-
   return (
     <>
       <div className="space-y-4 overflow-y-clip">
         <div className="flex items-center">
-          <NetworkDropDown />
+          <NetworkDropDown network={network} setNetwork={setNetwork} />
           <Input
             type="number"
             variant="bordered"

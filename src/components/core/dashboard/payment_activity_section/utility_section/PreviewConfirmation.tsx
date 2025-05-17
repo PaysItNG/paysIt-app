@@ -15,8 +15,14 @@ const PreviewConfirmation = () => {
 
   const { openConfirm } = useConfirmModal();
 
-  const { previewData, product_amount, utility_type, plan, phoneNumber } =
-    utilityStoreData;
+  const {
+    previewData,
+    product_amount,
+    utility_type,
+    plan,
+    phoneNumber,
+    network,
+  } = utilityStoreData;
 
   const dataPlan = { ...(plan as DataPlanType) };
   //function to go back
@@ -38,7 +44,13 @@ const PreviewConfirmation = () => {
       phone_no: phoneNumber,
       service_type: utility_type,
     },
+    airtime: {
+      price: product_amount,
+      service_type: utility_type,
+      service_id: network,
+    },
   };
+
   //<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>
 
   const handleConfirm = async () => {
@@ -73,7 +85,16 @@ const PreviewConfirmation = () => {
 
         <div className="w-full max-w-lg md:px-8 space-y-4">
           <div className="flex justify-center mb-4">
-            <Image src={logo} alt="paysIt logo" width={80} height={80} />
+            <Image
+              src={logo}
+              alt="paysIt logo"
+              width={60}
+              height={60}
+              style={{
+                width: "auto",
+                height: "auto",
+              }}
+            />
           </div>
           <div className="text-center mb-3">
             <h2 className="font-bold text-2xl">

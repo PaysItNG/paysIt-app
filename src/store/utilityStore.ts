@@ -15,16 +15,17 @@ type StoreType = {
   closeDrawer: () => void;
 };
 
+const initialData = {
+  utility_type: "airtime" as UtilityViews,
+  currentView: "initial",
+};
+
 export const useUtilityStore = create<StoreType>((set) => ({
   isOpen: false,
-  data: {
-    utility_type: "airtime" as UtilityViews,
-    currentView: "initial",
-  },
+  data: initialData,
   openDrawer: (data) =>
     set((state) => ({ isOpen: true, data: { ...state.data, ...data } })),
   updateData: (newData) =>
     set((state) => ({ data: { ...state.data, ...newData } })),
-  closeDrawer: () =>
-    set((state) => ({ isOpen: false, data: { ...state.data } })),
+  closeDrawer: () => set(() => ({ isOpen: false, data: initialData })),
 }));

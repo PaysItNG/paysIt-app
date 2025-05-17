@@ -58,7 +58,7 @@ const ConfirmModal = () => {
                     className="w-full"
                     {...cancelButtonProps}
                   >
-                    {String(cancelText) || "Cancel"}
+                    {cancelText || "Cancel"}
                   </Button>
                   <Button
                     color={
@@ -69,7 +69,7 @@ const ConfirmModal = () => {
                     className="w-full"
                     {...okButtonProps}
                   >
-                    {String(okText) || "Confirm"}
+                    {okText || "Confirm"}
                   </Button>
                 </div>
               </ModalFooter>
