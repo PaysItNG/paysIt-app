@@ -30,7 +30,7 @@ export const useGetDataPlans = () => {
 export const useBuyUtilityService = () => {
   return useMutation<ApiResponseType, AxiosError, BuyServiceTypes>({
     mutationFn: async (payload) => {
-      const res = await http.get(API_ROUTE.buy_utility_service, payload);
+      const res = await http.post(API_ROUTE.buy_utility_service, payload);
       return res?.data;
     },
   });
