@@ -20,6 +20,7 @@ type ConfirmModalStoreType = {
   data: DataType;
   isOpen: boolean;
   openConfirm: (data: DataType) => void;
+  updateData: (data: Record<string, unknown>) => void;
   closeConfirm: () => void;
 };
 
@@ -30,5 +31,6 @@ export const useConfirmModal = create<ConfirmModalStoreType>((set) => ({
   },
   openConfirm: (data) =>
     set((state) => ({ data: { ...state.data, ...data }, isOpen: true })),
+  updateData: (data) => set((state) => ({ data: { ...state.data, ...data } })),
   closeConfirm: () => set(() => ({ data: { title: "" }, isOpen: false })),
 }));

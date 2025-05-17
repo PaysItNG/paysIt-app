@@ -9,11 +9,20 @@ import { useUtilityStore } from "@/store/utilityStore";
 import { DataPlanType, PreviewDataType } from "@/lib/utils/typeConfig";
 import { catchErrFunc } from "@/lib/utils/catchErrFunc";
 import { useConfirmModal } from "@/store/confirmModalStore";
+import { useBuyUtilityService } from "@/api/vtu";
+// import { notifier } from "@/lib/utils/notifier";
 
 const PreviewConfirmation = () => {
   const { data: utilityStoreData, updateData } = useUtilityStore();
 
-  const { openConfirm } = useConfirmModal();
+  const { mutateAsync: mutateBuyUtility, isPending: isLoading } =
+    useBuyUtilityService();
+
+  const {
+    openConfirm,
+    closeConfirm,
+    updateData: updateConfirmData,
+  } = useConfirmModal();
 
   const {
     previewData,
@@ -57,13 +66,20 @@ const PreviewConfirmation = () => {
     const payload = utilityPayload[utility_type as keyof typeof utilityPayload];
     openConfirm({
       title: "Please confirm this operation",
+      isLoading: isLoading,
       onOk: () => executeConfirmation(payload),
     });
   };
 
   const executeConfirmation = async (payload: Record<string, unknown>) => {
+    updateConfirmData({ isLoading });
     try {
       console.log(payload);
+      const res = await mutateBuyUtility(payload);
+      console.log(res);
+      // notifier({message: })
+
+      closeConfirm();
     } catch (err) {
       catchErrFunc(err);
     }

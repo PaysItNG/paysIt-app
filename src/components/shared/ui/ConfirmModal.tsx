@@ -22,6 +22,7 @@ const ConfirmModal = () => {
       cancelButtonProps,
       okText,
       cancelText,
+      isLoading,
     },
   } = useConfirmModal();
 
@@ -67,6 +68,7 @@ const ConfirmModal = () => {
                     onPress={onOk}
                     radius="sm"
                     className="w-full"
+                    isLoading={isLoading as boolean}
                     {...okButtonProps}
                   >
                     {okText || "Confirm"}

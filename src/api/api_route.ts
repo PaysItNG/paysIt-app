@@ -18,4 +18,5 @@ export const API_ROUTE = {
 
   //vtu apis
   get_data_plans: "/vtu/services/", //needs query param as suffix
+  buy_utility_service: "",
 };

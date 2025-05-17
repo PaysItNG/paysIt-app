@@ -9,6 +9,10 @@ type DataPlanParamType = {
   service_type: string;
 };
 
+type BuyServiceTypes = {
+  [key: string]: unknown;
+};
+
 export const useGetDataPlans = () => {
   return useMutation<ApiResponseType, AxiosError, DataPlanParamType>({
     mutationFn: async (payload) => {
@@ -19,6 +23,14 @@ export const useGetDataPlans = () => {
           service_type,
         },
       });
+      return res?.data;
+    },
+  });
+};
+export const useBuyUtilityService = () => {
+  return useMutation<ApiResponseType, AxiosError, BuyServiceTypes>({
+    mutationFn: async (payload) => {
+      const res = await http.get(API_ROUTE.buy_utility_service, payload);
       return res?.data;
     },
   });
