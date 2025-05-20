@@ -4,7 +4,6 @@ import NumberInput from "@/components/shared/ui/NumberInput";
 import { notifier } from "@/lib/utils/notifier";
 import { NetworkType, PreviewDataType } from "@/lib/utils/typeConfig";
 import { validatePhoneNumber } from "@/lib/utils/validatePhoneNumber";
-import clsx from "clsx";
 import React from "react";
 import NetworkDropDown from "../NetworkProviderDropdown";
 import { serviceProvider } from "@/lib/utils/serviceProvider";
