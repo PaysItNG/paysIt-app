@@ -1,4 +1,3 @@
-import EditProfileDrawer from "@/components/core/profile/editprofile/EditProfileDrawer";
 import ProfileAddressInfoView from "@/components/core/profile/ProfileAddressInfoView";
 import ProfileHeaderInfoView from "@/components/core/profile/ProfileHeaderInfoView";
 import ProfilePersonalInfoView from "@/components/core/profile/ProfilePersonalInfoView";
@@ -15,8 +14,6 @@ const AdminProfilePage = () => {
           <ProfileAddressInfoView />
         </section>
       </PageWrapper>
-
-      <EditProfileDrawer />
     </>
   );
 };

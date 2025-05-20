@@ -126,7 +126,7 @@ const PlanView = () => {
               <div className="h-52 flex flex-col gap-3 justify-center items-center w-full col-span-3 text-gray-400">
                 <MdOutlineHourglassEmpty size={30} className="animate" />
                 <Title
-                  title="No Data Plans Available"
+                  title={`No ${durationTab} Data Plans Available`}
                   classNames={{
                     title: "text-sm text-gray-400 font-medium",
                   }}

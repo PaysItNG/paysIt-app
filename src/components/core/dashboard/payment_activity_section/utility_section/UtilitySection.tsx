@@ -7,7 +7,6 @@ import { MdOutlineElectricBolt } from "react-icons/md";
 import { MdSignalCellularAlt } from "react-icons/md";
 import { FaTv } from "react-icons/fa6";
 import { IconType } from "react-icons";
-import UtilityDrawer from "./UtilityDrawer";
 import { useUtilityStore } from "@/store/utilityStore";
 
 const UtilitySection = () => {
@@ -50,7 +49,7 @@ const UtilitySection = () => {
   return (
     <div className="space-y-5 lg:block flex flex-col items-center">
       <Title
-        title="Quick transfer"
+        title="Quick Top-up"
         classNames={{
           title: "text-base font-medium",
         }}
@@ -80,8 +79,6 @@ const UtilitySection = () => {
           </div>
         ))}
       </div>
-
-      <UtilityDrawer />
     </div>
   );
 };

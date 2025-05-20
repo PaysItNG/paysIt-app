@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import ConfirmModal from "../shared/ui/ConfirmModal";
 import { useConfirmModal } from "@/store/confirmModalStore";
+import { isTokenExpiringSoon } from "@/lib/utils/checkTokenExpiration";
 
 const GeneralProtectedProvider = ({
   children,
@@ -16,7 +17,7 @@ const GeneralProtectedProvider = ({
 
   const { error } = useProfile();
 
-  const { removeAuthUser } = useAuthUser();
+  const { removeAuthUser, token } = useAuthUser();
 
   const { openConfirm, closeConfirm } = useConfirmModal();
 
@@ -34,6 +35,16 @@ const GeneralProtectedProvider = ({
       });
     }
   }, [error, router, removeAuthUser, openConfirm, closeConfirm]);
+
+  //<<<<<<<<<<<<This effect will be checking if access is about to expire and will try to run refresh token function>>>>>>>>>>>>>>>>>>
+  useEffect(() => {
+    const accessTokenExpired = isTokenExpiringSoon(token?.access || "");
+    if (accessTokenExpired) {
+      //run function to refesh token
+    }
+  }, [token?.access]);
+  //<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>
+
   return (
     <>
       <ConfirmModal />

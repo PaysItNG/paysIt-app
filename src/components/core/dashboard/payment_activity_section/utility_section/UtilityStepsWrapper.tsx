@@ -1,18 +1,19 @@
 "use client";
-import { useState, useEffect, useRef, createElement, FC, JSX } from "react";
+import { useState, useEffect, useRef, createElement, FC } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useUtilityStore } from "@/store/utilityStore";
 
 const views = ["initial", "preview"]; // Define known views in order
 
-type PropType = {
-  viewsComponent: {
-    initial: Element;
-    preview: Element;
-  };
-};
+type ViewKeys = "initial" | "preview";
 
-const UtilityStepWrapper: FC<PropType> = ({ viewsComponent }) => {
+interface UtilityStepWrapperProps {
+  viewsComponent: Record<ViewKeys, React.ComponentType>;
+}
+
+const UtilityStepWrapper: FC<UtilityStepWrapperProps> = ({
+  viewsComponent,
+}) => {
   const {
     data: { currentView },
   } = useUtilityStore();
@@ -64,7 +65,7 @@ const UtilityStepWrapper: FC<PropType> = ({ viewsComponent }) => {
           transition={transition}
           className="w-full"
         >
-          {createElement(viewsComponent[currentView])}
+          {createElement(viewsComponent[currentView as ViewKeys])}
         </motion.div>
       </AnimatePresence>
     </div>

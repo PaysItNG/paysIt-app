@@ -34,7 +34,7 @@ export const topMenus: MenuType[] = [
   },
   {
     path: "",
-    name: "Wallet",
+    name: "Transaction",
     defaultIcon: IoWalletOutline,
     activeIcon: IoWallet,
     active: false,

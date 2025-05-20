@@ -1,6 +1,6 @@
 import React from "react";
 import BalanceView from "./BalanceView";
-import SendOrReceiveActionView from "./SendOrReceiveActionView";
+import SendOrReceiveActionView from "./sendOrDeposit/SendOrReceiveActionView";
 import QuickTransfer from "./QuickTransfer";
 import UtilitySection from "./utility_section/UtilitySection";
 

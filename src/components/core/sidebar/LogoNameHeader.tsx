@@ -1,10 +1,9 @@
 import Image from "next/image";
 import paysIt_logo from "@/assets/images/paysIt_logo.jpeg";
-import Link from "next/link";
 import React from "react";
 import clsx from "clsx";
-import { AnimatePresence, motion } from "framer-motion";
-import useScreenSize from "@/hooks/use-screen-size";
+import { motion } from "framer-motion";
+// import useScreenSize from "@/hooks/use-screen-size";
 
 type PropType = {
   sideBarOpen: boolean;
@@ -12,7 +11,7 @@ type PropType = {
 
 const LogoNameHeader: React.FC<PropType> = ({ sideBarOpen }) => {
   //large screen size
-  const { isLargeScreen } = useScreenSize();
+  // const { isLargeScreen } = useScreenSize();
   return (
     <div
       className={clsx(
