@@ -5,6 +5,7 @@ export const API_ROUTE = {
   signup: "/auth/register/",
   login: "/auth/login/",
   activate_account: "/auth/activate/account/",
+  refreshToken: "/auth/token/refresh/",
 
   //profile apis
   profile: "/profile/",
