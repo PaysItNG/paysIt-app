@@ -32,8 +32,23 @@ export const useRefreshToken = () => {
         API_ROUTE.refreshToken,
         payload
       );
-
       return response?.data;
+    },
+  });
+};
+
+type GooglgeAuthTokenPayload = {
+  access_token: string;
+};
+
+export const useGoogleAuthToken = () => {
+  return useMutation<ApiResponseType, AxiosError, GooglgeAuthTokenPayload>({
+    mutationFn: async (payload) => {
+      const response = await http.post<ApiResponseType>(
+        API_ROUTE.google_auth,
+        payload
+      );
+      return response.data;
     },
   });
 };

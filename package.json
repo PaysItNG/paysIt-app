@@ -23,6 +23,7 @@
     "face-api.js": "^0.20.0",
     "framer-motion": "^12.4.7",
     "next": "^15.3.2",
+    "next-auth": "^4.24.11",
     "next-transpile-modules": "^10.0.1",
     "os-browserify": "^0.3.0",
     "path-browserify": "^1.0.1",

@@ -1,19 +1,20 @@
 "use client";
-import { Checkbox } from "@heroui/react";
+import { Checkbox, Divider } from "@heroui/react";
 import { Controller, FieldValues, useForm } from "react-hook-form";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IoEye, IoEyeOff } from "react-icons/io5";
 import { notifier } from "@/lib/utils/notifier";
-import { useLoginUser } from "@/api/auth/login";
+import { useGoogleAuthToken, useLoginUser } from "@/api/auth/login";
 import { AxiosError } from "axios";
 import Input from "@/components/shared/ui/Input";
 import { useRouter } from "next/navigation";
 import { APP_ROUTES } from "@/lib/routes";
 import Button from "@/components/shared/ui/Button";
 import useAuthUser from "@/hooks/useAuthUser";
-import { useSingleEffect } from "react-haiku";
-import { useProfile } from "@/hooks/use-profile";
+import GoogleAuthProviderButton from "./GoogleAuthProviderButton";
+import { useSession } from "next-auth/react";
+import { catchErrFunc } from "@/lib/utils/catchErrFunc";
 
 const Login = () => {
   const router = useRouter();
@@ -22,14 +23,20 @@ const Login = () => {
 
   const [pswVisible, setPswVisible] = useState(false);
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const { setAuthUser } = useAuthUser();
 
-  const { logoutUser } = useProfile();
+  const { data: session, status } = useSession();
+
+  const { mutateAsync: googleAuthToken, isPending } = useGoogleAuthToken();
+
+  // const { logoutUser } = useProfile();
 
   //=======remove user from local storage if gotten here and token is still in save
-  useSingleEffect(() => {
-    logoutUser();
-  });
+  // useSingleEffect(() => {
+  //   logoutUser();
+  // });
 
   //==================ends here===================
 
@@ -90,6 +97,26 @@ const Login = () => {
       });
     }
   };
+
+  useEffect(() => {
+    const sendTokentoBackend = async () => {
+      setIsLoading(true);
+      try {
+        const res = await googleAuthToken({
+          access_token: session?.accessToken as string,
+        });
+        console.log(res);
+      } catch (err) {
+        catchErrFunc(err);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    if (status === "authenticated") {
+      // ✅ You can now send this to your backend
+      sendTokentoBackend();
+    }
+  }, [status, session, googleAuthToken]);
 
   return (
     <div className="container my-auto">
@@ -192,6 +219,17 @@ const Login = () => {
               </Link>
             </div>
           </form>
+          <div className="flex gap-1 items-center w-50">
+            <Divider className="w-fit" />
+            <span>OR</span>
+            <Divider className="w-fit" />
+          </div>
+          <div>
+            <GoogleAuthProviderButton
+              isLoading={isLoading}
+              setIsLoading={setIsLoading}
+            />
+          </div>
         </div>
       </div>
     </div>

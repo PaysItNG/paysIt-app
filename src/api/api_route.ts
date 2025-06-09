@@ -6,6 +6,7 @@ export const API_ROUTE = {
   login: "/auth/login/",
   activate_account: "/auth/activate/account/",
   refreshToken: "/auth/token/refresh/",
+  google_auth: "auth/verify/social/google-oauth2/",
 
   //profile apis
   profile: "/profile/",

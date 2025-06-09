@@ -58,15 +58,11 @@ const FeaturesView = () => {
                   {feature.icon}
                 </div>
                 <div className="flex flex-col gap-2 my-5">
-                  <h3 className="text-xl font-semibold">{feature.title}</h3>
+                  <h3 className="text-xl font-semibold dark:text-black">
+                    {feature.title}
+                  </h3>
                   <p className="text-gray-600 text-lg">{feature.description}</p>
                 </div>
-                {/* <Button
-                  variant="ghost"
-                  className="group-hover:translate-x-2 transition-transform duration-300 mt-auto rounded-3xl p-6 max-w-max"
-                >
-                  Learn more <BsArrowRight className="ml-2 w-4 h-4" />
-                </Button> */}
               </div>
             </Card>
           ))}
