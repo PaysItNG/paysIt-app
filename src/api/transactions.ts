@@ -1,6 +1,6 @@
 import { ApiResponseType } from "@/lib/utils/typeConfig";
 import { useQuery } from "@tanstack/react-query";
-import { API_ROUTE } from "../api_route";
+import { API_ROUTE } from "./api_route";
 import { http } from "@/lib/utils/axiosInstance";
 
 type ParamTypes = {

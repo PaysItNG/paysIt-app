@@ -5,7 +5,7 @@ import DashboardFinanceSummary from "@/components/core/dashboard/DashboardFinanc
 import DashboardStatisticChart from "./DashboardStatistic";
 import MonthlyPaymentSummary from "./monthly_payment_summary/MonthlyPaymentSummary";
 import { useProfile } from "@/hooks/use-profile";
-import { useGetTransactions } from "@/api/auth/transactions";
+import { useGetTransactions } from "@/api/transactions";
 const OverviewSection = () => {
   const { profileData } = useProfile();
 

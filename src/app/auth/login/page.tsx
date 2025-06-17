@@ -2,7 +2,7 @@
 import { Checkbox, Divider } from "@heroui/react";
 import { Controller, FieldValues, useForm } from "react-hook-form";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { IoEye, IoEyeOff } from "react-icons/io5";
 import { notifier } from "@/lib/utils/notifier";
 import { useGoogleAuthToken, useLoginUser } from "@/api/auth/login";
@@ -15,6 +15,8 @@ import useAuthUser from "@/hooks/useAuthUser";
 import GoogleAuthProviderButton from "./GoogleAuthProviderButton";
 import { useSession } from "next-auth/react";
 import { catchErrFunc } from "@/lib/utils/catchErrFunc";
+import { UserType } from "@/lib/utils/typeConfig";
+import { useSingleEffect } from "react-haiku";
 
 const Login = () => {
   const router = useRouter();
@@ -25,18 +27,18 @@ const Login = () => {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const { setAuthUser } = useAuthUser();
+  const { setAuthUser, removeAuthUser } = useAuthUser();
 
   const { data: session, status } = useSession();
 
-  const { mutateAsync: googleAuthToken, isPending } = useGoogleAuthToken();
+  const { mutateAsync: googleAuthToken } = useGoogleAuthToken();
 
   // const { logoutUser } = useProfile();
 
   //=======remove user from local storage if gotten here and token is still in save
-  // useSingleEffect(() => {
-  //   logoutUser();
-  // });
+  useSingleEffect(() => {
+    removeAuthUser();
+  });
 
   //==================ends here===================
 
@@ -66,16 +68,20 @@ const Login = () => {
         | { access: string | null; refresh: string | null }
         | undefined;
 
-      if (res?.logged_in) {
-        setAuthUser({
-          data: resData,
-          token: tokens,
+      if (res?.logged_in && tokens) {
+        afterLoginSuccessfull({
+          userData: resData as UserType,
+          tokens: tokens,
         });
-        if (resData?.role === "user") {
-          router.push(APP_ROUTES.DASHBOARD);
-        } else {
-          router.push(APP_ROUTES.ADMIN_DASHBOARD);
-        }
+        // setAuthUser({
+        //   data: resData,
+        //   token: tokens,
+        // });
+        // if (resData?.role === "user") {
+        //   router.push(APP_ROUTES.DASHBOARD);
+        // } else {
+        //   router.push(APP_ROUTES.ADMIN_DASHBOARD);
+        // }
       } else if (
         res?.message === "This Account is not Activated, Check your mail"
       ) {
@@ -98,6 +104,27 @@ const Login = () => {
     }
   };
 
+  const afterLoginSuccessfull = useCallback(
+    ({
+      userData,
+      tokens,
+    }: {
+      userData: UserType;
+      tokens: { access: string | null; refresh: string | null };
+    }) => {
+      setAuthUser({
+        data: userData,
+        token: tokens,
+      });
+      if (userData?.role === "user") {
+        router.push(APP_ROUTES.DASHBOARD);
+      } else {
+        router.push(APP_ROUTES.ADMIN_DASHBOARD);
+      }
+    },
+    [router, setAuthUser]
+  );
+
   useEffect(() => {
     const sendTokentoBackend = async () => {
       setIsLoading(true);
@@ -105,7 +132,13 @@ const Login = () => {
         const res = await googleAuthToken({
           access_token: session?.accessToken as string,
         });
-        console.log(res);
+        afterLoginSuccessfull({
+          userData: res?.user as UserType,
+          tokens: res?.token as {
+            access: string | null;
+            refresh: string | null;
+          },
+        });
       } catch (err) {
         catchErrFunc(err);
       } finally {
@@ -116,7 +149,7 @@ const Login = () => {
       // ✅ You can now send this to your backend
       sendTokentoBackend();
     }
-  }, [status, session, googleAuthToken]);
+  }, [status, session, googleAuthToken, afterLoginSuccessfull]);
 
   return (
     <div className="container my-auto">
@@ -219,10 +252,8 @@ const Login = () => {
               </Link>
             </div>
           </form>
-          <div className="flex gap-1 items-center w-50">
-            <Divider className="w-fit" />
+          <div className="flex gap-1 justify-center my-3 items-center w-50">
             <span>OR</span>
-            <Divider className="w-fit" />
           </div>
           <div>
             <GoogleAuthProviderButton
