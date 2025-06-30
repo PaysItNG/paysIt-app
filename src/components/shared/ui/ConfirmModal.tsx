@@ -23,6 +23,7 @@ const ConfirmModal = () => {
       okText,
       cancelText,
       isLoading,
+      no_cancel,
     },
   } = useConfirmModal();
 
@@ -33,6 +34,7 @@ const ConfirmModal = () => {
         isKeyboardDismissDisabled={true}
         isOpen={isOpen}
         onClose={closeConfirm}
+        hideCloseButton={true}
         size="sm"
       >
         <ModalContent>
@@ -52,15 +54,17 @@ const ConfirmModal = () => {
               <ModalFooter className="flex flex-col">
                 <Divider />
                 <div className="w-full flex gap-3 mt-2">
-                  <Button
-                    variant="bordered"
-                    onPress={onClose}
-                    radius="sm"
-                    className="w-full"
-                    {...cancelButtonProps}
-                  >
-                    {cancelText || "Cancel"}
-                  </Button>
+                  {!no_cancel && (
+                    <Button
+                      variant="bordered"
+                      onPress={onClose}
+                      radius="sm"
+                      className="w-full"
+                      {...cancelButtonProps}
+                    >
+                      {cancelText || "Cancel"}
+                    </Button>
+                  )}
                   <Button
                     color={
                       (okButtonProps?.color as HeroUiDefaultColor) || "primary"

@@ -20,6 +20,7 @@ const GoogleAuthProviderButton = ({ isLoading, setIsLoading }: PropType) => {
         onPress={handleSignInWithGoogle}
         isLoading={isLoading}
         className="w-full"
+        size="lg"
       >
         <FcGoogle size={25} />
         Signin with Google

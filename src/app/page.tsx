@@ -3,6 +3,7 @@
 import FeaturesView from "@/components/core/landing_page/FeaturesView";
 import Footer from "@/components/core/landing_page/Footer";
 import HeroSection from "@/components/core/landing_page/HeroSection";
+import KeyFeaturesView from "@/components/core/landing_page/KeyFeatures";
 import Navbar from "@/components/core/landing_page/Navbar";
 import Section2View from "@/components/core/landing_page/Section2View";
 import Section3View from "@/components/core/landing_page/Section3View";
@@ -15,6 +16,7 @@ export default function Home() {
 
       <HeroSection />
       <FeaturesView />
+      <KeyFeaturesView />
       <Section3View />
       <Section2View />
       <WhyChooseUs />

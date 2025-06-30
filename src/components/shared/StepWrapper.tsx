@@ -13,7 +13,7 @@ const StepWrapper = <T extends string>({
   viewsComponent,
   viewsOrder,
 }: StepWrapperProps<T>) => {
-  const order = viewsOrder ?? (Object.keys(viewsComponent) as T[]);
+  const order = viewsOrder ?? (Object?.keys(viewsComponent) as T[]);
   const prevViewRef = useRef(currentView);
   const [direction, setDirection] = useState(1);
 

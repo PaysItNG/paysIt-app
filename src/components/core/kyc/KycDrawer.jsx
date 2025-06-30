@@ -29,7 +29,12 @@ const KycDrawer = () => {
 
   return (
     <>
-      <Drawer isOpen={kycStoreData.isOpen} onClose={onCloseDrawer} size="3xl">
+      <Drawer
+        isOpen={kycStoreData.isOpen}
+        // onClose={() => (!kycDetail?.submitted ? {} : onCloseDrawer())}
+        onClose={() => onCloseDrawer()}
+        size="3xl"
+      >
         <div className="space-y-6">
           <ConfigProvider
             theme={{

@@ -101,3 +101,20 @@ export type HeroUiDefaultColor =
   | "success"
   | "warning"
   | "danger";
+
+export interface TransactionDataType {
+  amount: string | number;
+  created_at: string;
+  description: string;
+  id: number | string;
+  payment_type: "credit" | "debit" | string;
+  paystack_data: string;
+  paystack_ref: string;
+  reference_id: string;
+  sender_name: string | null;
+  status: "completed" | "pending";
+  to_from: string | null;
+  transaction_type: string;
+  updated_at: string;
+  user: string;
+}

@@ -58,6 +58,7 @@ const GeneralProtectedProvider = ({
         title: "Your login session has expired, please re-login",
         okText: "Re-login",
         onOk: () => executeLogout(),
+        no_cancel: true,
       });
     }
   };

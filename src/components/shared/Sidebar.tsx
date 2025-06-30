@@ -119,7 +119,11 @@ const Sidebar: React.FC<PropType> = ({ role }) => {
         >
           <div className="pt-8 pb-5 flex flex-col justify-between h-screen overflow-y-auto">
             <div className="space-y-10">
-              {isLargeScreen && <LogoNameHeader sideBarOpen={sideBarOpen} />}
+              {isLargeScreen && (
+                <div className="flex justify-center">
+                  <LogoNameHeader sideBarOpen={sideBarOpen} />
+                </div>
+              )}
               <div>
                 <div className={clsx("space-y-5", sideBarOpen ? "mx-3" : "")}>
                   {topMenuItems.map((menu, index) =>

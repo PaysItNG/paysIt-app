@@ -29,13 +29,7 @@ const LogoNameHeader: React.FC<PropType> = ({ sideBarOpen }) => {
         }}
         className="w-10 h-10"
       >
-        <Image
-          src={paysIt_logo}
-          alt="logo"
-          width={50}
-          height={50}
-          className="rounded-full"
-        />
+        <Image src={paysIt_logo} alt="logo" width={50} height={50} />
       </motion.div>
 
       {/* Animated Text */}

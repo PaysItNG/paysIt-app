@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import faceapi from "@/lib/utils/face-api";
 import clsx from "clsx";
 import { base64ToFile } from "@/lib/utils/convertBase64ToFile";
+import Button from "./ui/Button";
 
 type VerificationData = {
   id: string;
@@ -64,9 +65,9 @@ const ClientSideLivenessDetector: React.FC<PropType> = ({
       setLoading(true);
       try {
         // Load models from public directory
-        await faceapi.nets.tinyFaceDetector.load("/models");
-        await faceapi.nets.faceLandmark68Net.load("/models");
-        await faceapi.nets.faceExpressionNet.load("/models");
+        await faceapi.nets.tinyFaceDetector.loadFromUri("/models");
+        await faceapi.nets.faceLandmark68Net.loadFromUri("/models");
+        await faceapi.nets.faceExpressionNet.loadFromUri("/models");
         setModelsLoaded(true);
       } catch (error) {
         console.error("Error loading models:", error);
@@ -561,20 +562,13 @@ const ClientSideLivenessDetector: React.FC<PropType> = ({
         style={{ marginTop: "20px" }}
       >
         {!isStarted ? (
-          <button
-            onClick={startDetection}
-            disabled={loading || !modelsLoaded}
-            style={{
-              backgroundColor: loading || !modelsLoaded ? "#cccccc" : "#4CAF50",
-              color: "white",
-              padding: "10px 20px",
-              border: "none",
-              borderRadius: "4px",
-              cursor: loading || !modelsLoaded ? "not-allowed" : "pointer",
-            }}
+          <Button
+            onPress={startDetection}
+            isDisabled={loading || !modelsLoaded}
+            color="primary"
           >
             {loading ? "Loading..." : "Start Liveness Check"}
-          </button>
+          </Button>
         ) : (
           <button
             onClick={stopCamera}

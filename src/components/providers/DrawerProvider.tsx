@@ -6,6 +6,8 @@ import EditProfileDrawer from "../core/profile/editprofile/EditProfileDrawer";
 import { useEditProfile } from "@/store/editProfile";
 import { useSendOrDepositStore } from "@/store/sendOrDepositStore";
 import { useUtilityStore } from "@/store/utilityStore";
+import SwapCurrencyDrawer from "../core/swap-currency/SwapCurrencyDrawer";
+import { useSwapCurrencyStore } from "@/store/swapCurrencyStore";
 
 const DrawerProvider = () => {
   const {
@@ -15,6 +17,7 @@ const DrawerProvider = () => {
   const editProfileOpen = useEditProfile((state) => state.data.isOpen);
   const sendOrDepositOpen = useSendOrDepositStore((state) => state.isOpen);
   const utilityOpen = useUtilityStore((state) => state.isOpen);
+  const swapCurrencyOpen = useSwapCurrencyStore((state) => state.data.isOpen);
 
   return (
     <>
@@ -27,6 +30,8 @@ const DrawerProvider = () => {
       {editProfileOpen && <EditProfileDrawer />}
 
       {kycDetailOpen && <ViewKycDetailDrawer />}
+
+      {swapCurrencyOpen && <SwapCurrencyDrawer />}
     </>
   );
 };

@@ -4,7 +4,7 @@ import { TbLayoutDashboardFilled } from "react-icons/tb";
 import { IoWallet } from "react-icons/io5";
 import { IoWalletOutline } from "react-icons/io5";
 
-import { AiOutlineLogout } from "react-icons/ai";
+import { AiOutlineLogout, AiOutlineTransaction } from "react-icons/ai";
 
 import { IconType } from "react-icons";
 import { MdApproval } from "react-icons/md";
@@ -26,15 +26,22 @@ export type MenuType = {
 
 export const topMenus: MenuType[] = [
   {
-    path: "",
+    path: "/p/dashboard",
     name: "Dashboard",
     defaultIcon: LuLayoutDashboard,
     activeIcon: TbLayoutDashboardFilled,
     active: true,
   },
   {
-    path: "",
+    path: "/p/transaction",
     name: "Transaction",
+    defaultIcon: AiOutlineTransaction,
+    activeIcon: AiOutlineTransaction,
+    active: false,
+  },
+  {
+    path: "/p/wallet",
+    name: "Wallets",
     defaultIcon: IoWalletOutline,
     activeIcon: IoWallet,
     active: false,
