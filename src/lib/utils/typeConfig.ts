@@ -118,3 +118,16 @@ export interface TransactionDataType {
   updated_at: string;
   user: string;
 }
+
+export interface Wallet {
+  balance: number;
+  wallet_id: string;
+  usd_balance: string;
+  eur_balance: string;
+  currency: CurrencyType;
+  is_active: boolean;
+  date_created: string;
+  updated_at: string;
+  user: string;
+  // add other properties if needed
+}

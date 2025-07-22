@@ -54,7 +54,7 @@ const UtilitySection = () => {
           title: "text-base font-medium",
         }}
       />
-      <div className="flex gap-8 lg:gap-3 lg:px-0 px-5">
+      <div className="flex flex-wrap gap-8 lg:gap-6 lg:px-0 px-5">
         {utilities?.map((it, index) => (
           <div
             key={index + "_____avatar"}
@@ -75,7 +75,7 @@ const UtilitySection = () => {
                 fontWeight: 600,
               }}
             />
-            <p className="text-sm">{it.name}</p>
+            <p className="text-sm mt-1">{it.name}</p>
           </div>
         ))}
       </div>

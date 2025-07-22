@@ -152,6 +152,7 @@ const TransactionTable = () => {
           isLoading={isloadingTransaction}
           loadingContent={<Spinner label="Loading..." />}
           items={transactionData}
+          emptyContent={<div>Empty Transaction</div>}
         >
           {(rowData) => (
             <TableRow key={rowData.id}>

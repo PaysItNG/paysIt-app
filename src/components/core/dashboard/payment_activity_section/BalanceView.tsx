@@ -2,12 +2,8 @@
 
 import { useGetTransactions } from "@/api/transactions";
 import { formatCurrency } from "@/lib/utils/formatCurrency";
+import { Wallet } from "@/lib/utils/typeConfig";
 import { GoArrowUpRight } from "react-icons/go";
-
-type Wallet = {
-  balance: number;
-  // add other properties if needed
-};
 
 const BalanceView = () => {
   const { data } = useGetTransactions({});

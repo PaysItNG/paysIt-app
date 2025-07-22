@@ -253,7 +253,9 @@ const Login = () => {
             </div>
           </form>
           <div className="flex gap-1 justify-center my-3 items-center w-50">
-            <span>OR</span>
+            <hr />
+            <span>or</span>
+            <hr />
           </div>
           <div>
             <GoogleAuthProviderButton

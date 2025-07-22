@@ -24,4 +24,7 @@ export const API_ROUTE = {
 
   //transactions
   get_transactions: "/transactions/",
+
+  //wallet apis
+  swap_currency: "wallet/swap/currencies/",
 };

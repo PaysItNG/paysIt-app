@@ -16,7 +16,7 @@ const CardInfoSectionView = () => {
         />
         <AddCardButton />
       </div>
-      <div className="mt-5 space-y-5 md:flex md:gap-5 md:space-y-0 lg:block flex-wrap w-full">
+      <div className="mt-5 space-y-5 md:flex md:gap-5 md:space-y-4 lg:block flex-wrap w-full">
         <div className="w-full">
           <MasterCard balance={0} cardNo="123456789392" expiryDate={"09/26"} />
         </div>
