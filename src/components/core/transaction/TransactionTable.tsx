@@ -22,17 +22,7 @@ import { FaArrowTrendDown, FaArrowTrendUp } from "react-icons/fa6";
 
 type TableColumnType = {
   name: string;
-  selector:
-    | "payment_type"
-    | "date"
-    | "reference_id"
-    | "transaction_type"
-    | "description"
-    | "user"
-    | "sender"
-    | "amount"
-    | "status"
-    | "actions";
+  selector?: string | keyof TransactionDataType;
   isCurrency?: boolean;
   isDate?: boolean;
   minWidth?: string;
@@ -50,7 +40,7 @@ const tableColumns: TableColumnType[] = [
   { name: "", selector: "actions", isCurrency: false },
 ];
 
-const statusColor: Record<string, string> = {
+const statusColor: Record<string, "success" | "danger"> = {
   completed: "success",
   pending: "danger",
 };
@@ -85,7 +75,7 @@ const TransactionTable = () => {
       if (type === "credit") {
         return <FaArrowTrendUp size={20} />;
       }
-    }, []);
+    }, [type]);
 
     return (
       <div
@@ -169,7 +159,7 @@ const TransactionTable = () => {
                   ) : column.selector === "status" ? (
                     <Chip
                       color={
-                        statusColor[rowData.status as "success" | "danger"]
+                        statusColor[rowData.status as keyof typeof statusColor]
                       }
                       variant="light"
                       className="capitalize"
@@ -180,9 +170,12 @@ const TransactionTable = () => {
                     dayjs(rowData.created_at).format("DD MMM YY") +
                     dayjs(rowData.created_at).format("hh:mmA")
                   ) : column.isCurrency ? (
-                    formatCurrency(rowData[column.selector])
+                    formatCurrency(
+                      rowData[column.selector as keyof TransactionDataType] ??
+                        ""
+                    )
                   ) : (
-                    rowData[column.selector]
+                    rowData[column.selector as keyof TransactionDataType] ?? ""
                   )}
                 </TableCell>
               ))}

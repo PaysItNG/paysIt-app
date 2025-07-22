@@ -11,18 +11,18 @@ import clsx from "clsx";
 
 const { Dragger } = Upload;
 
-interface FormData {
-  file: File | null; // Add the 'file' property
-  image: string; // Add the 'image' property
+interface UploadImageFormData {
+  file: File | string | null;
+  image: string;
   selfie?: string | null;
   [key: string]: unknown;
 }
 
 interface PropType {
-  setValue: UseFormSetValue<FormData>; // Correctly type setValue
-  getValues: UseFormGetValues<FormData>;
+  setValue: UseFormSetValue<UploadImageFormData>;
+  getValues: UseFormGetValues<UploadImageFormData>;
   label?: string;
-  classNames: {
+  classNames?: {
     base?: string | string[];
   };
   isProfile?: boolean;

@@ -33,7 +33,7 @@ const QuickTransfer = () => {
           <div key={index + "_____avatar"}>
             <Avatar
               classNames={{
-                base: "p-2.5",
+                base: "p-",
                 img: "rounded-full",
                 icon: "rounded-full",
               }}

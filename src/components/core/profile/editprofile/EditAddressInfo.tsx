@@ -17,8 +17,8 @@ type FormType = {
   city?: string;
   address?: string;
   utility_bill?: string;
-  file?: string;
-  image?: string;
+  file: string | File | null;
+  image: string;
 };
 
 const EditAddressInfo = () => {
@@ -42,7 +42,7 @@ const EditAddressInfo = () => {
       city: "",
       address: "",
       utility_bill: "",
-      file: "",
+      file: null,
       image: "",
     },
   });

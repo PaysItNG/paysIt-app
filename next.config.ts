@@ -25,6 +25,7 @@ const nextConfig: NextConfig = {
     "@tensorflow/tfjs-core",
     "react-haiku",
   ],
+
   webpack: (config, { isServer }) => {
     if (!isServer) {
       config.resolve.fallback = {

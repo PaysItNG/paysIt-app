@@ -107,7 +107,7 @@ export const MasterCard = ({
         </tspan>
       </text>
       <text
-        opacity="0.54"
+        opacity="3.54"
         fill="white"
         xmlSpace="preserve"
         fontFamily="Cera Pro"

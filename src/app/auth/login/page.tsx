@@ -1,5 +1,5 @@
 "use client";
-import { Checkbox, Divider } from "@heroui/react";
+import { Checkbox } from "@heroui/react";
 import { Controller, FieldValues, useForm } from "react-hook-form";
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";

@@ -6,20 +6,19 @@ import UploadImage from "@/components/shared/ui/UploadImage";
 import { useProfile } from "@/hooks/use-profile";
 import { filePrefix } from "@/lib/utils/filePrefix";
 import { notifier } from "@/lib/utils/notifier";
+import { UploadableImageFormType } from "@/lib/utils/typeConfig";
 import { useEditProfile } from "@/store/editProfile";
 import { AxiosError } from "axios";
 import React, { useEffect } from "react";
 import { Controller, FieldValues, useForm } from "react-hook-form";
 
-interface FormData {
-  file: File | null;
-  image: string;
+type PersonalFormType = UploadableImageFormType & {
   email: string;
   first_name: string;
   last_name: string;
   phone_number: string;
   bvn?: string | number | null;
-}
+};
 
 const EditPersonalInfo = () => {
   const { closeDrawer } = useEditProfile();
@@ -36,7 +35,7 @@ const EditPersonalInfo = () => {
     setValue,
     control,
     reset,
-  } = useForm<FormData>({
+  } = useForm<PersonalFormType>({
     defaultValues: {
       email: "",
       first_name: "",
@@ -56,7 +55,7 @@ const EditPersonalInfo = () => {
         image: profileData.profile_picture
           ? filePrefix + profileData.profile_picture
           : "",
-        file: null,
+        file: "",
       });
     }
   }, [profileData, reset]);
@@ -175,6 +174,7 @@ const EditPersonalInfo = () => {
               <Input
                 label="BVN"
                 variant="bordered"
+                type="number"
                 {...field}
                 errorMessage={errors?.bvn?.message}
                 isInvalid={!!errors?.bvn?.message}
@@ -182,6 +182,7 @@ const EditPersonalInfo = () => {
                   inputWrapper: "px-4 shadow-none border-1",
                 }}
                 isDisabled={isUpdatingProfile}
+                value={(field.value as string) ?? null}
               />
             )}
           />

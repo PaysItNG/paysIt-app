@@ -131,3 +131,10 @@ export interface Wallet {
   user: string;
   // add other properties if needed
 }
+
+export interface UploadableImageFormType {
+  file: File | string | null;
+  image: string;
+  selfie?: string | null;
+  [key: string]: unknown;
+}

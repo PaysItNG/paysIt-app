@@ -1,7 +1,6 @@
 "use client";
 import React, { useState } from "react";
 import { BiCreditCard, BiMinus, BiPlus, BiSend } from "react-icons/bi";
-import { GiBanknote } from "react-icons/gi";
 import { HiEye, HiEyeOff } from "react-icons/hi";
 import { LuArrowUpDown } from "react-icons/lu";
 import WalletSelector from "./CurrenyTab";
