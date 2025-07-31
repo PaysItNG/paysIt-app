@@ -138,3 +138,9 @@ export interface UploadableImageFormType {
   selfie?: string | null;
   [key: string]: unknown;
 }
+
+export type ScrollPositionType = {
+  x: number;
+  y: number;
+  [key: string]: number | undefined;
+};

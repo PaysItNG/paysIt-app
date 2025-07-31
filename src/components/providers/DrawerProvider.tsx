@@ -8,6 +8,8 @@ import { useSendOrDepositStore } from "@/store/sendOrDepositStore";
 import { useUtilityStore } from "@/store/utilityStore";
 import SwapCurrencyDrawer from "../core/swap-currency/SwapCurrencyDrawer";
 import { useSwapCurrencyStore } from "@/store/swapCurrencyStore";
+import NewVirtualCardDrawer from "../core/dashboard/card_info_section/add_new_card/NewVirtualCardDrawer";
+import { useCreateVirtualCardStore } from "@/store/createVirtualCardStore";
 
 const DrawerProvider = () => {
   const {
@@ -18,6 +20,9 @@ const DrawerProvider = () => {
   const sendOrDepositOpen = useSendOrDepositStore((state) => state.isOpen);
   const utilityOpen = useUtilityStore((state) => state.isOpen);
   const swapCurrencyOpen = useSwapCurrencyStore((state) => state.data.isOpen);
+  const createVirtualCardOpen = useCreateVirtualCardStore(
+    (state) => state.data.isOpen
+  );
 
   return (
     <>
@@ -32,6 +37,8 @@ const DrawerProvider = () => {
       {kycDetailOpen && <ViewKycDetailDrawer />}
 
       {swapCurrencyOpen && <SwapCurrencyDrawer />}
+
+      {createVirtualCardOpen && <NewVirtualCardDrawer />}
     </>
   );
 };

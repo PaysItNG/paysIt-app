@@ -9,6 +9,7 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "img.freepik.com" },
       { protocol: "https", hostname: "res.cloudinary.com" },
       { protocol: "https", hostname: "cdn.worldvectorlogo.com" },
+      { protocol: "https", hostname: "encrypted-tbn1.gstatic.com" },
     ],
   },
   typescript: {

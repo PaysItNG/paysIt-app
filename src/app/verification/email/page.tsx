@@ -4,7 +4,6 @@ import { InputOtp, Spinner } from "@heroui/react";
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { Suspense } from "react";
 import { Controller, useForm } from "react-hook-form";
-import logo from "@/assets/images/paysIt_logo.jpeg";
 import Image from "next/image";
 import { useActivateAccount } from "@/api/auth/verification";
 import { notifier } from "@/lib/utils/notifier";
@@ -70,7 +69,12 @@ const EmailVerificationContent = () => {
           className="bg-white rounded-2xl p-8 flex items-center justify-center flex-col gap-y-3 m-4 w-full max-w-lg shadow"
         >
           <div>
-            <Image src={logo} alt="logo" height={70} width={70} />
+            <Image
+              src={"/assets/images/paysIt_logo.jpeg"}
+              alt="logo"
+              height={70}
+              width={70}
+            />
           </div>
           <div className="space-y-1">
             <h2 className="text-xl md:text-2xl font-medium text-center">

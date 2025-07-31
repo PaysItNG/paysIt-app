@@ -27,4 +27,7 @@ export const API_ROUTE = {
 
   //wallet apis
   swap_currency: "wallet/swap/currencies/",
+
+  //virtual-card apis
+  create_virtual_card: "/virtualcard/create/",
 };

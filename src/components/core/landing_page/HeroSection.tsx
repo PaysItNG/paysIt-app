@@ -1,8 +1,9 @@
 "use client";
-
+import { APP_ROUTES } from "@/lib/routes";
+import { Button, Image } from "@heroui/react";
+import { useRouter } from "next/navigation";
 import { BiCheckCircle } from "react-icons/bi";
-import Image from "next/image";
-import { Button, Progress } from "@heroui/react";
+import { motion } from "framer-motion";
 
 type HeroNotificationPropType = {
   avatar: string;
@@ -17,95 +18,156 @@ const HeroNotification = ({
 }: HeroNotificationPropType) => (
   <div
     //   absolute -left-16 bottom-1/4 bg-white p-4 rounded-xl shadow-lg animate-float-delayed
-    className={`absolute z-40  hidden  bg-white rounded-lg shadow-xl p-3 sm:flex items-center gap-3 animate-float-delayed ${className}`}
+    className={`absolute z-40  hidden  bg-white rounded-lg shadow-xl p-2 sm:flex items-center gap-3 animate-float-delayed ${className}`}
   >
-    <Image
-      src={avatar}
-      alt="User avatar"
-      width={40}
-      height={50}
-      className="w-8 h-8 rounded-full"
-    />
+    <Image src={avatar} alt="User avatar" className="w-8 h-8 rounded-full" />
     <span className="text-sm text-gray-700">{message}</span>
     <BiCheckCircle className="w-4 h-4 text-green-500" />
   </div>
 );
 
-const HeroSection = () => (
-  <section className="pt-32 pb-20 px-4 overflow-hidden relative bg-white pattern-2">
-    <div className="absolute inset-0 top-72 bg-gradient-to-b from-blue-50 to-red-500 -z-10"></div>
+const HeroSection = () => {
+  const router = useRouter();
 
-    {/* Floating Notifications */}
-    <HeroNotification
-      avatar="https://static.vecteezy.com/system/resources/previews/002/002/403/non_2x/man-with-beard-avatar-character-isolated-icon-free-vector.jpg"
-      message="Subscription processed successfully"
-      className="left-20 md:top-72 top-0"
-    />
-    <HeroNotification
-      avatar="https://static.vecteezy.com/system/resources/previews/002/002/403/non_2x/man-with-beard-avatar-character-isolated-icon-free-vector.jpg"
-      message="Payment successfull"
-      className="right-20 md:top-60 top-0"
-    />
+  const handleStartHere = () => {
+    router.push(APP_ROUTES.SIGNUP);
+  };
 
-    <div className="container mx-auto max-w-7xl relative">
-      {/* Progress Circle */}
-      <div className="absolute -right-20 top-0 w-40 h-40 bg-white/80 backdrop-blur-sm rounded-full p-4 shadow-lg animate-float hidden md:block">
-        <div className="w-full h-full relative ">
-          <Progress
-            classNames={{
-              base: "base-classes",
-              labelWrapper: "labelWrapper-classes",
-              label: "label-classes",
-              value: "value-classes",
-              track: "track-classes",
-              indicator: "bg-btnColor/60",
+  return (
+    <div className="pt-44 pb-20 overflow-hidde relative z-10">
+      {/* Floating Notifications */}
+
+      <div className="relative grid grid-cols-3">
+        <div className="col-span-2 space-y-6">
+          <div className="space-y-3">
+            <h2 className="text-6xl lg:text-8xl font-bold text-white uppercas">
+              Seamless Subscriptions
+            </h2>
+            <h2 className="text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-green-500 to-cyan-500">
+              And Faster Payments
+            </h2>
+          </div>
+          <div className="w-full max-w-2xl">
+            <hr className="h-[1px] border-green-400 bg-green-300" />
+          </div>
+          <h3 className="text-gray-200 text-lg">
+            Connecting banks and users for secure, automated transactions.
+          </h3>
+          <div>
+            <Button
+              size="lg"
+              variant="bordered"
+              className="max-w-40 text-white"
+              onPress={handleStartHere}
+            >
+              Start Here
+            </Button>
+          </div>
+        </div>
+
+        <div className="relative">
+          <motion.div
+            animate={{
+              y: [0, -10, 0],
+              rotateY: [0, 5, 0, -5, 0],
             }}
-            value={37}
-            size="lg"
-            className="rounded-full"
-          />
-          <div className="absolute inset-0 flex flex-col items-center justify-center">
-            <div className="text-2xl font-bold">37%</div>
-            <div className="text-xs text-gray-500">Completion</div>
-          </div>
+            transition={{
+              y: {
+                duration: 4,
+                repeat: Infinity,
+                ease: "easeInOut",
+              },
+              rotateY: {
+                duration: 4,
+                repeat: Infinity,
+                ease: "easeInOut",
+              },
+            }}
+            // Hover animations
+            whileHover={{
+              scale: 1.05,
+              rotateY: 15,
+              rotateX: 5,
+              transition: {
+                rotateX: {
+                  duration: 0.3,
+                  ease: "easeOut",
+                },
+                rotateY: {
+                  duration: 0.3,
+                  ease: "easeOut",
+                },
+              },
+            }}
+            // Add perspective to parent for 3D effect
+            style={{
+              transformStyle: "preserve-3d",
+              perspective: 1000,
+            }}
+            className="relative flex justify-start -mt-[5.5rem] -ml-[6rem] items-center h-full"
+          >
+            <motion.div
+              initial={{ opacity: 0, x: -100, scale: 0.8 }}
+              animate={{ opacity: 1, x: 0, scale: 1 }}
+              transition={{ delay: 0.5, duration: 0.6, ease: "easeOut" }}
+            >
+              <HeroNotification
+                avatar="https://static.vecteezy.com/system/resources/previews/002/002/403/non_2x/man-with-beard-avatar-character-isolated-icon-free-vector.jpg"
+                message="Subscription processed successfully"
+                className="top-24 left-0 -ml-32"
+              />
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, x: 100, scale: 1 }}
+              animate={{ opacity: 1, x: 0, scale: 1 }}
+              transition={{ delay: 1, duration: 0.6, ease: "easeOut" }}
+              className="z-20"
+            >
+              <HeroNotification
+                avatar="https://static.vecteezy.com/system/resources/previews/002/002/403/non_2x/man-with-beard-avatar-character-isolated-icon-free-vector.jpg"
+                message="Payment successfull"
+                className="right-0 bottom-[20%]"
+              />
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              whileHover={{
+                y: -20,
+                rotateX: 10,
+                rotateY: -10,
+                transition: {
+                  duration: 0.4,
+                  ease: "easeOut",
+                },
+              }}
+              className="relative"
+            >
+              <Image
+                src={"/assets/images/dashboard_phone_mockup.png"}
+                // src="/assets/images/dashbord_portrait_phone.png"
+                alt="dashboard phone mockup"
+                className="object-cover max-h-[750px] w-auto"
+              />
+
+              <motion.div
+                initial={{ opacity: 0, x: 100, scale: 1 }}
+                animate={{ opacity: 1, x: 0, scale: 1 }}
+                transition={{ delay: 1, duration: 0.6, ease: "easeOut" }}
+              >
+                <HeroNotification
+                  avatar="https://static.vecteezy.com/system/resources/previews/002/002/403/non_2x/man-with-beard-avatar-character-isolated-icon-free-vector.jpg"
+                  message="Payment successfull"
+                  className="-right-16 bottom-[23%]"
+                />
+              </motion.div>
+            </motion.div>
+          </motion.div>
         </div>
-      </div>
-
-      <div className="text-center max-w-4xl mx-auto mb-16">
-        {/* <Badge className="mb-6 px-6 py-2 text-sm" variant="flat">
-            Trusted by 10,000+ companies worldwide
-          </Badge> */}
-        <h1 className="text-5xl md:text-7xl font-bold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-gray-900 via-btnColor to-gray-900">
-          Seamless Subscriptions and Faster Payments
-        </h1>
-        <p className="text-xl text-gray-700 mb-10 max-w-2xl mx-auto">
-          Connecting banks and users for secure, automated transactions.
-        </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <Button size="lg" variant="bordered" className="max-w-40">
-            Start Here
-          </Button>
-        </div>
-      </div>
-
-      {/* Dashboard Preview */}
-      <div className="relative">
-        {/* <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-2xl rounded-2xl overflow-hidden">
-              <CardBody>
-                      <img src={HeroImage} alt="" />
-              </CardBody>
-          </Card> */}
-
-        {/* Floating Elements */}
-        {/* <div className="absolute -left-8 top-1/2 transform -translate-y-1/2 bg-white rounded-lg shadow-lg p-4 animate-float">
-            <Users className="w-6 h-6 text-blue-500" />
-          </div>
-          <div className="absolute -right-8 top-1/3 transform -translate-y-1/2 bg-white rounded-lg shadow-lg p-4 animate-float-delayed">
-            <CgLock className="w-6 h-6 text-green-500" />
-          </div> */}
       </div>
     </div>
-  </section>
-);
+  );
+};
 
 export default HeroSection;

@@ -1,8 +1,8 @@
 const KeyFeaturesView = () => {
   return (
     <>
-      <section className="pb-10 pt-8 pattern-6">
-        <div className="mx-auto max-w-screen-xl space-y-8 px-4 py-16 sm:px-6 lg:space-y-16 lg:px-8">
+      <section className="pb-5">
+        <div className="mx-auto max-w-screen-xl space-y-8 px-4 py-8 sm:px-6 lg:space-y-16 lg:px-0">
           <div className="flex flex-col gap-10 px-4 py-10">
             <div className="flex flex-col gap-4">
               <h1 className="text-[#0d141c] tracking-light text-[32px] font-bold leading-tight @[480px]:text-4xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em] max-w-[720px]">
@@ -18,13 +18,13 @@ const KeyFeaturesView = () => {
                 <div
                   className="text-[#0d141c]"
                   data-icon="CreditCard"
-                  data-size="24px"
+                  data-size="30px"
                   data-weight="regular"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    width="24px"
-                    height="24px"
+                    width="30px"
+                    height="30px"
                     fill="currentColor"
                     viewBox="0 0 256 256"
                   >
@@ -35,7 +35,7 @@ const KeyFeaturesView = () => {
                   <h2 className="text-[#0d141c] text-base font-bold leading-tight">
                     Bill Payment
                   </h2>
-                  <p className="text-[#49739c] text-sm font-normal leading-normal">
+                  <p className="text-[#606a73] text-sm font-normal leading-normal">
                     Pay all your bills in one place, from utilities to rent.
                   </p>
                 </div>
@@ -44,13 +44,13 @@ const KeyFeaturesView = () => {
                 <div
                   className="text-[#0d141c]"
                   data-icon="CellSignalHigh"
-                  data-size="24px"
+                  data-size="30px"
                   data-weight="regular"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    width="24px"
-                    height="24px"
+                    width="30px"
+                    height="30px"
                     fill="currentColor"
                     viewBox="0 0 256 256"
                   >
@@ -61,7 +61,7 @@ const KeyFeaturesView = () => {
                   <h2 className="text-[#0d141c] text-base font-bold leading-tight">
                     Airtime Top-Up
                   </h2>
-                  <p className="text-[#49739c] text-sm font-normal leading-normal">
+                  <p className="text-[#606a73] text-sm font-normal leading-normal">
                     Quickly top-up your airtime with just a few clicks.
                   </p>
                 </div>
@@ -70,13 +70,13 @@ const KeyFeaturesView = () => {
                 <div
                   className="text-[#0d141c]"
                   data-icon="WifiHigh"
-                  data-size="24px"
+                  data-size="30px"
                   data-weight="regular"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    width="24px"
-                    height="24px"
+                    width="30px"
+                    height="30px"
                     fill="currentColor"
                     viewBox="0 0 256 256"
                   >
@@ -87,7 +87,7 @@ const KeyFeaturesView = () => {
                   <h2 className="text-[#0d141c] text-base font-bold leading-tight">
                     Data Purchase
                   </h2>
-                  <p className="text-[#49739c] text-sm font-normal leading-normal">
+                  <p className="text-[#606a73] text-sm font-normal leading-normal">
                     Purchase data bundles for your mobile devices.
                   </p>
                 </div>
@@ -96,13 +96,13 @@ const KeyFeaturesView = () => {
                 <div
                   className="text-[#0d141c]"
                   data-icon="ListBullets"
-                  data-size="24px"
+                  data-size="30px"
                   data-weight="regular"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    width="24px"
-                    height="24px"
+                    width="30px"
+                    height="30px"
                     fill="currentColor"
                     viewBox="0 0 256 256"
                   >
@@ -113,7 +113,7 @@ const KeyFeaturesView = () => {
                   <h2 className="text-[#0d141c] text-base font-bold leading-tight">
                     Subscription Management
                   </h2>
-                  <p className="text-[#49739c] text-sm font-normal leading-normal">
+                  <p className="text-[#606a73] text-sm font-normal leading-normal">
                     Manage all your subscriptions and never miss a payment.
                   </p>
                 </div>

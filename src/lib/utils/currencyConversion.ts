@@ -16,8 +16,9 @@ export const exchangeConversion = async (
   toCurrency: string,
   amount: number
 ) => {
+  const accessKey = process.env.NEXT_PUBLIC_CONVERSION_ACCESS_KEY;
   const params = new URLSearchParams({
-    access_key: "3263fca29bbc7eae94c823b8ee2cb213",
+    access_key: accessKey as string,
     from: fromCurrency,
     to: toCurrency,
     amount: amount.toString(),

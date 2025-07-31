@@ -47,14 +47,14 @@ const UtilitySection = () => {
   };
 
   return (
-    <div className="space-y-5 lg:block flex flex-col items-center">
+    <div className="space-y-2 lg:block">
       <Title
         title="Quick Top-up"
         classNames={{
           title: "text-base font-medium",
         }}
       />
-      <div className="flex flex-wrap gap-8 lg:gap-6 lg:px-0 px-5">
+      <div className="flex flex-wrap gap-8 lg:gap-6 px-5 lg:px-0">
         {utilities?.map((it, index) => (
           <div
             key={index + "_____avatar"}

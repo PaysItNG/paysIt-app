@@ -33,8 +33,8 @@ const WhyChooseUs = () => {
 
   return (
     <main>
-      <div className="bg-[#F5F7FA] w-full">
-        <div className="mx-auto max-w-screen-xl grid grid-cols-1 lg:grid-cols-3 gap-8 px-5 md:px-8 lg:px-12 py-14">
+      <div className="bg-[#F5F7FA]">
+        <div className="mx-auto max-w-screen-xl grid grid-cols-1 lg:grid-cols-3 gap-10 px-5 md:px-8 lg:px-0 py-16 ">
           <div className="relative h-full flex items-center">
             <div className="absolute inset-0 bg-gradient-to-r from-red/50 via-black/30 to-slate-500 rounded-lg" />
             <Image

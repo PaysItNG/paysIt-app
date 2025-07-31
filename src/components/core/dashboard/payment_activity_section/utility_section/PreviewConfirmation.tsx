@@ -4,7 +4,6 @@ import { Avatar } from "@heroui/react";
 import Image from "next/image";
 import React from "react";
 import { IoArrowBackOutline } from "react-icons/io5";
-import logo from "@/assets/images/paysIt_logo.jpeg";
 import { useUtilityStore } from "@/store/utilityStore";
 import { DataPlanType, PreviewDataType } from "@/lib/utils/typeConfig";
 import { catchErrFunc } from "@/lib/utils/catchErrFunc";
@@ -102,7 +101,7 @@ const PreviewConfirmation = () => {
         <div className="w-full max-w-lg md:px-8 space-y-4">
           <div className="flex justify-center mb-4">
             <Image
-              src={logo}
+              src={"/assets/images/paysIt_logo.jpeg"}
               alt="paysIt logo"
               width={60}
               height={60}

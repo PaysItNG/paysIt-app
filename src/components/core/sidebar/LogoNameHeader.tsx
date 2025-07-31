@@ -1,5 +1,4 @@
 import Image from "next/image";
-import paysIt_logo from "@/assets/images/paysIt_logo.jpeg";
 import React from "react";
 import clsx from "clsx";
 import { motion } from "framer-motion";
@@ -29,7 +28,12 @@ const LogoNameHeader: React.FC<PropType> = ({ sideBarOpen }) => {
         }}
         className="w-10 h-10"
       >
-        <Image src={paysIt_logo} alt="logo" width={50} height={50} />
+        <Image
+          src={"/assets/images/paysIt_logo.jpeg"}
+          alt="logo"
+          width={50}
+          height={50}
+        />
       </motion.div>
 
       {/* Animated Text */}

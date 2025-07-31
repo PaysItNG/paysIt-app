@@ -179,13 +179,13 @@ const MyWalletView = () => {
           {/* Action Buttons */}
           <div className="flex justify-between flex-wrap gap-4 mb-6">
             <button
-              className="bg-gradient-to-r w-full xl:w-fit from-green-600 to-green-700 hover:from-green-500 hover:to-green-600 text-white font-semibold py-4 px-6 rounded-2xl transform transition-all duration-300 hover:scale-105 active:scale-95 shadow-lg flex items-center justify-center space-x-2"
+              className="bg-gradient-to-r w-full xl:w-fit from-green-600 to-green-700 hover:from-green-500 hover:to-green-600 text-white font-semibold py-4 px-6 rounded-2xl transform transition-all duration-300 hover:scale-104 active:scale-95 shadow-lg flex items-center justify-center space-x-2"
               onClick={handleSwapCurrency}
             >
               <LuArrowUpDown className="w-5 h-5" />
               <span>Swap Currency</span>
             </button>
-            <button className="bg-gradient-to-r w-full xl:w-fit from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white font-semibold py-4 px-6 rounded-2xl transform transition-all duration-300 hover:scale-105 active:scale-95 shadow-lg flex items-center justify-center space-x-2">
+            <button className="bg-gradient-to-r w-full xl:w-fit from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white font-semibold py-4 px-6 rounded-2xl transform transition-all duration-300 hover:scale-104 active:scale-95 shadow-lg flex items-center justify-center space-x-2">
               <BiSend className="w-5 h-5" />
               <span>Bank Transfer</span>
             </button>

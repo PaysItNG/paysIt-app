@@ -21,19 +21,19 @@ const QuickTransfer = () => {
   }, []);
 
   return (
-    <div className="space-y-2 lg:block flex flex-col items-center">
+    <div className="space-y-2 lg:block">
       <Title
         title="Quick transfer"
         classNames={{
           title: "text-base font-medium",
         }}
       />
-      <div className="flex flex-wrap gap-8 lg:gap-6 lg:px-0 px-5">
+      <div className="flex flex-wrap gap-8 lg:gap-6 px-5 lg:px-0">
         {[1, 2, 3].map((it, index) => (
-          <div key={index + "_____avatar"}>
+          <div key={index + "_____avatar"} className="cursor-pointer">
             <Avatar
               classNames={{
-                base: "p-",
+                base: "p-1",
                 img: "rounded-full",
                 icon: "rounded-full",
               }}
@@ -47,7 +47,7 @@ const QuickTransfer = () => {
             />
           </div>
         ))}
-        <div className="">
+        <div className="cursor-pointer">
           <Avatar
             classNames={{
               base: "p-3 border-2 border-dashed border-default-200 bg-transparent cursor-pointer",
