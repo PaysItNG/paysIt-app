@@ -1,11 +1,11 @@
-import { Image } from "@heroui/react";
 import React from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 const Section2View = () => {
   return (
     <>
-      <div className="bg-primary pattern1 relative min-h-[600px]">
+      <div className="bg-primary pattern-1 relative min-h-[600px]">
         <div className="h-10 w-10 bg-white/5 absolute left-10 top-24 rounded-full"></div>
         <div className="h-16 w-16 bg-white/5 absolute left-32 bottom-24 rounded-full"></div>
         <div className="h-20 w-20 bg-white/15 absolute left-1/3 top-8 rounded-full"></div>
@@ -24,8 +24,10 @@ const Section2View = () => {
                 <div className="-mt-[16rem] ml-32 h-96 w-96 -rotate-12 shadow rounded-3xl bg-primary p-2">
                   <Image
                     src="https://img.freepik.com/free-vector/top-up-credit-concept-illustration_114360-7244.jpg?ga=GA1.1.67237897.1738672990&semt=ais_hybrid&w=740"
+                    height={320}
+                    width={320}
                     alt="payment-mockup"
-                    className="w-[100%] mx-auto"
+                    className="w-[100%] mx-auto rounded-2xl"
                   />
                 </div>
               </div>

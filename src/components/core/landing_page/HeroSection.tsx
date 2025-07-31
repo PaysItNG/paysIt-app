@@ -1,9 +1,10 @@
 "use client";
 import { APP_ROUTES } from "@/lib/routes";
-import { Button, Image } from "@heroui/react";
 import { useRouter } from "next/navigation";
 import { BiCheckCircle } from "react-icons/bi";
 import { motion } from "framer-motion";
+import Image from "next/image";
+import Button from "@/components/shared/ui/Button";
 
 type HeroNotificationPropType = {
   avatar: string;
@@ -20,7 +21,13 @@ const HeroNotification = ({
     //   absolute -left-16 bottom-1/4 bg-white p-4 rounded-xl shadow-lg animate-float-delayed
     className={`absolute z-40  hidden  bg-white rounded-lg shadow-xl p-2 sm:flex items-center gap-3 animate-float-delayed ${className}`}
   >
-    <Image src={avatar} alt="User avatar" className="w-8 h-8 rounded-full" />
+    <Image
+      src={avatar}
+      alt="User avatar"
+      width={40}
+      height={50}
+      className="w-8 h-8 rounded-full"
+    />
     <span className="text-sm text-gray-700">{message}</span>
     <BiCheckCircle className="w-4 h-4 text-green-500" />
   </div>
@@ -57,7 +64,7 @@ const HeroSection = () => {
             <Button
               size="lg"
               variant="bordered"
-              className="max-w-40 text-white"
+              className=" text-white"
               onPress={handleStartHere}
             >
               Start Here
@@ -126,7 +133,7 @@ const HeroSection = () => {
               <HeroNotification
                 avatar="https://static.vecteezy.com/system/resources/previews/002/002/403/non_2x/man-with-beard-avatar-character-isolated-icon-free-vector.jpg"
                 message="Payment successfull"
-                className="right-0 bottom-[20%]"
+                className="-right-6 bottom-[19%]"
               />
             </motion.div>
             <motion.div
@@ -144,12 +151,14 @@ const HeroSection = () => {
               }}
               className="relative"
             >
-              <Image
-                src={"/assets/images/dashboard_phone_mockup.png"}
-                // src="/assets/images/dashbord_portrait_phone.png"
-                alt="dashboard phone mockup"
-                className="object-cover max-h-[750px] w-auto"
-              />
+              <div className="w-[500px] h-[750px]">
+                <Image
+                  src={"/assets/images/dashboard_phone_mockup.png"}
+                  alt="dashboard phone mockup"
+                  fill
+                  className="object-contain"
+                />
+              </div>
 
               <motion.div
                 initial={{ opacity: 0, x: 100, scale: 1 }}
@@ -159,7 +168,7 @@ const HeroSection = () => {
                 <HeroNotification
                   avatar="https://static.vecteezy.com/system/resources/previews/002/002/403/non_2x/man-with-beard-avatar-character-isolated-icon-free-vector.jpg"
                   message="Payment successfull"
-                  className="-right-16 bottom-[23%]"
+                  className="-right-12 bottom-[22%]"
                 />
               </motion.div>
             </motion.div>

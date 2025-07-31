@@ -4,8 +4,8 @@ import { IoIosCloudDone } from "react-icons/io";
 import { GiArtificialIntelligence } from "react-icons/gi";
 import { FaUserCheck } from "react-icons/fa";
 import { RiLinksLine } from "react-icons/ri";
-import { Image } from "@heroui/react";
 import { ElementType } from "react";
+import Image from "next/image";
 
 const WhyChooseUs = () => {
   const reasons = [
@@ -40,6 +40,8 @@ const WhyChooseUs = () => {
             <Image
               src="https://img.freepik.com/premium-photo/marketing-research-agency-group-leader-pointing-out-business-statistics-data-tablet-african-american-business-man-informing-office-colleague-about-necessity-budget-cutting_482257-41515.jpg?ga=GA1.1.67237897.1738672990&semt=ais_hybrid"
               alt="Team collaborating on case management"
+              height={320}
+              width={320}
               className="w-full h-full object-cover rounded-lg shadow-xl"
             />
           </div>
