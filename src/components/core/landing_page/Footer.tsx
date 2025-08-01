@@ -14,6 +14,7 @@ const Footer = () => {
                     alt="paysIt logo"
                     width={70}
                     height={70}
+                    className="rounded-xl"
                   />
                 </div>
 

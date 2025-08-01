@@ -5,7 +5,7 @@ const KeyFeaturesView = () => {
         <div className="mx-auto max-w-screen-xl space-y-8 px-4 py-8 sm:px-6 lg:space-y-16 lg:px-0">
           <div className="flex flex-col gap-10 px-4 py-10">
             <div className="flex flex-col gap-4">
-              <h1 className="text-[#0d141c] tracking-light text-[32px] font-bold leading-tight @[480px]:text-4xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em] max-w-[720px]">
+              <h1 className="text-[#0d141c] tracking-light text-4xl font-bold leading-tight @[480px]:text-4xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em]">
                 Key Features
               </h1>
               <p className="text-[#0d141c] text-base font-normal leading-normal max-w-[720px]">
@@ -13,8 +13,13 @@ const KeyFeaturesView = () => {
                 life.
               </p>
             </div>
-            <div className="grid grid-cols-[repeat(auto-fit,minmax(158px,1fr))] gap-6 p-0">
-              <div className="flex flex-1 gap-3 rounded-lg border border-[#cedbe8] bg-slate-50 p-4 flex-col">
+            <div className="grid grid-cols-[repeat(auto-fit,minmax(158px,1fr))] gap-4 p-0">
+              <div className="relative flex flex-1 gap-3 rounded-2xl border border-[#cee8de] bg-green-500/10 p-6 flex-col">
+                <div className="absolute top-0 -right-8 h-full w-12 space-y-8 py-7">
+                  <div className="h-[10px] w-full rounded-full bg-white"></div>
+                  <div className="h-[10px] w-full rounded-full bg-white"></div>
+                  <div className="h-[10px] w-full rounded-full bg-white"></div>
+                </div>
                 <div
                   className="text-[#0d141c]"
                   data-icon="CreditCard"
@@ -40,7 +45,7 @@ const KeyFeaturesView = () => {
                   </p>
                 </div>
               </div>
-              <div className="flex flex-1 gap-3 rounded-lg border border-[#cedbe8] bg-slate-50 p-4 flex-col">
+              <div className="flex flex-1 gap-3 rounded-2xl border border-[#cedbe8] bg-green-500/10 p-6 flex-col">
                 <div
                   className="text-[#0d141c]"
                   data-icon="CellSignalHigh"
@@ -66,7 +71,12 @@ const KeyFeaturesView = () => {
                   </p>
                 </div>
               </div>
-              <div className="flex flex-1 gap-3 rounded-lg border border-[#cedbe8] bg-slate-50 p-4 flex-col">
+              <div className="relative flex flex-1 gap-3 rounded-2xl border border-[#cedbe8] bg-green-500/10 p-6 flex-col">
+                <div className="absolute top-0 -left-8 h-full w-12 space-y-8 py-7">
+                  <div className="h-[10px] w-full rounded-full bg-white"></div>
+                  <div className="h-[10px] w-full rounded-full bg-white"></div>
+                  <div className="h-[10px] w-full rounded-full bg-white"></div>
+                </div>
                 <div
                   className="text-[#0d141c]"
                   data-icon="WifiHigh"
@@ -92,7 +102,12 @@ const KeyFeaturesView = () => {
                   </p>
                 </div>
               </div>
-              <div className="flex flex-1 gap-3 rounded-lg border border-[#cedbe8] bg-slate-50 p-4 flex-col">
+              <div className="relative flex flex-1 gap-3 rounded-2xl border border-[#cedbe8] bg-green-500/10 p-6 flex-col">
+                <div className="absolute top-0 -left-8 h-full w-12 space-y-8 py-7">
+                  <div className="h-[10px] w-full rounded-full bg-white"></div>
+                  <div className="h-[10px] w-full rounded-full bg-white"></div>
+                  <div className="h-[10px] w-full rounded-full bg-white"></div>
+                </div>
                 <div
                   className="text-[#0d141c]"
                   data-icon="ListBullets"

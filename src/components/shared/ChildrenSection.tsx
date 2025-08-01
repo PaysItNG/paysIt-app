@@ -53,7 +53,7 @@ const ChildrenSection = ({
               animate="open"
               exit="closed"
               variants={backdropVariants}
-              className="fixed inset-0 top-[3.6rem] z-30 bg-black bg-opacity-50 lg:hidden"
+              className="fixed inset-0 top-[3.6rem] z-30 bg-black/70 lg:hidden"
               onClick={switchSidebar}
             />
           )}

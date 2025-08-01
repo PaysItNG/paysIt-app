@@ -1,10 +1,7 @@
 
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
-/* @tailwind base;
-@tailwind components;
-@tailwind utilities; */
+@import "tailwindcss";
+@plugin './hero.ts';
+@source '../../node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}';
 
 :root {
   --background: #faf8f8;
@@ -13,8 +10,6 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    /* --background: #0a0a0a;
-    --foreground: #ededed; */
     --background: #faf8f8;
   --foreground: #171717;
   }

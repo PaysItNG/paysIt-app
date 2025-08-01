@@ -3,7 +3,6 @@
 import { CiBank } from "react-icons/ci";
 import { MdOutlineSubscriptions } from "react-icons/md";
 import { IoFlashOutline } from "react-icons/io5";
-import { Card } from "@heroui/react";
 import clsx from "clsx";
 import { motion } from "framer-motion";
 
@@ -15,15 +14,17 @@ const FeaturesView = () => {
       description:
         "Virtual assistant for seamless account management, transactions, and financial support.",
       color: "text-[#ec8631]",
-      colorbg: "bg-[#ec8631]/10",
+      colorbg: "bg-[#ec8631]/20",
+      cardBg: "bg-[#ec8631]/40",
     },
     {
       icon: <MdOutlineSubscriptions className="w-8 h-8" />,
       title: "Subcription management",
       description:
         "A centralized platform to track, manage, and optimize all your subscriptions in one place.",
-      color: "text-green-600",
-      colorbg: "bg-green-100/50",
+      color: "text-primary",
+      colorbg: "bg-green-100/40",
+      cardBg: "bg-primary/30",
     },
     {
       icon: <IoFlashOutline className="w-8 h-8" />,
@@ -31,7 +32,8 @@ const FeaturesView = () => {
       description:
         "A secure and efficient system for instant transactions and seamless fund transfers.",
       color: "text-[#db560c]",
-      colorbg: "bg-[#db560c]/10",
+      colorbg: "bg-[#db560c]/20",
+      cardBg: "bg-[#db560c]/40",
     },
   ];
 
@@ -59,15 +61,29 @@ const FeaturesView = () => {
               </motion.p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mx-auto gap-14 min-h-[350px] relative">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mx-auto gap-10 min-h-[350px] relative">
               {features.map((feature, index) => (
-                <Card
+                <div
                   key={index}
                   className={clsx(
-                    "group hover:shadow-lg rounded-3xl border-none shadow-none transition-all duration-300 border-0 min-h-[300px] max-w-[400px] h-full"
+                    "group hover:shadow-lg rounded-3xl border-none shadow-none transition-all duration-300 border-0 min-h-[300px] max-w-[400px] h-full relative",
+                    feature.cardBg
                   )}
                 >
-                  <div className="p-8 flex flex-col gap-y-6 justify-betwee h-full">
+                  <div
+                    className={clsx(
+                      "absolute top-0 -left-[60px] h-full w-20 space-y-10 py-10",
+                      index === 0 && "hidden"
+                    )}
+                  >
+                    <div className="h-[12px] w-full rounded-full bg-white"></div>
+                    <div className="h-[12px] w-full rounded-full bg-white"></div>
+                    <div className="h-[12px] w-full rounded-full bg-white"></div>
+                    <div className="h-[12px] w-full rounded-full bg-white"></div>
+                    <div className="h-[12px] w-full rounded-full bg-white"></div>
+                    <div className="h-[12px] w-full rounded-full bg-white"></div>
+                  </div>
+                  <div className="p-10 flex flex-col gap-y-6 justify-betwee h-full">
                     <div
                       className={clsx(
                         `${feature.color} group-hover:scale-110 transition-transform duration-300 ${feature.colorbg} p-4 rounded-3xl max-w-max`
@@ -84,7 +100,7 @@ const FeaturesView = () => {
                       </p>
                     </div>
                   </div>
-                </Card>
+                </div>
               ))}
             </div>
           </div>

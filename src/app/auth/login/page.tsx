@@ -1,5 +1,4 @@
 "use client";
-import { Checkbox } from "@heroui/react";
 import { Controller, FieldValues, useForm } from "react-hook-form";
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
@@ -7,7 +6,6 @@ import { IoEye, IoEyeOff } from "react-icons/io5";
 import { notifier } from "@/lib/utils/notifier";
 import { useGoogleAuthToken, useLoginUser } from "@/api/auth/login";
 import { AxiosError } from "axios";
-import Input from "@/components/shared/ui/Input";
 import { useRouter } from "next/navigation";
 import { APP_ROUTES } from "@/lib/routes";
 import Button from "@/components/shared/ui/Button";
@@ -17,6 +15,8 @@ import { useSession } from "next-auth/react";
 import { catchErrFunc } from "@/lib/utils/catchErrFunc";
 import { UserType } from "@/lib/utils/typeConfig";
 import { useSingleEffect } from "react-haiku";
+import Input from "@/components/shared/ui/Input";
+import { Checkbox } from "@heroui/react";
 
 const Login = () => {
   const router = useRouter();

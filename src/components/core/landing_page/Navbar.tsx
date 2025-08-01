@@ -30,6 +30,7 @@ const Navbar = () => {
               alt="paysIt logo"
               width={40}
               height={40}
+              className="rounded-xl"
             />
           </div>
           <nav className="hidden lg:flex gap-x-10"></nav>
