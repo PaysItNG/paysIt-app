@@ -2,8 +2,6 @@
 
 import { APP_ROUTES } from "@/lib/routes";
 import Link from "next/link";
-import { useState } from "react";
-import { BiMenu } from "react-icons/bi";
 import { BsArrowRight } from "react-icons/bs";
 import Image from "next/image";
 import clsx from "clsx";
@@ -12,8 +10,9 @@ import { useGetScreenPosition } from "@/hooks/use-screen-position";
 const navLinks = ["Product", "Solutions", "Resources", "Pricing"];
 
 const Navbar = () => {
-  const [menuOpen, setMenuOpen] = useState(false);
   const { y: verticalScroll } = useGetScreenPosition();
+
+  const menuOpen = false; // Placeholder for menu state, can be managed with useState if needed
 
   return (
     <header
