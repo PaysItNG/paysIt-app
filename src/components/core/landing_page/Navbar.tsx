@@ -12,7 +12,7 @@ const navLinks = ["Product", "Solutions", "Resources", "Pricing"];
 const Navbar = () => {
   const { y: verticalScroll } = useGetScreenPosition();
 
-  const menuOpen = false; // Placeholder for menu state, can be managed with useState if needed
+  const menuOpen = false;
 
   return (
     <header
