@@ -18,12 +18,12 @@ const Navbar = () => {
   return (
     <header
       className={clsx(
-        "fixed top-0 left-0 right-0 z-50 backdrop-blur-sm",
-        verticalScroll > 20 && "bg-primary/60"
+        "fixed top-0 left-0 right-0 z-50",
+        verticalScroll > 20 && "bg-primary/60 backdrop-blur-sm"
       )}
     >
       <div className="w-full max-w-screen lg:max-w-screen-xl mx-auto">
-        <div className=" sm:max-w-[95vw] mx-auto py-3 flex items-center justify-between">
+        <div className="px-6 md:px-10 mx-auto py-4 lg:py-3 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Image
               src={"/assets/images/paysIt_logo.jpeg"}
@@ -47,12 +47,12 @@ const Navbar = () => {
             >
               Signup <BsArrowRight className="ml-2 w-4 h-4" />
             </Link>
-            <button
+            {/* <button
               className="lg:hidden"
               onClick={() => setMenuOpen(!menuOpen)}
             >
               <BiMenu className="w-6 h-6" />
-            </button>
+            </button> */}
           </div>
         </div>
       </div>

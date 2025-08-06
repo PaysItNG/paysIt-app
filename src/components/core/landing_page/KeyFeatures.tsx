@@ -2,8 +2,8 @@ const KeyFeaturesView = () => {
   return (
     <>
       <section className="pb-5">
-        <div className="mx-auto max-w-screen-xl space-y-8 px-4 py-8 sm:px-6 lg:space-y-16 lg:px-0">
-          <div className="flex flex-col gap-10 px-4 py-10">
+        <div className="mx-auto max-w-screen-xl space-y-8 py-8 px-6 md:px-10 lg:space-y-16 lg:px-0">
+          <div className="flex flex-col gap-10 py-10">
             <div className="flex flex-col gap-4">
               <h1 className="text-[#0d141c] tracking-light text-4xl font-bold leading-tight @[480px]:text-4xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em]">
                 Key Features
@@ -13,9 +13,9 @@ const KeyFeaturesView = () => {
                 life.
               </p>
             </div>
-            <div className="grid grid-cols-[repeat(auto-fit,minmax(158px,1fr))] gap-4 p-0">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gridcols-[repeat(auto-fit,minmax(158px,1fr))] gap-4 p-0">
               <div className="relative flex flex-1 gap-3 rounded-2xl border border-[#cee8de] bg-green-500/10 p-6 flex-col">
-                <div className="absolute top-0 -right-8 h-full w-12 space-y-8 py-7">
+                <div className="absolute top-0 -right-8 h-full w-12 space-y-9 md:space-y-8 py-7 md:py-7">
                   <div className="h-[10px] w-full rounded-full bg-white"></div>
                   <div className="h-[10px] w-full rounded-full bg-white"></div>
                   <div className="h-[10px] w-full rounded-full bg-white"></div>
@@ -72,7 +72,7 @@ const KeyFeaturesView = () => {
                 </div>
               </div>
               <div className="relative flex flex-1 gap-3 rounded-2xl border border-[#cedbe8] bg-green-500/10 p-6 flex-col">
-                <div className="absolute top-0 -left-8 h-full w-12 space-y-8 py-7">
+                <div className="hidden lg:block absolute top-0 -left-8 h-full w-12 space-y-8 py-7">
                   <div className="h-[10px] w-full rounded-full bg-white"></div>
                   <div className="h-[10px] w-full rounded-full bg-white"></div>
                   <div className="h-[10px] w-full rounded-full bg-white"></div>
@@ -103,7 +103,7 @@ const KeyFeaturesView = () => {
                 </div>
               </div>
               <div className="relative flex flex-1 gap-3 rounded-2xl border border-[#cedbe8] bg-green-500/10 p-6 flex-col">
-                <div className="absolute top-0 -left-8 h-full w-12 space-y-8 py-7">
+                <div className="absolute top-0 -left-8 h-full w-12 space-y-10 md:space-y-8 py-6 md:py-7">
                   <div className="h-[10px] w-full rounded-full bg-white"></div>
                   <div className="h-[10px] w-full rounded-full bg-white"></div>
                   <div className="h-[10px] w-full rounded-full bg-white"></div>

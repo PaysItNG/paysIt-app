@@ -40,7 +40,7 @@ const FeaturesView = () => {
   return (
     <>
       <section className="pb-10 bg-[#f1f1f1]">
-        <div className="mx-auto max-w-screen-xl space-y-8 px-4 py-16 sm:px-6 lg:px-0">
+        <div className="mx-auto max-w-screen-xl space-y-8 py-16 px-6 md:px-10 lg:px-0">
           <div className="">
             <div className="text-center mb-10">
               <motion.h2
@@ -66,14 +66,14 @@ const FeaturesView = () => {
                 <div
                   key={index}
                   className={clsx(
-                    "group hover:shadow-lg rounded-3xl border-none shadow-none transition-all duration-300 border-0 min-h-[300px] max-w-[400px] h-full relative",
+                    "group hover:shadow-lg rounded-3xl border-none shadow-none transition-all duration-300 border-0 min-h-[300px] md:max-w-[400px] h-full relative",
                     feature.cardBg
                   )}
                 >
-                  <div
+                  {/* <div
                     className={clsx(
-                      "absolute top-0 -left-[60px] h-full w-20 space-y-10 py-10",
-                      index === 0 && "hidden"
+                      "absolute top-0 -left-[60px] h-full w-20 space-y-10 py-10 hidden",
+                      index === 0 ? "hidden" : "lg:block"
                     )}
                   >
                     <div className="h-[12px] w-full rounded-full bg-white"></div>
@@ -82,7 +82,30 @@ const FeaturesView = () => {
                     <div className="h-[12px] w-full rounded-full bg-white"></div>
                     <div className="h-[12px] w-full rounded-full bg-white"></div>
                     <div className="h-[12px] w-full rounded-full bg-white"></div>
+                  </div> */}
+                  <div
+                    className={clsx(
+                      "absolute top-0 left-0 h-full w-6 space-y-10 py-12 lg:py-16"
+                    )}
+                  >
+                    <div className="h-[12px] w-full rounded-r-full bg-white"></div>
+                    <div className="h-[12px] w-full rounded-r-full bg-white"></div>
+                    <div className="h-[12px] w-full rounded-r-full bg-white"></div>
+                    <div className="h-[12px] w-full rounded-r-full bg-white"></div>
+                    <div className="h-[12px] w-full rounded-r-full bg-white"></div>
                   </div>
+                  <div
+                    className={clsx(
+                      "absolute top-0 right-0 h-full w-6 space-y-10 py-12 lg:py-16 lg:hidde"
+                    )}
+                  >
+                    <div className="h-[12px] w-full rounded-l-full bg-white"></div>
+                    <div className="h-[12px] w-full rounded-l-full bg-white"></div>
+                    <div className="h-[12px] w-full rounded-l-full bg-white"></div>
+                    <div className="h-[12px] w-full rounded-l-full bg-white"></div>
+                    <div className="h-[12px] w-full rounded-l-full bg-white"></div>
+                  </div>
+
                   <div className="p-10 flex flex-col gap-y-6 justify-betwee h-full">
                     <div
                       className={clsx(

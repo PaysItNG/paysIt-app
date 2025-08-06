@@ -1,6 +1,6 @@
 import useAuthUser from "@/hooks/useAuthUser";
 import { APP_ROUTES } from "@/lib/routes";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect } from "react";
 import ConfirmModal from "../shared/ui/ConfirmModal";
 import { useConfirmModal } from "@/store/confirmModalStore";
@@ -13,6 +13,8 @@ const GeneralProtectedProvider = ({
   children: React.ReactNode;
 }) => {
   const router = useRouter();
+
+  const routerPathname = usePathname();
 
   // const { error } = useProfile();
 
@@ -54,12 +56,14 @@ const GeneralProtectedProvider = ({
       setAuthUser(authToken);
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (err) {
-      openConfirm({
-        title: "Your login session has expired, please re-login",
-        okText: "Re-login",
-        onOk: () => executeLogout(),
-        no_cancel: true,
-      });
+      if (routerPathname !== "/") {
+        openConfirm({
+          title: "Your login session has expired, please re-login",
+          okText: "Re-login",
+          onOk: () => executeLogout(),
+          no_cancel: true,
+        });
+      }
     }
   };
 

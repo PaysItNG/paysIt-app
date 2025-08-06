@@ -4,10 +4,10 @@ const Footer = () => {
   return (
     <>
       <footer className="bg-primary text-white">
-        <div className="mx-auto max-w-screen-xl space-y-8 px-4 py-16 sm:px-6 lg:space-y-16 lg:px-0">
-          <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
+        <div className="mx-auto max-w-screen-xl space-y-8 px-6 md:px-10 py-16 lg:space-y-16 lg:px-0">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
             <div>
-              <div className="lg:flex gap-4 ">
+              <div className="flex gap-4">
                 <div className="text-primary">
                   <Image
                     src={"/assets/images/paysIt_logo.jpeg"}
@@ -18,7 +18,7 @@ const Footer = () => {
                   />
                 </div>
 
-                <div>
+                <div className="">
                   <p className="max-w-xs text-default-100 text-sm">
                     Need help? Our support team is available 24/7 to assist you
                     with any inquiries.
@@ -151,7 +151,7 @@ const Footer = () => {
               </ul>
             </div>
 
-            <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:col-span-2 lg:grid-cols-4">
+            <div className="grid grid-cols-2 gap-8 sm:grid-cols-2 lg:col-span-2 lg:grid-cols-4">
               <div>
                 <p className="font-medium text-default-100">Services</p>
 
@@ -208,7 +208,7 @@ const Footer = () => {
                 </ul>
               </div>
 
-              <div>
+              <div className="text-end sm:text-start">
                 <p className="font-medium text-default-100">Company</p>
 
                 <ul className="mt-6 space-y-4 text-sm">
@@ -280,7 +280,7 @@ const Footer = () => {
                 </ul>
               </div>
 
-              <div>
+              <div className="text-end sm:text-start">
                 <p className="font-medium text-default-100">Legal</p>
 
                 <ul className="mt-6 space-y-4 text-sm">
@@ -328,7 +328,7 @@ const Footer = () => {
           </div>
 
           <p className="text-xs text-gray-1000">
-            &copy; 2022. Company Name. All rights reserved.
+            &copy; {new Date().getFullYear()}. PaysIt All rights reserved.
           </p>
         </div>
       </footer>

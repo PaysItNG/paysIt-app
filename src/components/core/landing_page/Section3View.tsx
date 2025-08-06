@@ -1,6 +1,7 @@
 import Image from "next/image";
 import React from "react";
 import { motion } from "framer-motion";
+import clsx from "clsx";
 
 const Section3View = () => {
   const items = [
@@ -21,7 +22,7 @@ const Section3View = () => {
   return (
     <>
       <main className="bg-white pb-14">
-        <div className="mx-auto max-w-screen-xl space-y-8 px-4 py-20 sm:px-6 lg:space-y-10 lg:px-8 lg:w-[80%]">
+        <div className="mx-auto max-w-screen-xl space-y-8 py-20 px-6 md:px-10 lg:space-y-10 lg:px-8 lg:w-[80%]">
           <div className="text-center mx-auto lg:w-[80%]">
             <motion.h2
               initial={{ y: 50, opacity: 0 }}
@@ -42,19 +43,26 @@ const Section3View = () => {
               track of your finances with ease.
             </motion.p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 place-items-center mb-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 place-items-center mb-6 lg:mb-10">
             {items?.map((item, index) => (
-              <div key={index + "______"} className="relative w-[300px]">
-                <Image
-                  src={item.img}
-                  alt={"img" + index}
-                  width={300}
-                  height={300}
-                  className="rounded-lg shadow"
-                />
+              <div key={index + "______"}>
+                <div
+                  className={clsx(
+                    "relative w-full md:w-[300px]",
+                    index !== 2 ? "md:mb-16 lg:mb-0" : ""
+                  )}
+                >
+                  <Image
+                    src={item.img}
+                    alt={"img" + index}
+                    width={300}
+                    height={300}
+                    className="rounded-lg shadow w-full"
+                  />
 
-                <div className="absolute -bottom-14 font-medium text-[#717171] shadow rounded-lg bg-[#F5F7FA] px-4 py-3 text-[0.91rem] text-center mx-6 min-h-32">
-                  {item.desc}
+                  <div className="absolute w-[60%] md:w-auto right-0 bottom-5 md:-bottom-14 font-medium text-[#717171] shadow rounded-lg bg-[#F5F7FA] px-4 py-3 text-[0.91rem] text-center mx-6 min-h-32">
+                    {item.desc}
+                  </div>
                 </div>
               </div>
             ))}

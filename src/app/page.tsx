@@ -13,7 +13,7 @@ export default function Home() {
   return (
     <main className="relative">
       <Navbar />
-      <section className="md:h-[45vh] lg:h-[83vh] relative">
+      <section className="md:h-[70vh] lg:h-[83vh] relative">
         <video
           loop
           muted
