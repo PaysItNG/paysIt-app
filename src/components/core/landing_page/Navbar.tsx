@@ -10,9 +10,9 @@ import { useGetScreenPosition } from "@/hooks/use-screen-position";
 const navLinks = ["Product", "Solutions", "Resources", "Pricing"];
 
 const Navbar = () => {
-  const { y: verticalScroll } = useGetScreenPosition();
-
   const menuOpen = false;
+
+  const { y: verticalScroll } = useGetScreenPosition();
 
   return (
     <header
