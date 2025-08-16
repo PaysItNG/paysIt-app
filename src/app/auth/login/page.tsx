@@ -242,6 +242,8 @@ const Login = () => {
             >
               Login
             </Button>
+          </form>
+          <div className="text-center">
             <div className="text-default-500 text-base mt-5">
               New to PaysIt?{" "}
               <Link
@@ -251,17 +253,17 @@ const Login = () => {
                 Create account
               </Link>
             </div>
-          </form>
-          <div className="flex gap-1 justify-center my-3 items-center w-50">
-            <hr />
-            <span>or</span>
-            <hr />
-          </div>
-          <div>
-            <GoogleAuthProviderButton
-              isLoading={isLoading}
-              setIsLoading={setIsLoading}
-            />
+            <div className="flex gap-1 justify-center my-3 items-center">
+              <div className="border-[0.5px] border-gray-400 w-full"></div>
+              <span>or</span>
+              <div className="border-[0.5px] border-gray-400 w-full"></div>
+            </div>
+            <div>
+              <GoogleAuthProviderButton
+                isLoading={isLoading}
+                setIsLoading={setIsLoading}
+              />
+            </div>
           </div>
         </div>
       </div>
