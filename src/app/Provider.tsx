@@ -6,6 +6,7 @@ import ReactQueryProvider from "@/components/providers/ReactQueryProvider";
 import GeneralProtectedProvider from "@/components/providers/GeneralProtectedProvider";
 import DrawerProvider from "@/components/providers/DrawerProvider";
 import { SessionProvider } from "next-auth/react";
+import StripeProvider from "@/components/providers/StripeProvider";
 
 export const Providers = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
@@ -31,10 +32,12 @@ export const Providers = ({ children }: { children: ReactNode }) => {
   return (
     <ReactQueryProvider>
       <HeroProvider>
-        <GeneralProtectedProvider>
-          <SessionProvider>{children}</SessionProvider>
-        </GeneralProtectedProvider>
-        <DrawerProvider />
+        <StripeProvider>
+          <GeneralProtectedProvider>
+            <SessionProvider>{children}</SessionProvider>
+          </GeneralProtectedProvider>
+          <DrawerProvider />
+        </StripeProvider>
       </HeroProvider>
       <Toaster
         position="top-right"

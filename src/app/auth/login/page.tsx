@@ -254,9 +254,9 @@ const Login = () => {
               </Link>
             </div>
             <div className="flex gap-1 justify-center my-3 items-center">
-              <div className="border-[0.5px] border-gray-400 w-full"></div>
+              <div className="border-[0.5px] border-[#c9c5c5] w-full"></div>
               <span>or</span>
-              <div className="border-[0.5px] border-gray-400 w-full"></div>
+              <div className="border-[0.5px] border-[#c9c5c5] w-full"></div>
             </div>
             <div>
               <GoogleAuthProviderButton
