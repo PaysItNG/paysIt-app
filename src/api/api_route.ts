@@ -19,8 +19,9 @@ export const API_ROUTE = {
   admin_approve_reject_kyc: "/auth/kyc/approve/",
 
   //vtu apis
-  get_data_plans: "/vtu/services/", //needs query param as suffix
+  get_vtu_services: "/vtu/services/", //needs query param as suffix
   buy_utility_service: "/vtu/services/",
+  verify_card_number: "/vtu/verify/card/number",
 
   //transactions
   get_transactions: "/transactions/",

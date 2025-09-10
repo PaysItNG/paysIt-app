@@ -144,3 +144,13 @@ export type ScrollPositionType = {
   y: number;
   [key: string]: number | undefined;
 };
+
+export interface CablePlanType {
+  price: number;
+  provider_price: number;
+  plan_id: string;
+  provider: string;
+  service_id: string;
+  name: string;
+  network: string;
+}

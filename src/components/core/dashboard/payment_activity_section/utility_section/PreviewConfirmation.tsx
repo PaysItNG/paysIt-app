@@ -5,11 +5,23 @@ import Image from "next/image";
 import React from "react";
 import { IoArrowBackOutline } from "react-icons/io5";
 import { useUtilityStore } from "@/store/utilityStore";
-import { DataPlanType, PreviewDataType } from "@/lib/utils/typeConfig";
+import {
+  CablePlanType,
+  DataPlanType,
+  PreviewDataType,
+} from "@/lib/utils/typeConfig";
 import { catchErrFunc } from "@/lib/utils/catchErrFunc";
 import { useConfirmModal } from "@/store/confirmModalStore";
 import { useBuyUtilityService } from "@/api/vtu";
-// import { notifier } from "@/lib/utils/notifier";
+import { motion, AnimatePresence } from "framer-motion";
+import StarLoader from "@/components/shared/ui/loaders/StarLoader";
+
+interface CableDataType {
+  serviceId: string;
+  cardNumber: string;
+  selectedPlan?: CablePlanType;
+  // add other fields if needed
+}
 
 const PreviewConfirmation = () => {
   const { data: utilityStoreData, updateData } = useUtilityStore();
@@ -30,7 +42,11 @@ const PreviewConfirmation = () => {
     plan,
     phoneNumber,
     network,
-  } = utilityStoreData;
+    cable_data,
+    electricity_data,
+  } = utilityStoreData as typeof utilityStoreData & {
+    cable_data?: CableDataType;
+  };
 
   const dataPlan = { ...(plan as DataPlanType) };
   //function to go back
@@ -44,7 +60,7 @@ const PreviewConfirmation = () => {
   //<<<<<<<<<<<<< Utility types payload >>>>>>>>>>>>>>>
   const utilityPayload = {
     data: {
-      price: dataPlan?.price,
+      amount: dataPlan?.price,
       provider_price: dataPlan?.provider_price,
       provider: dataPlan?.provider,
       plan_id: dataPlan?.plan_id,
@@ -52,10 +68,28 @@ const PreviewConfirmation = () => {
       phone_no: phoneNumber,
       service_type: utility_type,
     },
+    cable: {
+      service_id: cable_data?.serviceId as string,
+      card_no: cable_data?.cardNumber as string,
+      price: product_amount as string,
+      subscription_type: "renew",
+      plan_id: cable_data?.selectedPlan?.plan_id as string,
+      phone_no: phoneNumber,
+      service_type: "tv",
+    },
+    electricity: {
+      service_id: electricity_data?.serviceId,
+      meter_no: electricity_data?.meterNumber,
+      amount: product_amount,
+      phone_no: phoneNumber,
+      meter_type: electricity_data?.meter_type,
+      service_type: "ELECTRICITY",
+    },
     airtime: {
-      price: product_amount,
+      amount: product_amount,
       service_type: utility_type,
-      service_id: network,
+      service_id: network || "MTN",
+      phone_no: phoneNumber,
     },
   };
 
@@ -63,6 +97,7 @@ const PreviewConfirmation = () => {
 
   const handleConfirm = async () => {
     const payload = utilityPayload[utility_type as keyof typeof utilityPayload];
+
     openConfirm({
       title: "Please confirm this operation",
       isLoading: isLoading,
@@ -80,12 +115,35 @@ const PreviewConfirmation = () => {
 
       closeConfirm();
     } catch (err) {
+      console.log(err);
       catchErrFunc(err);
     }
   };
 
   return (
     <>
+      {/* <AnimatePresence>
+        <motion.div
+          className="absolute inset-0 bg-black/30 z-10 flex items-center justify-center rounded-xl p-6"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.3 }}
+        >
+          <motion.div
+            className="bg-white p-6 rounded-xl text-center shadow-lg"
+            initial={{ scale: 0.9, opacity: 0, y: 40 }}
+            animate={{ scale: 1, opacity: 1, y: 0 }}
+            exit={{ scale: 0.9, opacity: 0, y: 40 }}
+            transition={{ duration: 0.35, ease: "easeOut" }}
+          >
+            <StarLoader />
+            <p className="mt-2 text-sm text-gray-700">
+              Verifying meter number...
+            </p>
+          </motion.div>
+        </motion.div>
+      </AnimatePresence> */}
       <main className="relative">
         <Button
           isIconOnly
@@ -134,7 +192,7 @@ const PreviewConfirmation = () => {
                             item?.product_img ||
                             "https://images.unsplash.com/broken"
                           }
-                          className="h-6 w-6"
+                          className="h-8 w-8"
                         />
                       </div>
                       <p className="text-sm">{item?.value}</p>

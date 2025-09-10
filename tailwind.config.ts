@@ -15,6 +15,19 @@ export default {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
       },
+      utilities: {
+        ".no-spinner": {
+          "-moz-appearance": "textfield",
+          "&::-webkit-inner-spin-button": {
+            "-webkit-appearance": "none",
+            margin: "0",
+          },
+          "&::-webkit-outer-spin-button": {
+            "-webkit-appearance": "none",
+            margin: "0",
+          },
+        },
+      },
     },
   },
   darkMode: "class",
