@@ -1,6 +1,7 @@
 import Button from "@/components/shared/ui/Button";
 import { useUtilityStore } from "@/store/utilityStore";
 import { Image } from "@heroui/react";
+import clsx from "clsx";
 import React from "react";
 
 // const doomydata = {
@@ -107,27 +108,23 @@ const TransactionSummaryReceipt = () => {
       value: "No. 4 Kate Gada str. igwe mgbe Abule egba Ekoro Lagos",
     },
     { label: "Meter No", key: "meter_no", value: "1111111111111" },
-    { label: "Date", key: "date", value: "4000.00" },
+    { label: "Date", key: "date", value: "10th September, 2025" },
     { label: "Product", key: "product", value: "Electricity" },
-    { label: "Provider", key: "product", value: "Electricity" },
+    { label: "Provider", key: "product", value: "IBADAN" },
     { label: "Value", key: "value", value: "79.9 kWh" },
     {
       label: "Transaction Ref.",
       key: "transaction_ref",
       value: "17575519320447904060695884",
     },
-    {
-      label: "Transaction Ref.",
-      key: "transaction_ref",
-      value: "17575519320447904060695884",
-    },
     { label: "Total Paid", key: "total_paid", value: "1000.00" },
+    { label: "Status", key: "status", value: "TRANSACTION SUCCESSFUL" },
     { label: "TOKEN(stdToken)", key: "token", value: "26362054405982757802" },
   ];
   return (
     <main className="w-full space-y-4">
-      <div className="bg-green-100 p-6">
-        <div className="flex flex-col items-center justify-center mb-4 gap-4">
+      <div className="bg-green-100 p-4">
+        <div className="flex flex-col items-center justify-center mb-4 gap-3">
           <Image
             src={"/assets/images/paysIt_logo.jpeg"}
             alt="paysIt logo"
@@ -149,7 +146,7 @@ const TransactionSummaryReceipt = () => {
                 height: "auto",
               }}
             />
-            <h3 className="text-lg font-bold text-gray-800">
+            <h3 className="text-lg font-bold text-gray-800 font-mono">
               {product_name as string}
             </h3>
           </div>
@@ -166,10 +163,20 @@ const TransactionSummaryReceipt = () => {
                 key={index + "___transaction_summary"}
                 className="flex items-center justify-between gap-6"
               >
-                <p className="text-black font-medium text-start font-mono text-sm">
+                <p
+                  className={clsx(
+                    "text-black text-start font-mono text-sm",
+                    field.key === "token" ? "font-semibold" : "font-medium"
+                  )}
+                >
                   {field?.label}
                 </p>
-                <p className="font-light text-xs text-end font-mono">
+                <p
+                  className={clsx(
+                    "font-light text-xs text-end font-mono",
+                    field.key === "token" ? "font-semibold" : "font-medium"
+                  )}
+                >
                   {field?.value}
                 </p>
               </div>
