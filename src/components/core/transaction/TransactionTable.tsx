@@ -31,7 +31,7 @@ type TableColumnType = {
 const tableColumns: TableColumnType[] = [
   { name: "", selector: "payment_type", isCurrency: false },
   { name: "Name", selector: "user", isCurrency: false, minWidth: "200px" },
-  { name: "Date", selector: "date", isDate: true, minWidth: "150px" },
+  { name: "Date", selector: "date", isDate: true, minWidth: "180px" },
   { name: "Transaction ID", selector: "reference_id", isCurrency: false },
   { name: "Transaction Type", selector: "transaction_type", isCurrency: false },
   { name: "Description", selector: "description", isCurrency: false },
@@ -40,9 +40,12 @@ const tableColumns: TableColumnType[] = [
   { name: "", selector: "actions", isCurrency: false },
 ];
 
-const statusColor: Record<string, "success" | "danger"> = {
+const statusColor: Record<string, "success" | "danger" | "warning"> = {
   completed: "success",
-  pending: "danger",
+  pending: "warning",
+  failed: "danger",
+  cancelled: "danger",
+  processing: "warning",
 };
 
 type TabKeysType = "all" | "complete" | "pending" | "deposit" | "outgoing";
@@ -159,7 +162,9 @@ const TransactionTable = () => {
                   ) : column.selector === "status" ? (
                     <Chip
                       color={
-                        statusColor[rowData.status as keyof typeof statusColor]
+                        statusColor[
+                          rowData.status?.toLowerCase() as keyof typeof statusColor
+                        ]
                       }
                       variant="light"
                       className="capitalize"
@@ -167,7 +172,8 @@ const TransactionTable = () => {
                       {rowData[column.selector]}
                     </Chip>
                   ) : column.isDate ? (
-                    dayjs(rowData.created_at).format("DD MMM YY") +
+                    dayjs(rowData.created_at).format("DD MMM. YY") +
+                    " " +
                     dayjs(rowData.created_at).format("hh:mmA")
                   ) : column.isCurrency ? (
                     formatCurrency(

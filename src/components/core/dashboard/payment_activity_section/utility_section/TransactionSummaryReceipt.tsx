@@ -90,7 +90,7 @@ import React from "react";
 // };
 
 const TransactionSummaryReceipt = () => {
-  const { data: utilityStoreData } = useUtilityStore();
+  const { data: utilityStoreData, closeDrawer } = useUtilityStore();
 
   const { product_img, product_name, transaction_response } = utilityStoreData;
 
@@ -186,7 +186,9 @@ const TransactionSummaryReceipt = () => {
       </div>
       <div className="bg-green-200 h-10 w-full"></div>
       <div className="mt-4 flex justify-center">
-        <Button color="primary">Close</Button>
+        <Button color="primary" onPress={() => closeDrawer()}>
+          Close
+        </Button>
       </div>
     </main>
   );
