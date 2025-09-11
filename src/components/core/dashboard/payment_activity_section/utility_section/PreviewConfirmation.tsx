@@ -2,7 +2,7 @@ import Button from "@/components/shared/ui/Button";
 import { formatCurrency } from "@/lib/utils/formatCurrency";
 import { Avatar } from "@heroui/react";
 import Image from "next/image";
-import React from "react";
+import React, { FC, useState } from "react";
 import { IoArrowBackOutline } from "react-icons/io5";
 import { useUtilityStore } from "@/store/utilityStore";
 import {
@@ -13,8 +13,8 @@ import {
 import { catchErrFunc } from "@/lib/utils/catchErrFunc";
 import { useConfirmModal } from "@/store/confirmModalStore";
 import { useBuyUtilityService } from "@/api/vtu";
-import { motion, AnimatePresence } from "framer-motion";
-import TransactionSummaryReceipt from "./TransactionSummaryReceipt";
+import { TbAlertTriangle } from "react-icons/tb";
+import { BiX } from "react-icons/bi";
 interface CableDataType {
   serviceId: string;
   cardNumber: string;
@@ -28,11 +28,12 @@ const PreviewConfirmation = () => {
   const { mutateAsync: mutateBuyUtility, isPending: isLoading } =
     useBuyUtilityService();
 
-  const {
-    openConfirm,
-    closeConfirm,
-    updateData: updateConfirmData,
-  } = useConfirmModal();
+  const { closeConfirm, updateData: updateConfirmData } = useConfirmModal();
+
+  const [isOpenConfirmModal, setIsOpenConfirmModal] = useState({
+    state: false,
+    payload: {},
+  });
 
   const {
     previewData,
@@ -97,11 +98,7 @@ const PreviewConfirmation = () => {
   const handleConfirm = async () => {
     const payload = utilityPayload[utility_type as keyof typeof utilityPayload];
 
-    openConfirm({
-      title: "Please confirm this operation",
-      isLoading: isLoading,
-      onOk: () => executeConfirmation(payload),
-    });
+    setIsOpenConfirmModal({ state: true, payload });
   };
 
   const executeConfirmation = async (payload: Record<string, unknown>) => {
@@ -120,6 +117,7 @@ const PreviewConfirmation = () => {
         transaction_response: res?.data,
         product_img: product?.product_img,
         product_name: product?.value,
+        utility_type,
       });
     } catch (err) {
       catchErrFunc(err);
@@ -128,34 +126,13 @@ const PreviewConfirmation = () => {
     }
   };
 
+  const handleCancelConfirmModal = () => {
+    setIsOpenConfirmModal({ state: false, payload: {} });
+  };
+
   return (
     <>
-      {/* <AnimatePresence>
-        <motion.div
-          className="absolute inset-0 z-10 flex items-center justify-center rounded-xl p-6"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.3 }}
-        >
-          <motion.div
-            className="bg-white w-full max-w-md p-6 rounded-xl text-center shadow-lg space-y-4"
-            initial={{ scale: 0.9, opacity: 0, y: 40 }}
-            animate={{ scale: 1, opacity: 1, y: 0 }}
-            exit={{ scale: 0.9, opacity: 0, y: 40 }}
-            transition={{ duration: 0.35, ease: "easeOut" }}
-          >
-            <p className="mt-2 text-sm text-gray-700">
-              Please confirm this operation
-            </p>
-            <div className="flex justify-between gap-6">
-              <Button>Cancel</Button>
-              <Button color="primary">Confirm</Button>
-            </div>
-          </motion.div>
-        </motion.div>
-      </AnimatePresence> */}
-      <main className="relative">
+      <main className="relative h-screen">
         <Button
           isIconOnly
           color="primary"
@@ -227,9 +204,99 @@ const PreviewConfirmation = () => {
             </Button>
           </div>
         </div>
+
+        <ConfirmationModal
+          isOpen={isOpenConfirmModal.state}
+          onConfirm={() => executeConfirmation(isOpenConfirmModal.payload)}
+          onCancel={handleCancelConfirmModal}
+          isLoading={isLoading}
+        />
       </main>
     </>
   );
 };
 
 export default PreviewConfirmation;
+
+const ConfirmationModal: FC<{
+  isOpen: boolean;
+  onConfirm: () => void;
+  onCancel: () => void;
+  isLoading?: boolean;
+  title?: string;
+  message?: string;
+}> = ({
+  isOpen,
+  onConfirm,
+  onCancel,
+  title = "Confirm Action",
+  message = "Are you sure you want to proceed with this operation?",
+  isLoading,
+}) => {
+  if (!isOpen) return null;
+
+  return (
+    <div className="absolute inset-0 z-50 flex items-start justify-center pt-20 px-4">
+      {/* Backdrop */}
+      <div
+        className="absolute inset-0 bg-black/5 bg-opacity-40 backdrop-blur-sm"
+        onClick={onCancel}
+      />
+
+      {/* Modal */}
+      <div
+        className="relative bg-white w-full max-w-md rounded-2xl shadow-2xl border border-gray-100 overflow-hidden transform transition-all duration-300 ease-out animate-slide-up"
+        style={{
+          animation: "slideUp 0.3s ease-out forwards",
+        }}
+      >
+        {/* Header with gradient accent */}
+        <div className="relative bg-gradient-to-r from-amber-100 to-orange-100 px-6 py-4 border-b border-gray-100">
+          <div className="flex items-center gap-3">
+            <div className="flex-shrink-0 w-10 h-10 bg-amber-200 rounded-full flex items-center justify-center">
+              <TbAlertTriangle className="w-5 h-5 text-amber-600" />
+            </div>
+            <div className="flex-1">
+              <h3 className="font-semibold text-gray-900 text-lg">{title}</h3>
+            </div>
+            <button
+              onClick={onCancel}
+              className="flex-shrink-0 w-8 h-8 rounded-full bg-white bg-opacity-70 hover:bg-opacity-100 flex items-center justify-center transition-colors duration-200 cursor-pointer"
+            >
+              <BiX className="w-4 h-4 text-gray-500" />
+            </button>
+          </div>
+        </div>
+
+        {/* Content */}
+        <div className="px-6 py-5">
+          <p className="text-gray-600 leading-relaxed">{message}</p>
+        </div>
+
+        {/* Actions */}
+        <div className="px-6 py-4 bg-gray-50 flex gap-3 justify-end">
+          <Button onPress={onCancel} variant="bordered">
+            Cancel
+          </Button>
+          <Button onPress={onConfirm} color="primary" isLoading={isLoading}>
+            Confirm
+          </Button>
+        </div>
+      </div>
+
+      {/* Move the style inside the component */}
+      <style jsx>{`
+        @keyframes slideUp {
+          from {
+            transform: translateY(100%);
+            opacity: 0;
+          }
+          to {
+            transform: translateY(0);
+            opacity: 1;
+          }
+        }
+      `}</style>
+    </div>
+  );
+};

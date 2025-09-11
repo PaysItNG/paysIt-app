@@ -79,8 +79,6 @@ const ElectricityFormView = () => {
     const verifyRes = await handleVerifyMeterNumber();
 
     if (verifyRes && verifyRes.verified) {
-      console.log(verifyRes);
-
       const meter_number_detail = verifyRes?.data;
 
       //<<<<<<<<<<<<<<<<<<< PREVIEW DATA >>>>>>>>>>>>>>>>>>>>

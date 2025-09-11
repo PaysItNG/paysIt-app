@@ -3,6 +3,7 @@ import { KycStatus } from "@/api/kyc";
 export type ApiResponseType = {
   status?: number;
   message?: string;
+  verified?: boolean;
   data?: {
     message?: string;
     [key: string]: unknown;
@@ -117,6 +118,13 @@ export interface TransactionDataType {
   transaction_type: string;
   updated_at: string;
   user: string;
+  token: string;
+  units: string;
+  product_name: string;
+  meter_no: string;
+  customer_name: string;
+  customer_address: string;
+  [key: string]: string | number | null | undefined;
 }
 
 export interface Wallet {
@@ -154,3 +162,11 @@ export interface CablePlanType {
   name: string;
   network: string;
 }
+
+export const statusColor: Record<string, "success" | "danger" | "warning"> = {
+  completed: "success",
+  pending: "warning",
+  failed: "danger",
+  cancelled: "danger",
+  processing: "warning",
+};

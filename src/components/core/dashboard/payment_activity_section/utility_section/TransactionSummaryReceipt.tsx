@@ -1,124 +1,72 @@
 import Button from "@/components/shared/ui/Button";
+import { formatCurrency } from "@/lib/utils/formatCurrency";
+import {
+  statusColor,
+  TransactionDataType,
+  UtilityViews,
+} from "@/lib/utils/typeConfig";
 import { useUtilityStore } from "@/store/utilityStore";
-import { Image } from "@heroui/react";
+import { Chip, Image } from "@heroui/react";
 import clsx from "clsx";
+import dayjs from "dayjs";
 import React from "react";
-
-// const doomydata = {
-//   data: {
-//     id: 28,
-//     to_from: null,
-//     sender_name: null,
-//     transaction_type: "subscription",
-//     amount: "4000.00",
-//     status: "completed",
-//     payment_type: "debit",
-//     paystack_data: null,
-//     paystack_ref: null,
-//     vt_request_id: null,
-//     description: "Ikeja electric Prepaid unit purchase",
-//     reference_id: "8z22axcr53",
-//     created_at: "2025-09-11T00:52:11.480868Z",
-//     updated_at: "2025-09-11T00:52:21.279542Z",
-//     user: "de4a66cf-31da-437f-9641-0ff132d36281",
-//     otp: null,
-//   },
-//   message: "completed",
-//   pin: {
-//     code: "000",
-//     content: {
-//       transactions: {
-//         status: "delivered",
-//         product_name: "Ikeja Electric Payment - IKEDC",
-//         unique_element: "1111111111111",
-//         unit_price: "4000",
-//         quantity: 1,
-//         service_verification: null,
-//         channel: "api",
-//         commission: 60,
-//         total_amount: 3940,
-//         discount: null,
-//         type: "Electricity Bill",
-//         email: "apaysit@gmail.com",
-//         phone: "09073502641",
-//         name: null,
-//         convinience_fee: 0,
-//         amount: "4000",
-//         platform: "api",
-//         method: "api",
-//         transactionId: "17575519320447904060695884",
-//         commission_details: {
-//           amount: 60,
-//           rate: "1.50",
-//           rate_type: "percent",
-//           computation_type: "default",
-//         },
-//       },
-//     },
-//     response_description: "TRANSACTION SUCCESSFUL",
-//     requestId: "8z22axcr53",
-//     amount: 4000,
-//     transaction_date: "2025-09-11T00:52:12.000000Z",
-//     purchased_code: "Token : 26362054405982757802",
-//     customerName: "N/A",
-//     customerAddress: "N/A",
-//     meterNumber: "N/A",
-//     token: "Token : 26362054405982757802",
-//     tokenAmount: 1860.47,
-//     exchangeReference: "40532461",
-//     resetToken: "N/A",
-//     configureToken: "N/A",
-//     units: "79.9 kWh",
-//     fixChargeAmount: 0,
-//     tariff: "R2 SINGLE PHASE RESIDENTIAL",
-//     taxAmount: 0,
-//     debtAmount: 0,
-//     kct1: "N/A",
-//     kct2: "N/A",
-//     penalty: 0,
-//     costOfUnit: 0,
-//     announcement: "N/A",
-//     meterCost: 0,
-//     currentCharge: 0,
-//     lossOfRevenue: 0,
-//     tariffBaseRate: 0,
-//     installationFee: 0,
-//     reconnectionFee: 0,
-//     meterServiceCharge: 0,
-//     administrativeCharge: 0,
-//   },
-// };
 
 const TransactionSummaryReceipt = () => {
   const { data: utilityStoreData, closeDrawer } = useUtilityStore();
 
-  const { product_img, product_name, transaction_response } = utilityStoreData;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { product_img, product_name, transaction_response, utility_type } =
+    utilityStoreData as typeof utilityStoreData & {
+      product_img: string;
+      product_name: string;
+      transaction_response: TransactionDataType;
+      utility_type: UtilityViews;
+    };
 
   console.log(transaction_response);
 
-  const fields = [
+  const fields: {
+    label: string;
+    key: string;
+    isDate?: boolean;
+    isCurrency?: boolean;
+    value: string;
+  }[] = [
     {
       label: "Customer Name",
       key: "customer_name",
-      value: "Adeoye John Fixit",
+      value: transaction_response?.customer_name || "Adeoye John Fixit",
     },
     {
-      label: "Address",
-      key: "address",
-      value: "No. 4 Kate Gada str. igwe mgbe Abule egba Ekoro Lagos",
+      label: "Customer Address",
+      key: "customer_address",
+      value:
+        transaction_response?.customer_address ||
+        "No. 4 Kate Gada str. igwe mgbe Abule egba Ekoro Lagos",
     },
-    { label: "Meter No", key: "meter_no", value: "1111111111111" },
-    { label: "Date", key: "date", value: "10th September, 2025" },
-    { label: "Product", key: "product", value: "Electricity" },
-    { label: "Provider", key: "product", value: "IBADAN" },
-    { label: "Value", key: "value", value: "79.9 kWh" },
+    {
+      label: "Meter No",
+      key: "meter_no",
+      value: transaction_response?.meter_no || "1111111111111",
+    },
+    {
+      label: "Date",
+      key: "created_at",
+      isDate: true,
+      value:
+        dayjs(transaction_response.created_at).format("DD MMM. YY") ||
+        "10th September, 2025",
+    },
+    { label: "Product", key: "product_name", value: "Electricity" },
+    { label: "Value", key: "units", value: "79.9 kWh" },
     {
       label: "Transaction Ref.",
-      key: "transaction_ref",
+      key: "transaction_id",
       value: "17575519320447904060695884",
     },
-    { label: "Total Paid", key: "total_paid", value: "1000.00" },
+    { label: "Total Paid", key: "amount", isCurrency: true, value: "1000.00" },
     { label: "Status", key: "status", value: "TRANSACTION SUCCESSFUL" },
+    { label: "Description", key: "description", value: "26362054405982757802" },
     { label: "TOKEN(stdToken)", key: "token", value: "26362054405982757802" },
   ];
   return (
@@ -158,29 +106,58 @@ const TransactionSummaryReceipt = () => {
         </h3>
         <div className="mt-4">
           <div className="space-y-3">
-            {fields?.map((field, index) => (
-              <div
-                key={index + "___transaction_summary"}
-                className="flex items-center justify-between gap-6"
-              >
-                <p
-                  className={clsx(
-                    "text-black text-start font-mono text-sm",
-                    field.key === "token" ? "font-semibold" : "font-medium"
-                  )}
-                >
-                  {field?.label}
-                </p>
-                <p
-                  className={clsx(
-                    "font-light text-xs text-end font-mono",
-                    field.key === "token" ? "font-semibold" : "font-medium"
-                  )}
-                >
-                  {field?.value}
-                </p>
-              </div>
-            ))}
+            {fields?.map(
+              (field, index) =>
+                field.key in transaction_response && (
+                  <div
+                    key={index + "___transaction_summary"}
+                    className="flex items-center justify-between gap-6"
+                  >
+                    <p
+                      className={clsx(
+                        "text-black text-start font-mono text-sm",
+                        field.key === "token"
+                          ? "font-semibold"
+                          : "font-medium text-[0.95rem]"
+                      )}
+                    >
+                      {field?.label}
+                    </p>
+                    <p
+                      className={clsx(
+                        "font-light text-xs text-end font-mono",
+                        field.key === "token"
+                          ? "font-semibold text-[0.95rem"
+                          : "font-medium"
+                      )}
+                    >
+                      {field.isDate ? (
+                        dayjs(transaction_response[field.key]).format(
+                          "DD MMMM, YYYY"
+                        )
+                      ) : field.key === "status" ? (
+                        <Chip
+                          color={
+                            statusColor[
+                              transaction_response.status?.toLowerCase() as keyof typeof statusColor
+                            ]
+                          }
+                          variant="flat"
+                          className="capitalize"
+                        >
+                          {transaction_response.status}
+                        </Chip>
+                      ) : field.isCurrency ? (
+                        formatCurrency(
+                          transaction_response?.[field.key] as string
+                        )
+                      ) : (
+                        transaction_response?.[field.key] || field?.value
+                      )}
+                    </p>
+                  </div>
+                )
+            )}
           </div>
         </div>
       </div>

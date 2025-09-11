@@ -45,7 +45,9 @@ const CableFormView = () => {
     cable_data?.cardNumber as string
   );
 
-  const [serviceId, setServiceId] = useState<string>("gotv");
+  const [serviceId, setServiceId] = useState<string>(
+    (cable_data?.serviceId as string) || "gotv"
+  );
   const [selectedPlan, setSelectedPlan] = useState<CablePlanType>(
     storedSelectedPlan as CablePlanType
   );
