@@ -40,10 +40,12 @@ const ElectricityFormView = () => {
   const storedSelectedDistribution =
     electricity_data?.selectedDistribution ?? {};
 
-  const [phoneNumber, setPhoneNumber] = useState<string>(storedPhone as string);
+  const [phoneNumber, setPhoneNumber] = useState<string>(
+    (storedPhone as string) || ""
+  );
 
   const [meterNumber, setMeterNumber] = useState<string>(
-    electricity_data?.meterNumber as string
+    (electricity_data?.meterNumber as string) || ""
   );
 
   const [amount, setAmount] = useState<number>(product_amount as number);
@@ -76,7 +78,7 @@ const ElectricityFormView = () => {
 
     const verifyRes = await handleVerifyMeterNumber();
 
-    if (verifyRes) {
+    if (verifyRes && verifyRes.verified) {
       console.log(verifyRes);
 
       const meter_number_detail = verifyRes?.data;
@@ -117,11 +119,16 @@ const ElectricityFormView = () => {
           selectedDistribution,
           meter_type: meterType,
         },
+        product_img: "/assets/images/electricity-icon.jpg",
+        product_name: "Electricity",
         phoneNumber,
         product_amount: amount,
         currentView: "preview",
         previewData,
       });
+      setResponseMsg({ state: false, msg: "" });
+    } else {
+      setResponseMsg({ state: true, msg: verifyRes?.message as string });
     }
   };
 
@@ -135,31 +142,6 @@ const ElectricityFormView = () => {
 
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const verificationRes = await mutateVerifyMeterNumber(json);
-
-      // const res = {
-      //   data: {
-      //     Customer_Name: "TESTMETER1",
-      //     Address: "ABULE  EGBA BU ABULE",
-      //     Meter_Number: "68100017372",
-      //     Customer_Arrears: "",
-      //     Minimum_Amount: "",
-      //     Min_Purchase_Amount: "",
-      //     Can_Vend: "yes",
-      //     Business_Unit: "",
-      //     Customer_Account_Type: "PRIME",
-      //     Meter_Type: "PREPAID",
-      //     WrongBillersCode: false,
-      //     commission_details: {
-      //       amount: null,
-      //       rate: "1.50",
-      //       rate_type: "percent",
-      //       computation_type: "default",
-      //     },
-      //   },
-      // };
-
-      // return res;
-
       return verificationRes;
     } catch (err: unknown) {
       const error = err as AxiosError<{ message: string }>;

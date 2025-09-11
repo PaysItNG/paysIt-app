@@ -14,8 +14,7 @@ import { catchErrFunc } from "@/lib/utils/catchErrFunc";
 import { useConfirmModal } from "@/store/confirmModalStore";
 import { useBuyUtilityService } from "@/api/vtu";
 import { motion, AnimatePresence } from "framer-motion";
-import StarLoader from "@/components/shared/ui/loaders/StarLoader";
-
+import TransactionSummaryReceipt from "./TransactionSummaryReceipt";
 interface CableDataType {
   serviceId: string;
   cardNumber: string;
@@ -60,7 +59,7 @@ const PreviewConfirmation = () => {
   //<<<<<<<<<<<<< Utility types payload >>>>>>>>>>>>>>>
   const utilityPayload = {
     data: {
-      amount: dataPlan?.price,
+      price: dataPlan?.price,
       provider_price: dataPlan?.provider_price,
       provider: dataPlan?.provider,
       plan_id: dataPlan?.plan_id,
@@ -80,13 +79,13 @@ const PreviewConfirmation = () => {
     electricity: {
       service_id: electricity_data?.serviceId,
       meter_no: electricity_data?.meterNumber,
-      amount: product_amount,
+      price: product_amount,
       phone_no: phoneNumber,
       meter_type: electricity_data?.meter_type,
       service_type: "ELECTRICITY",
     },
     airtime: {
-      amount: product_amount,
+      price: product_amount,
       service_type: utility_type,
       service_id: network || "MTN",
       phone_no: phoneNumber,
@@ -106,17 +105,26 @@ const PreviewConfirmation = () => {
   };
 
   const executeConfirmation = async (payload: Record<string, unknown>) => {
-    updateConfirmData({ isLoading });
+    updateConfirmData({ isLoading: true });
     try {
-      console.log(payload);
       const res = await mutateBuyUtility(payload);
       console.log(res);
-      // notifier({message: })
+      closeConfirm(); //this will close the custom confirm modal
 
-      closeConfirm();
+      const product = (previewData as PreviewDataType[])?.find(
+        (item) => item?.key === "product_name"
+      );
+
+      updateData({
+        currentView: "receipt",
+        transaction_response: res?.data,
+        product_img: product?.product_img,
+        product_name: product?.value,
+      });
     } catch (err) {
-      console.log(err);
       catchErrFunc(err);
+    } finally {
+      updateConfirmData({ isLoading: false });
     }
   };
 
@@ -124,23 +132,26 @@ const PreviewConfirmation = () => {
     <>
       {/* <AnimatePresence>
         <motion.div
-          className="absolute inset-0 bg-black/30 z-10 flex items-center justify-center rounded-xl p-6"
+          className="absolute inset-0 z-10 flex items-center justify-center rounded-xl p-6"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.3 }}
         >
           <motion.div
-            className="bg-white p-6 rounded-xl text-center shadow-lg"
+            className="bg-white w-full max-w-md p-6 rounded-xl text-center shadow-lg space-y-4"
             initial={{ scale: 0.9, opacity: 0, y: 40 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.9, opacity: 0, y: 40 }}
             transition={{ duration: 0.35, ease: "easeOut" }}
           >
-            <StarLoader />
             <p className="mt-2 text-sm text-gray-700">
-              Verifying meter number...
+              Please confirm this operation
             </p>
+            <div className="flex justify-between gap-6">
+              <Button>Cancel</Button>
+              <Button color="primary">Confirm</Button>
+            </div>
           </motion.div>
         </motion.div>
       </AnimatePresence> */}

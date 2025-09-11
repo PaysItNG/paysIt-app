@@ -69,7 +69,7 @@ const CableFormView = () => {
 
     const verifyRes = await handleVerifyMeterNumber();
 
-    if (verifyRes) {
+    if (verifyRes.verified) {
       const card_number_detail = verifyRes?.data;
 
       //<<<<<<<<<<<<<<<<<<< PREVIEW DATA >>>>>>>>>>>>>>>>>>>>
@@ -108,6 +108,9 @@ const CableFormView = () => {
         currentView: "preview",
         previewData,
       });
+    } else {
+      notifier({ type: "error", message: verifyRes?.message as string });
+      // setResponseMsg({ state: true, msg: verifyRes?.message as string });
     }
   };
 
@@ -120,7 +123,6 @@ const CableFormView = () => {
       };
 
       const verificationRes = await mutateVerifyMeterNumber(json);
-      console.log(verificationRes);
       return verificationRes;
     } catch (err) {
       catchErrFunc(err);
@@ -179,9 +181,6 @@ const CableFormView = () => {
                 className="rounded-xl shadow-sm"
                 style={{ width: "auto", height: "auto" }}
               />
-              {/* <span className="text-xs font-medium text-gray-700 mt-1">
-                {service?.label}
-              </span> */}
               {serviceId === service?.key && (
                 <div className="absolute -top-1 -right-1 bg-green-500 text-white rounded-full w-5 h-5 flex items-center justify-center">
                   <BiCheck className="w-3 h-3" />
@@ -223,7 +222,7 @@ const CableFormView = () => {
           <label className="block text-sm font-semibold text-gray-700">
             Select Plan
           </label>
-          <div className="space-y-2 max-h-[30rem] shadow-sm overflow-y-auto">
+          <div className="space-y-2 max-h-[25rem] shadow-sm overflow-y-auto">
             {isLoadingCablePlans ? (
               <div className="flex items-center justify-center h-64">
                 <StarLoader size={28} />

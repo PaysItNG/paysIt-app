@@ -3,9 +3,9 @@ import { useState, useEffect, useRef, createElement, FC } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useUtilityStore } from "@/store/utilityStore";
 
-const views = ["initial", "preview"]; // Define known views in order
+const views = ["initial", "preview", "receipt"]; // Define known views in order
 
-type ViewKeys = "initial" | "preview";
+type ViewKeys = "initial" | "preview" | "receipt";
 
 interface UtilityStepWrapperProps {
   viewsComponent: Record<ViewKeys, React.ComponentType>;
