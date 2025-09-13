@@ -34,7 +34,7 @@ const ChildrenSection = ({
     <div
       className={clsx(
         "w-full flex-1 relative",
-        sideBarOpen ? "lg:ml-64" : "lg:ml-16"
+        sideBarOpen ? "lg:ml-72" : "lg:ml-16"
       )}
     >
       <div className="w-full sticky top-0 z-40">{header}</div>

@@ -72,11 +72,11 @@ const Sidebar: React.FC<PropType> = ({ role }) => {
     desktopOpen: {
       x: 0,
       opacity: 1,
-      width: "16rem", // 64
+      width: "18rem", // 64
       transition: {
         type: "tween",
         ease: "easeInOut",
-        duration: 0.3,
+        duration: 0.4,
       },
     },
     desktopClosed: {
@@ -113,19 +113,20 @@ const Sidebar: React.FC<PropType> = ({ role }) => {
           exit={isMobile ? "closed" : "desktopClosed"}
           variants={sidebarVariants}
           className={clsx(
-            "bg-[#f1f1f1] h-screen fixed top-[3.6rem] lg:top-0 z-40 overflow-y-scroll",
-            sideBarOpen ? "lg:w-64 w-72" : "lg:w-16 hidden lg:block"
+            // #277318 064E3B
+            "bg-[#246316] h-screen fixed top-[3.6rem] lg:top-0 z-40 overflow-y-scroll",
+            sideBarOpen ? "lg:w-72 w-72" : "lg:w-16 hidden lg:block"
           )}
         >
           <div className="pt-8 pb-5 flex flex-col justify-between h-screen overflow-y-auto">
-            <div className="space-y-10">
+            <div className="flex flex-col gap-y-20">
               {isLargeScreen && (
                 <div className="flex justify-center">
                   <LogoNameHeader sideBarOpen={sideBarOpen} />
                 </div>
               )}
               <div>
-                <div className={clsx("space-y-5", sideBarOpen ? "mx-3" : "")}>
+                <div className={clsx("space-y-2", sideBarOpen ? "mx-3" : "")}>
                   {topMenuItems.map((menu, index) =>
                     menu?.menuItem?.length ? (
                       <motion.div

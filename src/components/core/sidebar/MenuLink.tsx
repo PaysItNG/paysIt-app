@@ -57,26 +57,23 @@ const MenuLink: React.FC<MenuType> = ({ menu, isSubmenu }) => {
       href={menu.path}
       onClick={handleClickEvent}
       className={clsx(
-        "relative flex items-center gap-x-2 px-3 py-2 transition-all",
+        "relative flex items-center gap-x-2 px-3 py-5 transition-all",
         routeActive &&
-          "before:absolute before:left-0 before:top-0 before:bottom-0 before:w-[5px] before:bg-gradient-to-b before:from-green-700 before:to-green-300 before:rounded-full",
+          "before:absolute before:left-0 before:top-0 before:bottom-0 before:w-[5px] before:bg-gradient-to-b before:from-green-800 before:to-green-300 before:rounded-full bg-white text-green-800 rounded-r-4xl",
         !sideBarOpen && "justify-center"
       )}
     >
       {/* Active Indicator with Curved Shape */}
       {routeActive && (
-        <span
-          className="absolute left-0 top-0 h-full w-2 bg-gradient-to-b from-green-700 to-green-400"
-          style={{
-            clipPath: "polygon(0 0, 100% 50%, 0 100%, 0 0)",
-          }}
-        />
+        <span className="absolute left-0 top-0 h-full w-2 bg-gradient-to-b from-green-800 to-green-400" />
       )}
 
       {/* Icon */}
       {React.createElement(routeActive ? menu.activeIcon : menu.defaultIcon, {
-        size: isSubmenu ? 17 : 22,
-        className: clsx(routeActive ? "text-green-700" : "text-[#7B7B7B]"),
+        size: isSubmenu ? 20 : 25,
+        className: clsx(
+          routeActive ? "text-green-800" : "text-[#7B7B7B text-white"
+        ),
       })}
 
       {/* Animate Menu Name (Only When Sidebar is Open) */}
@@ -88,7 +85,10 @@ const MenuLink: React.FC<MenuType> = ({ menu, isSubmenu }) => {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -10 }}
             transition={{ duration: 0.2 }}
-            className="text-gray-500 text-[1rem] transition-all"
+            className={clsx(
+              "text-[1rem] transition-all",
+              routeActive ? "text-green-800" : "text-gray500 text-white"
+            )}
           >
             {menu?.name}
           </motion.h3>

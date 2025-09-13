@@ -115,6 +115,8 @@ const PreviewConfirmation = () => {
       updateData({
         currentView: "receipt",
         transaction_response: res?.data,
+        transaction_response_msg: res?.message,
+        transaction_response_status: res?.status,
         product_img: product?.product_img,
         product_name: product?.value,
         utility_type,

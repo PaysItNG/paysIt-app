@@ -15,15 +15,19 @@ const TransactionSummaryReceipt = () => {
   const { data: utilityStoreData, closeDrawer } = useUtilityStore();
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { product_img, product_name, transaction_response, utility_type } =
-    utilityStoreData as typeof utilityStoreData & {
-      product_img: string;
-      product_name: string;
-      transaction_response: TransactionDataType;
-      utility_type: UtilityViews;
-    };
-
-  console.log(transaction_response);
+  const {
+    product_img,
+    product_name,
+    transaction_response,
+    transaction_response_msg,
+    transaction_response_status,
+    utility_type,
+  } = utilityStoreData as typeof utilityStoreData & {
+    product_img: string;
+    product_name: string;
+    transaction_response: TransactionDataType;
+    utility_type: UtilityViews;
+  };
 
   const fields: {
     label: string;
@@ -104,6 +108,18 @@ const TransactionSummaryReceipt = () => {
         <h3 className="text-center font-semibold font-mono">
           Transasction Summary
         </h3>
+        <div
+          className={clsx(
+            "border p-2 rounded-lg mt-2",
+            transaction_response_status === "success"
+              ? "bg-green-100 border-green-300"
+              : transaction_response_status === "pending"
+              ? "bg-yellow-100 border-yellow-300"
+              : "bg-red-100 border-red-300"
+          )}
+        >
+          <p>{transaction_response_msg as string}</p>
+        </div>
         <div className="mt-4">
           <div className="space-y-3">
             {fields?.map(

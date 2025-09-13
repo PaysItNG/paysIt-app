@@ -113,7 +113,7 @@ export interface TransactionDataType {
   paystack_ref: string;
   reference_id: string;
   sender_name: string | null;
-  status: "completed" | "pending";
+  status: "completed" | "pending" | "failed";
   to_from: string | null;
   transaction_type: string;
   updated_at: string;
