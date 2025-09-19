@@ -53,7 +53,7 @@ const UtilityStepWrapper: FC<UtilityStepWrapperProps> = ({
   };
 
   return (
-    <div className="relative w-full h-full min-h-[300px] overflow-hidden">
+    <div className="relative w-full h-full min-h-[300px] overflow-hidde">
       <AnimatePresence initial={false} custom={direction} mode="wait">
         <motion.div
           key={currentView}

@@ -139,7 +139,7 @@ const TransactionSummaryReceipt = () => {
                     >
                       {field?.label}
                     </p>
-                    <p
+                    <div
                       className={clsx(
                         "font-light text-xs text-end font-mono",
                         field.key === "token"
@@ -155,7 +155,7 @@ const TransactionSummaryReceipt = () => {
                         <Chip
                           color={
                             statusColor[
-                              transaction_response.status?.toLowerCase() as keyof typeof statusColor
+                              transaction_response?.status?.toLowerCase() as keyof typeof statusColor
                             ]
                           }
                           variant="flat"
@@ -170,7 +170,7 @@ const TransactionSummaryReceipt = () => {
                       ) : (
                         transaction_response?.[field.key] || field?.value
                       )}
-                    </p>
+                    </div>
                   </div>
                 )
             )}

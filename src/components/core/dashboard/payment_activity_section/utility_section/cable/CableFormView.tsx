@@ -7,10 +7,11 @@ import { formatCurrency } from "@/lib/utils/formatCurrency";
 import { useUtilityStore } from "@/store/utilityStore";
 import { Image } from "@heroui/react";
 import { useGetCableServices, useVerifyCardNumber } from "@/api/vtu";
-import { BiCheck } from "react-icons/bi";
+import { BiCheck, BiX } from "react-icons/bi";
 import StarLoader from "@/components/shared/ui/loaders/StarLoader";
 import { motion, AnimatePresence } from "framer-motion";
 import { catchErrFunc } from "@/lib/utils/catchErrFunc";
+import { TbAlertTriangle } from "react-icons/tb";
 
 interface CableService {
   key: string;
@@ -135,8 +136,44 @@ const CableFormView = () => {
     setSelectedPlan(plan);
   };
 
+  // const handleContinue=()=>{
+
+  // }
+
   return (
     <main className="relative">
+      {/* <div className="absolute inset-0 z-50">
+        <div className="relative bg-gradient-to-r from-amber-100 to-orange-100 px-6 py-4 border-b border-gray-100">
+          <div className="flex items-center gap-3">
+            <div className="flex-shrink-0 w-10 h-10 bg-amber-200 rounded-full flex items-center justify-center">
+              <TbAlertTriangle className="w-5 h-5 text-amber-600" />
+            </div>
+            <div className="flex-1">
+              <h3 className="font-semibold text-gray-900 text-lg">
+                Are you sure to proceed with this?
+              </h3>
+            </div>
+            <button className="flex-shrink-0 w-8 h-8 rounded-full bg-white bg-opacity-70 hover:bg-opacity-100 flex items-center justify-center transition-colors duration-200 cursor-pointer">
+              <BiX className="w-4 h-4 text-gray-500" />
+            </button>
+          </div>
+          <div className="px-6 py-4 mt-4 bg-gray-50 flex gap-3 justify-end">
+            <Button
+              // onPress={onCancel}
+              variant="bordered"
+            >
+              Cancel
+            </Button>
+            <Button
+              onPress={handleContinue}
+              color="primary"
+              // isLoading={isLoading}
+            >
+              Continue
+            </Button>
+          </div>
+        </div>
+      </div> */}
       <AnimatePresence>
         {isVerifyingNumber && (
           <motion.div

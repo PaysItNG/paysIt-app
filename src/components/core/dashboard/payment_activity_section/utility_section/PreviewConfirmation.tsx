@@ -106,7 +106,6 @@ const PreviewConfirmation = () => {
     try {
       const res = await mutateBuyUtility(payload);
       console.log(res);
-      closeConfirm(); //this will close the custom confirm modal
 
       const product = (previewData as PreviewDataType[])?.find(
         (item) => item?.key === "product_name"
@@ -125,6 +124,7 @@ const PreviewConfirmation = () => {
       catchErrFunc(err);
     } finally {
       updateConfirmData({ isLoading: false });
+      closeConfirm(); //this will close the custom confirm modal
     }
   };
 
