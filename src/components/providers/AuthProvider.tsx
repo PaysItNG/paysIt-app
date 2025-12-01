@@ -15,10 +15,6 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const { isPending: isLoadingProfile, isError: errorGettingProfile } =
     useUserProfile();
 
-  // const router = useRouter();
-
-  // const { token } = useAuthUser();
-
   const {
     data: kycStatus,
     isPending: isLoadingKycStatus,
