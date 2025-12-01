@@ -13,15 +13,12 @@ import React from "react";
 
 const TransactionSummaryReceipt = () => {
   const { data: utilityStoreData, closeDrawer } = useUtilityStore();
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const {
     product_img,
     product_name,
     transaction_response,
     transaction_response_msg,
     transaction_response_status,
-    utility_type,
   } = utilityStoreData as typeof utilityStoreData & {
     product_img: string;
     product_name: string;

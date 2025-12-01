@@ -7,11 +7,10 @@ import { formatCurrency } from "@/lib/utils/formatCurrency";
 import { useUtilityStore } from "@/store/utilityStore";
 import { Image } from "@heroui/react";
 import { useGetCableServices, useVerifyCardNumber } from "@/api/vtu";
-import { BiCheck, BiX } from "react-icons/bi";
+import { BiCheck } from "react-icons/bi";
 import StarLoader from "@/components/shared/ui/loaders/StarLoader";
 import { motion, AnimatePresence } from "framer-motion";
 import { catchErrFunc } from "@/lib/utils/catchErrFunc";
-import { TbAlertTriangle } from "react-icons/tb";
 
 interface CableService {
   key: string;

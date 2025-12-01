@@ -3,12 +3,11 @@
 "use client";
 import { useGetEphemeralKeys } from "@/api/virtual-card";
 import { useProfile } from "@/hooks/use-profile";
-import { catchErrFunc } from "@/lib/utils/catchErrFunc";
 import { useCreateVirtualCardStore } from "@/store/createVirtualCardStore";
 import { useElements, useStripe } from "@stripe/react-stripe-js";
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { BiCheckCircle, BiCreditCard, BiPlus, BiShield } from "react-icons/bi";
-import { BsArrowRight, BsEye, BsEyeSlash } from "react-icons/bs";
+import { BiCreditCard, BiPlus, BiShield } from "react-icons/bi";
+import { BsEye, BsEyeSlash } from "react-icons/bs";
 import { CiLock } from "react-icons/ci";
 
 // const NewVirtualCardView = () => {
@@ -561,10 +560,6 @@ const NewVirtualCardView = () => {
   // Store references to mounted elements for proper cleanup
   const mountedElementsRef = useRef({});
 
-  const formatCurrency = (amount, currency) => {
-    return `₦${amount.toLocaleString()}.00`;
-  };
-
   // Improved cleanup function
   const cleanupElements = useCallback(() => {
     // Unmount Stripe elements properly
@@ -854,7 +849,8 @@ const NewVirtualCardView = () => {
   }, [cleanupElements]);
 
   // Your custom SVG card component
-  const CustomVirtualCard = ({ balance, showDetails }) => (
+  const CustomVirtualCard = () => (
+    // { balance, showDetails }
     <div className="relative w-full max-w-sm mx-auto mb-6">
       <div className="relative w-[400px] h-[240px] rounded-2xl bg-gradient-to-br from-green-400 to-green-700 p-6 text-white shadow-lg">
         <div className="text-lg">Current Balance</div>

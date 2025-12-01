@@ -138,7 +138,6 @@ const ElectricityFormView = () => {
         meter_no: meterNumber,
       };
 
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const verificationRes = await mutateVerifyMeterNumber(json);
       return verificationRes;
     } catch (err: unknown) {

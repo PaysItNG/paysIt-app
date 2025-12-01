@@ -1,6 +1,6 @@
 import { http } from "@/lib/utils/axiosInstance";
 import { ApiResponseType } from "@/lib/utils/typeConfig";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { API_ROUTE } from "./api_route";
 
