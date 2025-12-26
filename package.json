@@ -27,7 +27,7 @@
     "encoding": "^0.1.13",
     "face-api.js": "^0.22.2",
     "framer-motion": "^12.4.7",
-    "next": "^15.3.2",
+    "next": "15.3.8",
     "next-auth": "^4.24.11",
     "next-transpile-modules": "^10.0.1",
     "os-browserify": "^0.3.0",
